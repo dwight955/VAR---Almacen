@@ -13,7 +13,7 @@
 <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 </head>
 <body>
-<h1 class = "titulo"> LOGIN</h1>
+<h1 class = "titulo"> LOGIN2.0</h1>
 
 
 
