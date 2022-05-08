@@ -1,24 +1,56 @@
 package com.var.entidad;
 
 public class Bienes {
-	private String descripcion,ID;
-	double precio;
-	public String getDescripcion() {
-		return descripcion;
+	private int stockAlmacen, stockDisponible;
+	private double precUni;
+	private String descBien, uniMed, fecIngreso,codBien,categoria;
+	
+	public int getStockAlmacen() {
+		return stockAlmacen;
 	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setStockAlmacen(int stockAlmacen) {
+		this.stockAlmacen = stockAlmacen;
 	}
-	public String getID() {
-		return ID;
+	public String getCategoria() {
+		return categoria;
 	}
-	public void setID(String iD) {
-		ID = iD;
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
-	public double getPrecio() {
-		return precio;
+	public String getCodBien() {
+		return codBien;
 	}
-	public void setPrecio(double precio) {
-		this.precio = precio;
+	public void setCodBien(String codBien) {
+		this.codBien = codBien;
+	}
+	public int getStockDisponible() {
+		return stockDisponible;
+	}
+	public void setStockDisponible(int stockDisponible) {
+		this.stockDisponible = stockDisponible;
+	}
+	public double getPrecUni() {
+		return precUni;
+	}
+	public void setPrecUni(double precUni) {
+		this.precUni = precUni;
+	}
+	public String getDescBien() {
+		return descBien;
+	}
+	public void setDescBien(String descBien) {
+		this.descBien = descBien;
+	}
+	public String getUniMed() {
+		return uniMed;
+	}
+	public void setUniMed(String uniMed) {
+		this.uniMed = uniMed;
+	}
+	public String getFecIngreso() {
+		return fecIngreso;
+	}
+	public void setFecIngreso(String fecIngreso) {
+		this.fecIngreso = fecIngreso;
 	}
 }

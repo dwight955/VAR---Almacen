@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+<link rel="stylesheet" href="Estyles/General.css">
+<header class="encabezado">
+	<div class="logo">
+		<img src="img/VAR_Logo.png">
+	</div>
+	<h3 class="lema">ALMACENES PARA TODO EL PERÚ</h3>
+	<div class="hora">
+		<h4 class="hora__text">2:09</h4>
+	</div>
+</header>
