@@ -5,7 +5,6 @@ public class UnidadOrganica {
 	private String nomUnidOrg, cargo,apenom;
 	private int idCargo,dnilogin;
 
-	
 	public int getIdCargo() {
 		return idCargo;
 	}
