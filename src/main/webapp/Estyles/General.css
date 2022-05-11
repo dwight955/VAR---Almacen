@@ -43,7 +43,7 @@
 .menu{
 	width: 20%;
 	height: calc(100vh - 50px);
-	display: flex;
+	display: inline-flex;
 	flex-direction: column;
 	align-items: center;
 	background: #F5F5F5;

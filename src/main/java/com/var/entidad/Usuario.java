@@ -1,37 +1,44 @@
 package com.var.entidad;
 
 public class Usuario {
-	private String idUsuario,username, password,dniTrab;
-
-	public String getIdUsuario() {
-		return idUsuario;
+	private String dniUsu, nombre, apellido, cargo, nomUnidadOrganica;
+	private int codUsuario;
+	
+	public String getDniUsu() {
+		return dniUsu;
 	}
-
-	public void setIdUsuario(String idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setDniUsu(String dniTrab) {
+		this.dniUsu = dniTrab;
 	}
-
-	public String getUsername() {
-		return username;
+	public String getNombre() {
+		return nombre;
 	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-
-	public String getPassword() {
-		return password;
+	public String getApellido() {
+		return apellido;
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
-
-	public String getDniTrab() {
-		return dniTrab;
+	public String getCargo() {
+		return cargo;
 	}
-
-	public void setDniTrab(String dniTrab) {
-		this.dniTrab = dniTrab;
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
+	public String getNomUnidadOrganica() {
+		return nomUnidadOrganica;
+	}
+	public void setNomUnidadOrganica(String codUnidadOrganica) {
+		this.nomUnidadOrganica = codUnidadOrganica;
+	}
+	public int getCodUsuario() {
+		return codUsuario;
+	}
+	public void setCodUsuario(int codUsuario) {
+		this.codUsuario = codUsuario;
+	}
+	
 }

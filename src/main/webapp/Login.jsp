@@ -1,82 +1,161 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>VAR - Login</title>
-<link rel="stylesheet" href="Estyles/General.css">
-	<!-- Bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<!-- Booststrap dataTable -->
-<link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Intranet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<style type="text/css">
+body {
+  background: #eee;
+}
+.wrapper {
+  margin: 15%;
+}
+.form-signin {
+  max-width: 380px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 5px 40px 50px;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox {
+  margin-bottom: 30px;
+}
+.form-signin input[type="text"], .form-signin input[type="password"] {
+  margin-bottom: 20px;
+}
+.form-signin .form-control {
+  padding: 10px;
+}
+.modal-login {
+		color: #636363;
+		/*width: 350px;*/
+		margin: 25px auto;
+	}
+	.modal-login .modal-content {
+		padding: 0px;
+		border-radius: 5px;
+		border: none;
+	}
+	.modal-login .modal-header {
+		border-bottom: none;
+		position: relative;
+		justify-content: center;
+	}
+	.modal-login h4 {
+		text-align: center;
+		font-size: 26px;
+	}
+	.modal-login  .form-group {
+		position: relative;
+	}
+	.modal-login i {
+		position: absolute;
+		left: 13px;
+		top: 11px;
+		font-size: 18px;
+	}
+	.modal-login .form-control {
+		padding-left: 40px;
+	}
+	.modal-login .form-control:focus {
+		border-color: #428bca;
+	}
+	.modal-login .form-control, .modal-login .btn {
+		min-height: 40px;
+		border-radius: 3px; 
+	}
+	.modal-login .hint-text {
+		text-align: center;
+		padding-top: 10px;
+	}
+	.modal-login .close {
+        position: absolute;
+		top: -5px;
+		right: -5px;
+	}
+	.modal-login .btn {
+		background: #428bca;
+		border: none;
+		line-height: normal;
+		font-weight:bold;
+		width:40%;
+	}
+	.modal-login .btn:hover, .modal-login .btn:focus {
+		background: #428bca;
+	}
+	.modal-login .modal-footer {
+		background: #ecf0f1;
+		border-color: #dee4e7;
+		text-align: center;
+		margin: 0 -20px -20px;
+		border-radius: 5px;
+		font-size: 13px;
+		justify-content: center;
+	}
+	.modal-login .modal-footer a {
+		color: #999;
+	}
+	.trigger-btn {
+		display: inline-block;
+		margin: 100px auto;
+	}
+	
+	.modal-header{
+		margin:0px;
+		color:#fff;
+		background: #428bca;
+		display: flex;
+  		justify-content: center;
+  		
+	}
+	.pie{
+		margin:0px;
+		display: flex;
+  		justify-content: center;
+  		
+	}
+</style>
 </head>
 <body>
 
-<section class="vh-100 gradient-custom">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card bg-white text-dark " style="border-radius: 1rem;">
-          <div class="card-body p-5 text-center">
-
-            <div class="mb-md-5 mt-md-4 pb-5">
-
-              <h2 class="fw-bold mb-2 text-uppercase">VAR</h2>
-              <p class="text-white-50 mb-5">Please enter your login and password!</p>
-
-              <div class="form-outline form-dark mb-4">
-                <input type="email" id="typeEmailX" class="form-control form-control-lg" />
-                <label class="form-label" for="typeEmailX">Email</label>
-              </div>
-
-              <div class="form-outline form-dark mb-4">
-                <input type="password" id="typePasswordX" class="form-control form-control-lg" />
-                <label class="form-label" for="typePasswordX">Password</label>
-              </div>
-              
-              <div class="form-outline form-dark mb-4">
-                <select class="form-select"  name="cargo" id="idCargo">
-				   	  <option value="">Seleccione Cargo</option>
-					  <option value="UnidadOrganica">Unidad Organica</option>
-					  <option value="Logistica">Logistica</option>
-					</select>
-              </div>
-              
-              
-				   
-				   
+<div class="wrapper">
+<div id="myModal">
+	<div class="modal-dialog modal-login">
+		<div class="modal-content">
+			<div class="modal-header">				
+				<h5 class="modal-title">INGRESAR INTRANET</h5>
 			</div>
+			<div class="modal-body">
+				<form id="idLogin" action="ServletUsuario?tipo=INICIAR" method="post">
+					<div class="form-group">
+						<i class="fa fa-user"></i>
+						<input type="text" class="form-control" placeholder="Username" required="required" name="username">
+					</div>
+					<div class="form-group">
+						<i class="fa fa-lock"></i>
+						<input type="password" class="form-control" placeholder="Password" required="required" name="clave">					
+					</div>
+					<div class="pie">
+						<!--<input type="submit" class="btn btn-primary btn-block btn-lg" value="Login">-->
+						<input type="submit" class="btn btn-primary btn-sm" aria-pressed="true" value="Iniciar Sesion">
+					</div>
+				</form>				
+				
+			</div>
+		</div>
+	</div>
+</div>     
 
-              <button class="btn btn-outline-dark btn-lg px-5" type="submit">Login</button>
-
-            
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- Orden correcto de las librerias -->
-	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	<!-- Scripts Bootstrap -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-	<!-- Librerias para la tabla -->
-	<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-	<!-- Bootstrap Validator -->
-	<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-validator/0.4.0/js/bootstrapValidator.js"></script>
-<!-- Bloque de codigo para activar los estilos y scripts de la tabla -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-		    $('#example').DataTable();
-		} );
-	</script>
+</div>
 </body>
 </html>
