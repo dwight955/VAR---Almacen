@@ -79,8 +79,9 @@ public class ServletProveedor extends HttpServlet {
 
 	private void registrarProveedor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//variables
-		String nroRuc,rzonSoc,estado,condic,direc,telf,codDis;
+		String codProv,nroRuc,rzonSoc,estado,condic,direc,telf,codDis;
 		//leer los controles del formulario que se encuentra en la página proveedores.jsp "usar el name de cada control"
+		codProv=request.getParameter("codigo");
 		nroRuc=request.getParameter("nroRuc");
 		rzonSoc=request.getParameter("razonSocial");
 		estado=request.getParameter("estado");
@@ -96,49 +97,49 @@ public class ServletProveedor extends HttpServlet {
 		bean.setEstado(estado);
 		bean.setCondic(condic);
 		bean.setDirec(direc);
-		bean.setTelf(Integer.parseInt(telf));
+		bean.setTelf(telf);
 		bean.setCodDis(codDis);
 		//validar variable codigo proveedor (cambiar)
-		//if(Integer.parseInt(nroRuc)==0) {
+		if(Integer.parseInt(codProv)==0) {
 			//invocar al mètodo save y enviar el objeto "bean"
-		//	int salida;
-		//	salida=ProveedorDAO.save(bean);
-		//	if(salida>0) {
+			int salida;
+			salida=ProveedorDAO.save(bean);
+			if(salida>0) {
 				//crear atributo MENSAJE
-		//		request.setAttribute("MENSAJE", "Proveedor registrado...");
-		//		
-		//		request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
-		//		listarProveedores(request,response);
-		//	}
-		//	else {
+				request.setAttribute("MENSAJE", "Proveedor registrado...");
+				
+				request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
+				listarProveedores(request,response);
+			}
+			else {
 		//		//crear atributo MENSAJE
-		//		request.setAttribute("MENSAJE", "Error en el registro...");
-		//		
-		//		request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
-		//		listarProveedores(request,response);
-		//	}
-		//}
-		//else {
+				request.setAttribute("MENSAJE", "Error en el registro...");
+				
+				request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
+				listarProveedores(request,response);
+			}
+		}
+		else {
 			//setear el atributo codigo
-		//	bean.setNroRuc(nroRuc);
+			bean.setCodProv(Integer.parseInt(codProv));
 			//invocar al mètodo update y enviar el objeto "bean"
-		//	int salida;
-		//	salida=ProveedorDAO.update(bean);			
-		//	if(salida>0) {
+			int salida;
+			salida=ProveedorDAO.update(bean);			
+			if(salida>0) {
 				//crear atributo MENSAJE
-		//		request.setAttribute("MENSAJE", "Proveedor actualizado...");
+				request.setAttribute("MENSAJE", "Proveedor actualizado...");
 				
-		//		request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
-		//		listarProveedores(request,response);
-		//	}
-		//	else {
+				request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
+				listarProveedores(request,response);
+			}
+			else {
 				//crear atributo MENSAJE
-		//		request.setAttribute("MENSAJE", "Error en la actualización...");
+				request.setAttribute("MENSAJE", "Error en la actualización...");
 				
-		//		request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
-		//		listarProveedores(request,response);
-		//	}
-		//}
+				request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
+				listarProveedores(request,response);
+			}
+		}
 		
 	}
 

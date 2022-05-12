@@ -54,9 +54,12 @@
 		      <div class="modal-header">
 		        <h5 class="modal-title" id="staticBackdropLabel">PROVEEDOR</h5>
 		      </div>
-		      <!-- Agregar nueva caja para el codigo de proveedor -->
 		      <div class="modal-body">
 		        <form id="idRegistrar" method="post" action="ServletProveedor?tipo=REGISTRAR">
+		        <div class="form-group">
+				    <label for="exampleInputEmail1" class="form-label">Codigo</label>
+				    <input type="text" class="form-control" name="codigo" id="idCodigo" readonly value="0">
+				  </div>
 		           <div class="form-group">
 				    <label for="exampleInputEmail1" class="form-label">Nro RUC</label>
 				    <input type="text" class="form-control" name="nroRuc" id="idRUC">
@@ -91,7 +94,13 @@
 				  </div>
 				  <div class="form-group">
 				    <label for="exampleInputPassword1" class="form-label">Distrito</label>
-				    <input type="text" class="form-control"  name="distrito" id="idDistrito">
+				   <select class="form-select"  name="distrito" id="idDistrito">
+				   	  <option value="">Seleccione Codigo Distrito</option>
+					  <option value="DS-01">DS-01</option>
+					  <option value="DS-02">DS-02</option>
+					  <option value="DS-03">DS-03</option>
+					  <option value="DS-04">DS-04</option>
+					</select>
 				  </div>
 				   <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" id="btn-cerrar" data-bs-dismiss="modal">Cerrar</button>
@@ -133,6 +142,7 @@
 			<table id="example" class="table table-striped" style="width:100%">
 		        <thead>
 		            <tr>
+		            	<th>CODIGO</th>
 		                <th>NRO RUC</th>
 		                <th>RAZON SOCIAL</th>
 		                <th>ESTADO</th>
@@ -147,6 +157,7 @@
 		        <tbody>
 		        	<c:forEach items="${requestScope.proveedores}" var="row">
 			            <tr>
+			            	<td>${row.codProv}</td>
 			                <td>${row.nroRuc}</td>
 			                <td>${row.rzSoc}</td>
 			                <td>${row.estado}</td>
@@ -192,7 +203,7 @@
 		
 		//asignar evento click a los botones con clase "btn-danger"
 		$(document).on("click",".btn-danger",function(){
-			//variable para almacenar el código del docente según el botón eliminar que se pulso
+			//variable para almacenar el código del proveedor según el botón eliminar que se pulso
 			let cod;
 			cod=$(this).parents("tr").find("td")[0].innerHTML;
 			$("#idCodigoEliminar").val(cod);
@@ -203,14 +214,16 @@
 			//variables
 			let cod,pat,mat,nom,sexo,hijos,sue;
 			//leer las columnas de según el botón editar que se pulso
-			ruc=$(this).parents("tr").find("td")[0].innerHTML;
-			razons=$(this).parents("tr").find("td")[1].innerHTML;
-			estado=$(this).parents("tr").find("td")[2].innerHTML;
-			condi=$(this).parents("tr").find("td")[3].innerHTML;
-			direc=$(this).parents("tr").find("td")[4].innerHTML;
-			telf=$(this).parents("tr").find("td")[5].innerHTML;
-			distri=$(this).parents("tr").find("td")[6].innerHTML;
+			codigo=$(this).parents("tr").find("td")[0].innerHTML;
+			ruc=$(this).parents("tr").find("td")[1].innerHTML;
+			razons=$(this).parents("tr").find("td")[2].innerHTML;
+			estado=$(this).parents("tr").find("td")[3].innerHTML;
+			condi=$(this).parents("tr").find("td")[4].innerHTML;
+			direc=$(this).parents("tr").find("td")[5].innerHTML;
+			telf=$(this).parents("tr").find("td")[6].innerHTML;
+			distri=$(this).parents("tr").find("td")[7].innerHTML;
 			//mostrar en las cajas del modal con id "staticBackdrop" los valores de las variables
+			$("#idCodigo").val(codigo)
 			$("#idRUC").val(ruc);
 			$("#idRazonSocial").val(razons);
 			$("#idEstado").val(estado);
@@ -233,59 +246,73 @@
 	<script>    
     $(document).ready(function(){     
         $("#idRegistrar").bootstrapValidator({      
-        	 fields:{
-        		 	nombre:{
-        		 		validators:{
-        		 			notEmpty:{
-        		 				message:'Campo nombre es obligatorio'
-        		 			},
-        		 			regexp:{
-        		 				//regexp:/^[a-zA-Z\ñ\Ñ\s\á\é\í\ó\ú\Á\É\Í\Ó\Ú]{3,20}$/,
-        		 				message:'Campo nombre solo letras MIN:3 - MAX:20'
-        		 			}
-        		 		}
-        		 	},
-        		 	paterno:{
-        		 		validators:{
-        		 			notEmpty:{
-        		 				message:'Campo paterno es obligatorio'
-        		 			}
-        		 		}
-        		 	},
-        		 	materno:{
-        		 		validators:{
-        		 			notEmpty:{
-        		 				message:'Campo materno es obligatorio'
-        		 			}
-        		 		}
-        		 	},
-        		 	hijos:{
-        		 		validators:{
-        		 			notEmpty:{
-        		 				message:'Campo hijos es obligatorio'
-        		 			}
-        		 		}
-        		 	},
-        		 	sueldo:{
-        		 		validators:{
-        		 			notEmpty:{
-        		 				message:'Campo sueldo es obligatorio'
-        		 			}
-        		 		}
-        		 	},
-        		 	sexo:{
-        		 		validators:{
-        		 			notEmpty:{
-        		 				message:'Campo sexo es obligatorio'
-        		 			}
-        		 		}
-        		 	}
-        		 	
-        		 
-        		 
-        		 
-        		 
-        		 
+        	// fields:{
+        	//	 	RUC:{
+        	//	 		validators:{
+        	//	 			notEmpty:{
+        	//	 				message:'Campo RUC es obligatorio'
+        	//	 			},
+        	//	 			regexp:{
+        	//	 				//regexp:/^ $/,
+        	//	 				message:'Campo RUC solo...'
+        	//	 			}
+        	//	 		}
+        	//	 	},
+        	//	 	RazonSocial:{
+        	//	 		validators:{
+        	//	 			notEmpty:{
+        	//	 				message:'Campo RazonSocial es obligatorio'
+        	//	 			},
+        	//	 			regexp:{
+        	//	 				//regexp:/^ $/,
+        	//	 				message:'Campo RazonSocial solo...'
+        	//	 			}
+        	//	 		}
+        	//	 	},
+        	//	 	Estado:{
+        	//	 		validators:{
+        	//	 			notEmpty:{
+        	//	 				message:'Campo Estado es obligatorio'
+        	//	 			}
+        	//	 		}
+        	//	 	},
+        	//	 	Condicion:{
+        	//	 		validators:{
+        	//	 			notEmpty:{
+        	//	 				message:'Campo Condicion es obligatorio'
+        	//	 			}
+        	//	 		}
+        	//	 	},
+        	//	 	Direccion:{
+        	//	 		validators:{
+        	//	 			notEmpty:{
+        	//	 				message:'Campo Direccion es obligatorio'
+        	//	 			},
+        	//	 			regexp:{
+        	//	 				//regexp:/^ $/,
+        	//	 				message:'Campo Direccion solo...'
+        	//	 			}
+        	//	 		}
+        	//	 	},
+        	//	 	Telefono:{
+        	//	 		validators:{
+        	//	 			notEmpty:{
+        	//	 				message:'Campo Telefono es obligatorio'
+        	//	 			},
+        	//	 			regexp:{
+        	//	 				//regexp:/^ $/,
+        	//	 				message:'Campo Telefono solo...'
+        	//	 			}
+        	//	 		},
+            //		 	Distrito:{
+            //		 		validators:{
+            //		 			notEmpty:{
+            //		 				message:'Campo sexo es obligatorio'
+            //		 			}
+            //		 		}
+        	//	 	}
+        	//	 	
+        		 		 
         	 }
         });   
 			

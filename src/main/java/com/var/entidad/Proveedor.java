@@ -1,9 +1,8 @@
 package com.var.entidad;
 
 public class Proveedor {
-	/*Agregar cod proveedor int y cambiar de tipo de variable a telf por string, agregar metodos*/
-	private int telf;
-	private String rzSoc, estado, condic, direc, codDis,nroRuc;
+	private int codProv;
+	private String rzSoc, estado, condic, direc, codDis,nroRuc,telf;
 	
 	public String getNroRuc() {
 		return nroRuc;
@@ -11,10 +10,16 @@ public class Proveedor {
 	public void setNroRuc(String nroRuc) {
 		this.nroRuc = nroRuc;
 	}
-	public int getTelf() {
+	public int getCodProv() {
+		return codProv;
+	}
+	public void setCodProv(int codProv) {
+		this.codProv = codProv;
+	}
+	public String getTelf() {
 		return telf;
 	}
-	public void setTelf(int telf) {
+	public void setTelf(String telf) {
 		this.telf = telf;
 	}
 	public String getRzSoc() {
