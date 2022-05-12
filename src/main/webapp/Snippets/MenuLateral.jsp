@@ -25,23 +25,24 @@
                				%>
                 			<a href="#" id="nav02"><i class="far fa-calendar-check"></i>Consultar los Cuadros de Requerimientos</a>
                 			<a href="#" id="nav03"><i class="far fa-calendar-check"></i>Mantenimiento de Trabajadores</a>
-                			<a href="#" id="nav06"><i class="far fa-calendar-check"></i>Bandeja de Entrada</a>
+                			<a href="#" id="nav04"><i class="far fa-calendar-check"></i>Bandeja de Entrada</a>
                 			<%
                			}
                			else if(cargo.equals("SUB-ALMACENERO")){
                				%>
-                    		<a href="#" id="nav04"><i class="far fa-calendar-check"></i> Generar PECOSA</a>
-		               		<a href="#" id="nav07"><i class="far fa-calendar-check"></i> Consultar PECOSAs</a>
-		               		<a href="#" id="nav05"><i class="far fa-calendar-check"></i> Listado de Bienes</a>
-		               		<a href="#" id="nav05"><i class="far fa-calendar-check"></i> Generar PECOSA</a>
+                    		<a href="#" id="nav05"><i class="far fa-calendar-check"></i> Generar PECOSA</a>
+		               		<a href="#" id="nav06"><i class="far fa-calendar-check"></i> Consultar PECOSAs</a>
+		               		<a href="#" id="nav07"><i class="far fa-calendar-check"></i> Listado de Bienes</a>
+		               		<a href="#" id="nav08"><i class="far fa-calendar-check"></i> Generar Reporte</a>
                     	<%
                			}
                			else if(cargo.equals("JEFE DE ALMACEN")){
                				%>
-                    		<a href="#" id="nav02"><i class="far fa-calendar-check"></i> Bandeja de entrada PECOSAs</a>
-                    		<a href="#" id="nav03"><i class="far fa-calendar-check"></i> Actualizar estado de PECOSA</a>
-                    		<a href="#" id="nav06"><i class="far fa-calendar-check"></i> Consultar PECOSA</a>
-                    		<a href="#" id="nav06"><i class="far fa-calendar-check"></i> Generar Reporte</a>
+                    		<a href="#" id="nav09"><i class="far fa-calendar-check"></i> Bandeja de entrada PECOSAs</a>
+                    		<a href="#" id="nav10"><i class="far fa-calendar-check"></i> Actualizar estado de PECOSA</a>
+                    		<a href="#" id="nav11"><i class="far fa-calendar-check"></i> Consultar PECOSA</a>
+                    		<a href="#" id="nav12"><i class="far fa-calendar-check"></i> Listado de Proveedores</a>
+                    		<a href="#" id="nav13"><i class="far fa-calendar-check"></i> Generar Reporte</a>
                     	<%
                			}
                			//MENU PARA LOS MENUS LATERALES

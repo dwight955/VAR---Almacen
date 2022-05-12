@@ -159,6 +159,7 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("ERROR: MySqlProveedor");
 		}
 		finally {
 			try {
