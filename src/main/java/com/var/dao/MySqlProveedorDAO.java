@@ -24,7 +24,7 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 			//1
 			cn=MySqlConexion.getConectar();
 			//2 Modificar para agregar codprov
-			String sql="insert into bwinfxi4ncz6ryqu6s48.tb_proveedores values(?,?,?,?,?,?,?)";
+			String sql="insert into bwinfxi4ncz6ryqu6s48.tb_proveedores values(null,?,?,?,?,?,?,?)";
 			//3
 			pstm=cn.prepareStatement(sql);
 			//4
@@ -33,7 +33,7 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 			pstm.setString(3, bean.getEstado());
 			pstm.setString(4, bean.getCondic());
 			pstm.setString(5, bean.getDirec());
-			pstm.setInt(6, bean.getTelf());
+			pstm.setString(6, bean.getTelf());
 			pstm.setString(7, bean.getCodDis());
 			//5
 			salida=pstm.executeUpdate();
@@ -59,19 +59,19 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 		try {
 			//1
 			cn=MySqlConexion.getConectar();
-			//2 Falta modificar para la nueva estructuracion de tabla proveedores
-			String sql="update bwinfxi4ncz6ryqu6s48.tb_proveedores set nroRuc=?,rzonSoc=?,estado=?,condic=?,direc=?,telf=?,codDis=? wheren nroRuc=?";
+			//2 
+			String sql="update bwinfxi4ncz6ryqu6s48.tb_proveedores set nroRuc=?,rzonSoc=?,estado=?,condic=?,direc=?,telf=?,codDis=? where codProv=?";
 			//3
 			pstm=cn.prepareStatement(sql);
 			//4
-			//pstm.setString(1, bean.getNroRuc());
-			pstm.setString(1, bean.getRzSoc());
-			pstm.setString(2, bean.getEstado());
-			pstm.setString(3, bean.getCondic());
-			pstm.setString(4, bean.getDirec());
-			pstm.setInt(5, bean.getTelf());
-			pstm.setString(6, bean.getCodDis());
-			pstm.setString(7, bean.getNroRuc());
+			pstm.setString(1, bean.getNroRuc());
+			pstm.setString(2, bean.getRzSoc());
+			pstm.setString(3, bean.getEstado());
+			pstm.setString(4, bean.getCondic());
+			pstm.setString(5, bean.getDirec());
+			pstm.setString(6, bean.getTelf());
+			pstm.setString(7, bean.getCodDis());
+			pstm.setInt(8, bean.getCodProv());
 			//5
 			salida=pstm.executeUpdate();
 		} catch (SQLException e) {
@@ -97,7 +97,7 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 			//1
 			cn=MySqlConexion.getConectar();
 			//2 Falta modificar para la nueva estructuracion de tabla proveedores
-			String sql="delete from bwinfxi4ncz6ryqu6s48.tb_proveedores where nroRuc=?";
+			String sql="delete from bwinfxi4ncz6ryqu6s48.tb_proveedores where codProv=?";
 			//3
 			pstm=cn.prepareStatement(sql);
 			//4
@@ -147,13 +147,14 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 				//7 crear bean
 				bean=new Proveedor();
 				//8
-				bean.setNroRuc(rs.getString(1));
-				bean.setRzSoc(rs.getString(2));
-				bean.setEstado(rs.getString(3));
-				bean.setCondic(rs.getString(4));
-				bean.setDirec(rs.getString(5));
-				bean.setTelf(rs.getInt(6));
-				bean.setCodDis(rs.getString(7));
+				bean.setCodProv(rs.getInt(1));
+				bean.setNroRuc(rs.getString(2));
+				bean.setRzSoc(rs.getString(3));
+				bean.setEstado(rs.getString(4));
+				bean.setCondic(rs.getString(5));
+				bean.setDirec(rs.getString(6));
+				bean.setTelf(rs.getString(7));
+				bean.setCodDis(rs.getString(8));
 				//9
 				data.add(bean);
 			}
