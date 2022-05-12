@@ -6,50 +6,55 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Intranet</title>
+  <title>Login - VAR</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="Estyles/Login.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-validator/0.4.0/js/bootstrapValidator.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 <style type="text/css">
-body {
-  background: #eee;
+		.help-block {
+		  		color: red;
+		}
+		.form-group.has-error .form-control-label {
+		  color: red;
+		}
+		.form-group.has-error .form-control {
+		  border: 1px solid red;
+		  box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
+		}
+.modal-dialog{
+	max-width: 630px;
 }
-.wrapper {
-  margin: 15%;
+.modal-login__img{
+	width:280px;
 }
-.form-signin {
-  max-width: 380px;
-  margin: 0 auto;
-  background-color: #fff;
-  padding: 5px 40px 50px;
-  border: 1px solid #e5e5e5;
-  border-radius: 10px;
+.modal-login__user-img{
+	width:100px;
+	margin:.5em;
 }
 .form-signin .form-signin-heading, .form-signin .checkbox {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 .form-signin input[type="text"], .form-signin input[type="password"] {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .form-signin .form-control {
   padding: 10px;
 }
 .modal-login {
 		color: #636363;
-		/*width: 350px;*/
-		margin: 25px auto;
+		display:flex;
+		box-shadow: 0px 0px 7px 3px rgba(0, 0, 0, 0.2); 
 	}
 	.modal-login .modal-content {
 		padding: 0px;
-		border-radius: 5px;
+		border-radius: 10px;
 		border: none;
-	}
-	.modal-login .modal-header {
-		border-bottom: none;
-		position: relative;
-		justify-content: center;
 	}
 	.modal-login h4 {
 		text-align: center;
@@ -61,96 +66,74 @@ body {
 	.modal-login i {
 		position: absolute;
 		left: 13px;
-		top: 11px;
+		top: 40px;
 		font-size: 18px;
 	}
 	.modal-login .form-control {
 		padding-left: 40px;
 	}
-	.modal-login .form-control:focus {
-		border-color: #428bca;
+	.modal-cabezera{
+		display:flex;
+		flex-direction:column;
+		align-items: center;
 	}
-	.modal-login .form-control, .modal-login .btn {
-		min-height: 40px;
-		border-radius: 3px; 
+	.modal-cabezera > h2{
+		font-size:16pt;
 	}
-	.modal-login .hint-text {
-		text-align: center;
-		padding-top: 10px;
+	.btn-sesion{
+		color: white;
+		background: #D40912;
+		border: 1px solid black;
+		padding: .3em;
+		width:180px;
+		font-family: 'Arial';
+		font-weight: bold;
 	}
-	.modal-login .close {
-        position: absolute;
-		top: -5px;
-		right: -5px;
-	}
-	.modal-login .btn {
-		background: #428bca;
-		border: none;
-		line-height: normal;
-		font-weight:bold;
-		width:40%;
-	}
-	.modal-login .btn:hover, .modal-login .btn:focus {
-		background: #428bca;
-	}
-	.modal-login .modal-footer {
-		background: #ecf0f1;
-		border-color: #dee4e7;
-		text-align: center;
-		margin: 0 -20px -20px;
-		border-radius: 5px;
-		font-size: 13px;
-		justify-content: center;
-	}
-	.modal-login .modal-footer a {
-		color: #999;
-	}
-	.trigger-btn {
-		display: inline-block;
-		margin: 100px auto;
-	}
-	
-	.modal-header{
-		margin:0px;
-		color:#fff;
-		background: #428bca;
-		display: flex;
-  		justify-content: center;
-  		
-	}
-	.pie{
-		margin:0px;
-		display: flex;
-  		justify-content: center;
-  		
+	.form-group > p{
+		font-weight: bold;
+		color: #7D7D7F;
+		margin-bottom: .3rem;
 	}
 </style>
 </head>
 <body>
-
+<header class="encabezado">
+	<div class="encabezado_logo">
+		<object data="img/logo.svg" width="150" height="230"> </object>
+	</div>
+</header>
+			<c:if test="${requestScope.MENSAJE!=null}">
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				  <strong>MENSAJE : </strong> ${requestScope.MENSAJE}
+				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			</c:if>
 <div class="wrapper">
 <div id="myModal">
 	<div class="modal-dialog modal-login">
+	<img class="modal-login__img" alt="" src="img/img_login.jpg">
 		<div class="modal-content">
-			<div class="modal-header">				
-				<h5 class="modal-title">INGRESAR INTRANET</h5>
-			</div>
 			<div class="modal-body">
+			<header class="modal-cabezera">
+				<h2>Iniciar Sesion</h2>
+				<img class="modal-login__user-img" alt="" src="img/user_login.png">
+			</header>
 				<form id="idLogin" action="ServletUsuario?tipo=INICIAR" method="post">
 					<div class="form-group">
+						<p>Usuario</p>
 						<i class="fa fa-user"></i>
-						<input type="text" class="form-control" placeholder="Username" required="required" name="username">
+						<input type="text" class="form-control" placeholder="Username"  name="username">
 					</div>
 					<div class="form-group">
+						<p>Contraseña</p>
 						<i class="fa fa-lock"></i>
-						<input type="password" class="form-control" placeholder="Password" required="required" name="clave">					
+						<input type="password" class="form-control" placeholder="Password" name="clave">					
 					</div>
 					<div class="pie">
 						<!--<input type="submit" class="btn btn-primary btn-block btn-lg" value="Login">-->
-						<input type="submit" class="btn btn-primary btn-sm" aria-pressed="true" value="Iniciar Sesion">
+						<center><input type="submit" class="btn-sesion" aria-pressed="true" value="Entrar"></center>
 					</div>
-				</form>				
-				
+				</form>
 			</div>
 		</div>
 	</div>
@@ -158,4 +141,29 @@ body {
 
 </div>
 </body>
+<script>
+$(document).ready(function(){     
+    $("#idLogin").bootstrapValidator({      
+    	 fields:{
+    		 	username:{
+    		 		validators:{
+    		 			notEmpty:{
+    		 				message:'Campo username es obligatorio'
+    		 			}
+    		 		}
+    		 	},
+    		 	clave:{
+    		 		validators:{
+    		 			notEmpty:{
+    		 				message:'Campo clave es obligatorio'	
+    		 			}
+    		 		}
+    		 		
+    		 	}
+    		 }
+    });
+});
+</script>
+
+
 </html>

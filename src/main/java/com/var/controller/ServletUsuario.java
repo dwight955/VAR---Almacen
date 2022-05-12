@@ -42,6 +42,7 @@ public class ServletUsuario extends HttpServlet {
 		
 		username = request.getParameter("username");
 		clave = request.getParameter("clave");
+		System.out.println(username + " " + clave);
 		
 		Usuario result = usuarioDAO.iniciarSesion(username, clave);
 		
@@ -55,7 +56,7 @@ public class ServletUsuario extends HttpServlet {
 			
 			response.sendRedirect("dashboard.jsp"); 
 		}else {
-			request.setAttribute("msj","Usuario y/o Contraseña Incorrecta");
+			request.setAttribute("MENSAJE","Usuario y/o Contraseña Incorrecta");
 			request.getRequestDispatcher("Login.jsp").forward(request, response);
 		}
 	}

@@ -4,6 +4,10 @@
 	padding:0;
 	box-sizing:border-box;
 }
+body {
+  background: #eee;
+  height:100vh;
+}
 /*ENCABEZADO*/
 .encabezado{
 	width:100%;
@@ -11,17 +15,18 @@
 	height:50px;
 	background:#D40912;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
 	box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 .encabezado > h3{
 	color: white;
 }
-.logo{
-	width: 110px;
+.encabezado_logo{
+	width: 20%;
+	text-align: center;
 	padding-top: 5px;
 }
-.logo > img{
+.encabezado_logo > img{
 	width:100%;
 }
 .lema{
@@ -30,6 +35,7 @@
 .hora{
 	width:120px;
 	padding:5px 5px;
+	margin-right: 7em;
 	height:auto;
 	background: #FFD133;
 	border-radius:15px 15px;
@@ -41,7 +47,7 @@
 }
 /*MENU LATERAL*/
 .menu{
-	width: 20%;
+	width: 25%;
 	height: calc(100vh - 50px);
 	display: inline-flex;
 	flex-direction: column;
@@ -49,8 +55,9 @@
 	background: #F5F5F5;
 }
 .menu__img-user{
-	width:35%;
+	width:40%;
 	padding-top:15px;
+	margin: 0 1em 1em 1em;
 }
 .menu__img-user > img{
 	width: 100%;
@@ -59,12 +66,13 @@
 .menu__datos-user{
 	padding-top: 5px;
 	text-align: center;
+	font-size:13.5pt;
+	font-family:'Arial';
 }
-.menu__datos-user > p{
-	margin-top:5;
-	font-size: 15pt;
-	fonr-family:'Arial';
-	font-weight: regular;
+.menu__datos-user > h5{
+	margin: .8em;
+	font-weight: normal;
+	font-size:10pt;
 }
 
 .menu__contenedor-modulos{
@@ -76,7 +84,7 @@
 .menu__contenedor-modulos > a{
 	text-decoration: none;
 	color: black;
-	padding: 20px 0px 20px 30px;
+	padding: 10px 0px 25px 30px;
 	font-size: 13pt;
 	transition: all .3s;
 }

@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="Estyles/Generalcss">
-<title>Insert title here</title>
+<title>Mi Dashboard</title>
 </head>
 <style>
 	.msg_bienvenida{
@@ -26,7 +26,8 @@
 		<%@ include file="Snippets/MenuLateral.jsp" %>
 		<section>
 			<div class="msg_bienvenida">
-			<h1>Te damos la bienvenida <%= nombre%></h1>
+			<h2>Te damos la bienvenida <%= nombre%> <%= apellido%></h2>
+			<h3>Unidad Organica: <%= unidaOrg%> </h3>
 		</section>
 	</div>
 	
