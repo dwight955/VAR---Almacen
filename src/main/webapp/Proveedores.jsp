@@ -54,6 +54,7 @@
 		      <div class="modal-header">
 		        <h5 class="modal-title" id="staticBackdropLabel">PROVEEDOR</h5>
 		      </div>
+		      <!-- Agregar nueva caja para el codigo de proveedor -->
 		      <div class="modal-body">
 		        <form id="idRegistrar" method="post" action="ServletProveedor?tipo=REGISTRAR">
 		           <div class="form-group">

@@ -23,7 +23,7 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 		try {
 			//1
 			cn=MySqlConexion.getConectar();
-			//2
+			//2 Modificar para agregar codprov
 			String sql="insert into bwinfxi4ncz6ryqu6s48.tb_proveedores values(?,?,?,?,?,?,?)";
 			//3
 			pstm=cn.prepareStatement(sql);
@@ -59,18 +59,19 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 		try {
 			//1
 			cn=MySqlConexion.getConectar();
-			//2
-			String sql="update bwinfxi4ncz6ryqu6s48.tb_proveedores set nroRuC=?,rzonSoc=?,estado=?,condic=?,direc=?,telf=?,codDis=?";
+			//2 Falta modificar para la nueva estructuracion de tabla proveedores
+			String sql="update bwinfxi4ncz6ryqu6s48.tb_proveedores set nroRuc=?,rzonSoc=?,estado=?,condic=?,direc=?,telf=?,codDis=? wheren nroRuc=?";
 			//3
 			pstm=cn.prepareStatement(sql);
 			//4
-			pstm.setString(1, bean.getNroRuc());
-			pstm.setString(2, bean.getRzSoc());
-			pstm.setString(3, bean.getEstado());
-			pstm.setString(4, bean.getCondic());
-			pstm.setString(5, bean.getDirec());
-			pstm.setInt(6, bean.getTelf());
-			pstm.setString(7, bean.getCodDis());
+			//pstm.setString(1, bean.getNroRuc());
+			pstm.setString(1, bean.getRzSoc());
+			pstm.setString(2, bean.getEstado());
+			pstm.setString(3, bean.getCondic());
+			pstm.setString(4, bean.getDirec());
+			pstm.setInt(5, bean.getTelf());
+			pstm.setString(6, bean.getCodDis());
+			pstm.setString(7, bean.getNroRuc());
 			//5
 			salida=pstm.executeUpdate();
 		} catch (SQLException e) {
@@ -95,7 +96,7 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 		try {
 			//1
 			cn=MySqlConexion.getConectar();
-			//2
+			//2 Falta modificar para la nueva estructuracion de tabla proveedores
 			String sql="delete from bwinfxi4ncz6ryqu6s48.tb_proveedores where nroRuc=?";
 			//3
 			pstm=cn.prepareStatement(sql);
@@ -133,7 +134,7 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 		try {
 			//1
 			cn=MySqlConexion.getConectar();
-			//2
+			//2 Falta modificar para la nueva estructuracion de tabla proveedores
 			String sql="SELECT * FROM bwinfxi4ncz6ryqu6s48.tb_proveedores";
 			//3
 			pstm=cn.prepareStatement(sql);
@@ -146,7 +147,7 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 				//7 crear bean
 				bean=new Proveedor();
 				//8
-				bean.setNroRuc(rs.getString(1));//bean.setCodigo(rs.getInt("cod_doc"));
+				bean.setNroRuc(rs.getString(1));
 				bean.setRzSoc(rs.getString(2));
 				bean.setEstado(rs.getString(3));
 				bean.setCondic(rs.getString(4));
