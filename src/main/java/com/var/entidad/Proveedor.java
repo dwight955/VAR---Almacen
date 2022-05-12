@@ -1,6 +1,7 @@
 package com.var.entidad;
 
 public class Proveedor {
+	/*Agregar cod proveedor int y cambiar de tipo de variable a telf por string, agregar metodos*/
 	private int telf;
 	private String rzSoc, estado, condic, direc, codDis,nroRuc;
 	
