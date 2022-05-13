@@ -1,8 +1,8 @@
 package com.var.entidad;
 
 public class Trabajador {
-	private String nomApe, cargo,sexo, codUnidadOrga;
-	private int dni;
+	private String nomApe,cargo,sexo,codUnidadOrga,dni;
+	private int codTrab ;
 	
 	
 	public String getCodUnidadOrga() {
@@ -29,10 +29,17 @@ public class Trabajador {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-	public int getDni() {
+	public String getDni() {
 		return dni;
 	}
-	public void setDni(int dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
+	public int getCodTrab() {
+		return codTrab;
+	}
+	public void setCodTrab(int codTrab) {
+		this.codTrab = codTrab;
+	}
+
 }
