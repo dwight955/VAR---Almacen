@@ -45,10 +45,7 @@ public class ServletProveedor extends HttpServlet {
 		else if(accion.equals("REGISTRAR"))
 			registrarProveedor(request,response);
 		else if(accion.equals("ELIMINAR"))
-			eliminarProveedor(request,response);	
-		
-		
-		
+			eliminarProveedor(request,response);
 		
 	}
 

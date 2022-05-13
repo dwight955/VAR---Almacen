@@ -8,6 +8,10 @@ body {
   background: #eee;
   height:100vh;
 }
+.dashboard_content{
+		display: flex;
+		align-items: flex-start;
+	}
 /*ENCABEZADO*/
 .encabezado{
 	width:100%;
@@ -46,8 +50,11 @@ body {
 	font-family:'Arial';
 }
 /*MENU LATERAL*/
+.active{
+	background: #FFD133;
+}
 .menu{
-	width: 25%;
+	width: 20%;
 	height: calc(100vh - 50px);
 	display: inline-flex;
 	flex-direction: column;

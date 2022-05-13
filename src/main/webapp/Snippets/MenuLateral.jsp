@@ -18,12 +18,12 @@
 			</div>
 			
 			<nav class="menu__contenedor-modulos">
-				<a href="#" class="active" id="01"> Principal</a>
+				<a href="dashboard.jsp" class="active" id="nav01"> Principal</a>
 				<%
                		if(unidaOrg.equals("LOGISTICA")){
                			if(cargo.equals("DIRECTOR EJECUTIVO")){
                				%>
-                			<a href="#" id="nav02"><i class="far fa-calendar-check"></i>Consultar los Cuadros de Requerimientos</a>
+                			<a href="ConsultarCuadroRqmts.jsp" id="nav02"><i class="far fa-calendar-check"></i>Bandeja de entrada</a>
                 			<a href="#" id="nav03"><i class="far fa-calendar-check"></i>Mantenimiento de Trabajadores</a>
                 			<a href="#" id="nav04"><i class="far fa-calendar-check"></i>Bandeja de Entrada</a>
                 			<%
@@ -41,16 +41,16 @@
                     		<a href="#" id="nav09"><i class="far fa-calendar-check"></i> Bandeja de entrada PECOSAs</a>
                     		<a href="#" id="nav10"><i class="far fa-calendar-check"></i> Actualizar estado de PECOSA</a>
                     		<a href="#" id="nav11"><i class="far fa-calendar-check"></i> Consultar PECOSA</a>
-                    		<a href="#" id="nav12"><i class="far fa-calendar-check"></i> Listado de Proveedores</a>
+                    		<a href="ServletProveedor?tipo=LISTAR" id="nav12"><i class="far fa-calendar-check"></i> Listado de Proveedores</a>
                     		<a href="#" id="nav13"><i class="far fa-calendar-check"></i> Generar Reporte</a>
                     	<%
                			}
-               			//MENU PARA LOS MENUS LATERALES
+               			//MENU PARA LOS DIRECTIVOS
                		}else{
                			%>
-	               			<a href="#" id="nav07"><i class="far fa-calendar-check"></i> Generar Cuadro de Necesidades</a>
-	               			<a href="#" id="nav05"><i class="far fa-calendar-check"></i> Consultar Cuadro de Necesidades</a>
-	               			<a href="#" id="nav05"><i class="far fa-calendar-check"></i> Generar Reporte</a>
+	               			<a href="#" id="nav14"><i class="far fa-calendar-check"></i> Generar Cuadro de Necesidades</a>
+	               			<a href="#" id="nav15"><i class="far fa-calendar-check"></i> Consultar Cuadro de Necesidades</a>
+	               			<a href="#" id="nav16"><i class="far fa-calendar-check"></i> Generar Reporte</a>
                			<%
                		}
                		%>	

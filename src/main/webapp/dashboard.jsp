@@ -11,13 +11,6 @@
 	.msg_bienvenida{
 		padding:1em;
 	}
-	.dashboard_content{
-		display: flex;
-		align-items: flex-start;
-	}
-	section{
-		width:100%;
-	}
 </style>
 <body>
 	<%@ include file="Snippets/Encabezado.jsp" %>
@@ -28,8 +21,17 @@
 			<div class="msg_bienvenida">
 			<h2>Te damos la bienvenida <%= nombre%> <%= apellido%></h2>
 			<h3>Unidad Organica: <%= unidaOrg%> </h3>
+			</div>
 		</section>
 	</div>
 	
 </body>
+<script>
+	$(document).ready(function() {
+		$('#nav02').click(function() {
+			$('#nav01').removeClass("active");
+			$('#nav02').addClass("active");
+		})
+	});
+</script>
 </html>
