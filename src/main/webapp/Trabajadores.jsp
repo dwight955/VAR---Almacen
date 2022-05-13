@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Proveedores</title>
+<title>Trabajador</title>
  <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -31,7 +31,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1 class="text-center mt-5">Proveedores</h1>
+		<h1 class="text-center mt-5">TRABAJADORES</h1>
 			
 			
 			<c:if test="${requestScope.MENSAJE!=null}">
@@ -44,7 +44,7 @@
 		
 		<!-- Button trigger modal -->
 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-		  Registrar Proveedor
+		  Registrar Trabajador
 		</button>
 		
 		<!-- Modal -->
@@ -52,54 +52,45 @@
 		  <div class="modal-dialog modal-dialog-centered">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title" id="staticBackdropLabel">PROVEEDOR</h5>
+		        <h5 class="modal-title" id="staticBackdropLabel">TRABAJADOR</h5>
 		      </div>
 		      <div class="modal-body">
-		        <form id="idRegistrar" method="post" action="ServletProveedor?tipo=REGISTRAR">
-		        <div class="form-group">
+		        <form id="idRegistrar" method="post" action="ServletTrabajador?tipo=REGISTRAR">
+		           <div class="form-group">
 				    <label for="exampleInputEmail1" class="form-label">Codigo</label>
 				    <input type="text" class="form-control" name="codigo" id="idCodigo" readonly value="0">
 				  </div>
-		           <div class="form-group">
-				    <label for="exampleInputEmail1" class="form-label">Nro RUC</label>
-				    <input type="text" class="form-control" name="nroRuc" id="idRUC">
+				  <div class="form-group">
+				    <label for="exampleInputEmail1" class="form-label">DNI</label>
+				    <input type="text" class="form-control" name="dni" id="idDNI">
 				  </div>
 				  <div class="form-group">
-				    <label for="exampleInputEmail1" class="form-label">Razon Social</label>
-				    <input type="text" class="form-control" name="razonSocial" id="idRazonSocial">
+				    <label for="exampleInputPassword1" class="form-label">Nombre Completo</label>
+				    <input type="text" class="form-control"  name="nombrecom" id="idNombreCom">
 				  </div>
 				  <div class="form-group">
-				    <label for="exampleInputPassword1" class="form-label">Estado</label>
-				   <select class="form-select"  name="estado" id="idEstado">
-				   	  <option value="">Seleccione Estado</option>
-					  <option value="ACTIVO">ACTIVO</option>
-					  <option value="NO ACTIVO">NO ACTIVO</option>
+				    <label for="exampleInputPassword1" class="form-label">Cargo</label>
+				    <input type="text" class="form-control"  name="cargo" id="idCargo">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1" class="form-label">Sexo</label>
+				   <select class="form-select"  name="sexo" id="idSexo">
+				   	  <option value="">Seleccione Sexo</option>
+					  <option value="FEMENINO">FEMENINO</option>
+					  <option value="MASCULINO">MASCULINO</option>
 					</select>
 				  </div>
 				  <div class="form-group">
-				    <label for="exampleInputPassword1" class="form-label">Condicion</label>
-				   <select class="form-select"  name="condicion" id="idCondicion">
-				   	  <option value="">Seleccione Condicion</option>
-					  <option value="HABIDO">HABIDO</option>
-					  <option value="NO HABIDO">NO HABIDO</option>
-					</select>
-				  </div>
-				  <div class="form-group">
-				    <label for="exampleInputPassword1" class="form-label">Direccion</label>
-				    <input type="text" class="form-control"  name="direccion" id="idDireccion">
-				  </div>
-				  <div class="form-group">
-				    <label for="exampleInputPassword1" class="form-label">Telefono</label>
-				    <input type="text" class="form-control"  name="telefono" id="idTelefono">
-				  </div>
-				  <div class="form-group">
-				    <label for="exampleInputPassword1" class="form-label">Distrito</label>
-				   <select class="form-select"  name="distrito" id="idDistrito">
-				   	  <option value="">Seleccione Codigo Distrito</option>
-					  <option value="DS-01">DS-01</option>
-					  <option value="DS-02">DS-02</option>
-					  <option value="DS-03">DS-03</option>
-					  <option value="DS-04">DS-04</option>
+				    <label for="exampleInputPassword1" class="form-label">Codigo UO</label>
+				   <select class="form-select"  name="coduo" id="idCodUO">
+				   	  <option value="">Seleccione Codigo de UO</option>
+					  <option value="UO0001">UO0001</option>
+					  <option value="UO0002">UO0002</option>
+					  <option value="UO0003">UO0003</option>
+					  <option value="UO0004">UO0004</option>
+					  <option value="UO0005">UO0005</option>
+					  <option value="UO0006">UO0006</option>
+					  <option value="UO0007">UO0007</option>
 					</select>
 				  </div>
 				   <div class="modal-footer">
@@ -122,7 +113,7 @@
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
-		        <form method="post" action="ServletProveedor?tipo=ELIMINAR">
+		        <form method="post" action="ServletTrabajador?tipo=ELIMINAR">
 				    <input type="hidden" class="form-control" id="idCodigoEliminar" name="codigoEliminar">
 				   <h4>Seguro de eliminar registro?</h4>
 				   <div class="modal-footer">
@@ -142,29 +133,25 @@
 			<table id="example" class="table table-striped" style="width:100%">
 		        <thead>
 		            <tr>
-		            	<th>CODIGO</th>
-		                <th>NRO RUC</th>
-		                <th>RAZON SOCIAL</th>
-		                <th>ESTADO</th>
-		                <th>CONDICION</th>
-		                <th>DIRECCION</th>
-		                <th>TELEFONO</th>
-		                <th>DISTRITO</th>
+		                <th>CÓDIGO</th>
+		                <th>DNI</th>
+		                <th>NOMBRE COMPLETO</th>
+		                <th>CARGO</th>
+		                <th>SEXO</th>
+		                <th>CODIGO UO</th>
 		                <th></th>
 		                <th></th>
 		            </tr>
 		        </thead>
 		        <tbody>
-		        	<c:forEach items="${requestScope.proveedores}" var="row">
+		        	<c:forEach items="${requestScope.trabajadores}" var="row">
 			            <tr>
-			            	<td>${row.codProv}</td>
-			                <td>${row.nroRuc}</td>
-			                <td>${row.rzSoc}</td>
-			                <td>${row.estado}</td>
-			                <td>${row.condic}</td>
-			                <td>${row.direc}</td>
-			                <td>${row.telf}</td>
-			                <td>${row.codDis}</td>
+			                <td>${row.codTrab}</td>
+			                <td>${row.dni}</td>
+			                <td>${row.nomApe}</td>			     
+			                <td>${row.cargo}</td>
+			                <td>${row.sexo}</td>
+			                <td>${row.codUnidadOrga}</td>
 			                <td><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Editar</button></td>
 			                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button></td>
 			            </tr>
@@ -203,7 +190,7 @@
 		
 		//asignar evento click a los botones con clase "btn-danger"
 		$(document).on("click",".btn-danger",function(){
-			//variable para almacenar el código del proveedor según el botón eliminar que se pulso
+			//variable para almacenar el código del docente según el botón eliminar que se pulso
 			let cod;
 			cod=$(this).parents("tr").find("td")[0].innerHTML;
 			$("#idCodigoEliminar").val(cod);
@@ -212,25 +199,21 @@
 		//asignar evento click a los botones con clase "btn-success"
 		$(document).on("click",".btn-success",function(){
 			//variables
-			let codigo,ruc,razons,estado,condi,direc,telf,distri;
+			let cod,dni,nomcom,cargo,sexo,coduo;
 			//leer las columnas de según el botón editar que se pulso
-			codigo=$(this).parents("tr").find("td")[0].innerHTML;
-			ruc=$(this).parents("tr").find("td")[1].innerHTML;
-			razons=$(this).parents("tr").find("td")[2].innerHTML;
-			estado=$(this).parents("tr").find("td")[3].innerHTML;
-			condi=$(this).parents("tr").find("td")[4].innerHTML;
-			direc=$(this).parents("tr").find("td")[5].innerHTML;
-			telf=$(this).parents("tr").find("td")[6].innerHTML;
-			distri=$(this).parents("tr").find("td")[7].innerHTML;
+			cod=$(this).parents("tr").find("td")[0].innerHTML;
+			dni=$(this).parents("tr").find("td")[1].innerHTML;
+			nomcom=$(this).parents("tr").find("td")[2].innerHTML;
+			cargo=$(this).parents("tr").find("td")[3].innerHTML;
+			sexo=$(this).parents("tr").find("td")[4].innerHTML;
+			coduo=$(this).parents("tr").find("td")[5].innerHTML;
 			//mostrar en las cajas del modal con id "staticBackdrop" los valores de las variables
-			$("#idCodigo").val(codigo)
-			$("#idRUC").val(ruc);
-			$("#idRazonSocial").val(razons);
-			$("#idEstado").val(estado);
-			$("#idCondicion").val(condi);
-			$("#idDireccion").val(direc);
-			$("#idTelefono").val(telf);
-			$("#idDistrito").val(distri);
+			$("#idCodigo").val(cod);
+			$("#idDNI").val(dni);
+			$("#idNombreCom").val(nomcom);
+			$("#idCargo").val(cargo);
+			$("#idSexo").val(sexo);
+			$("#idCodUO").val(coduo);
 			
 		})
 		//asignar evento click al botón con id "btn-cerrar"
@@ -312,7 +295,7 @@
             //		 		}
         	//	 	}
         	//	 	
-        		 		 
+        		 
         	 }
         });   
 			

@@ -64,14 +64,14 @@ public class ServletProveedor extends HttpServlet {
 			//crear atributo MENSAJE
 			request.setAttribute("MENSAJE", "Proveedor eliminado...");
 			//
-			//request.getRequestDispatcher("/docente.jsp").forward(request, response);
+			//request.getRequestDispatcher("/Proveedor.jsp").forward(request, response);
 			listarProveedores(request,response);
 		}
 		else {
 			//crear atributo MENSAJE
 			request.setAttribute("MENSAJE", "Error en la eliminación...");
 			//
-			//request.getRequestDispatcher("/docente.jsp").forward(request, response);
+			//request.getRequestDispatcher("/Proveedor.jsp").forward(request, response);
 			listarProveedores(request,response);
 		}
 		
@@ -108,14 +108,14 @@ public class ServletProveedor extends HttpServlet {
 				//crear atributo MENSAJE
 				request.setAttribute("MENSAJE", "Proveedor registrado...");
 				
-				request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
+				//request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
 				listarProveedores(request,response);
 			}
 			else {
 		//		//crear atributo MENSAJE
 				request.setAttribute("MENSAJE", "Error en el registro...");
 				
-				request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
+				//request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
 				listarProveedores(request,response);
 			}
 		}
@@ -129,14 +129,14 @@ public class ServletProveedor extends HttpServlet {
 				//crear atributo MENSAJE
 				request.setAttribute("MENSAJE", "Proveedor actualizado...");
 				
-				request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
+				//request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
 				listarProveedores(request,response);
 			}
 			else {
 				//crear atributo MENSAJE
 				request.setAttribute("MENSAJE", "Error en la actualización...");
 				
-				request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
+				//request.getRequestDispatcher("/Proveedores.jsp").forward(request, response);
 				listarProveedores(request,response);
 			}
 		}
