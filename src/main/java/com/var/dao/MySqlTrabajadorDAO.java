@@ -7,34 +7,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.var.entidad.Proveedor;
-import com.var.interfaces.ProveedorDAO;
+import com.var.entidad.Trabajador;
+import com.var.interfaces.TrabajadorDAO;
 import com.var.utils.MySqlConexion;
 
 
-
-public class MySqlProveedorDAO implements ProveedorDAO{
+public class MySqlTrabajadorDAO implements TrabajadorDAO{
 
 	@Override
-	public int save(Proveedor bean) {
+	public int save(Trabajador bean) {
 		int salida=-1;
 		Connection cn=null;
 		PreparedStatement pstm=null;
 		try {
 			//1
 			cn=MySqlConexion.getConectar();
-			//2 Modificar para agregar codprov
-			String sql="insert into bwinfxi4ncz6ryqu6s48.tb_proveedores values(null,?,?,?,?,?,?,?)";
+			//2
+			String sql="insert into bwinfxi4ncz6ryqu6s48.tb_trabajadores values(null,?,?,?,?,?)";
 			//3
 			pstm=cn.prepareStatement(sql);
 			//4
-			pstm.setString(1, bean.getNroRuc());
-			pstm.setString(2, bean.getRzSoc());
-			pstm.setString(3, bean.getEstado());
-			pstm.setString(4, bean.getCondic());
-			pstm.setString(5, bean.getDirec());
-			pstm.setString(6, bean.getTelf());
-			pstm.setString(7, bean.getCodDis());
+			pstm.setString(1, bean.getDni());
+			pstm.setString(2, bean.getNomApe());
+			pstm.setString(3, bean.getCargo());
+			pstm.setString(4, bean.getSexo());
+			pstm.setString(5, bean.getCodUnidadOrga());
 			//5
 			salida=pstm.executeUpdate();
 		} catch (SQLException e) {
@@ -52,26 +49,24 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 	}
 
 	@Override
-	public int update(Proveedor bean) {
+	public int update(Trabajador bean) {
 		int salida=-1;
 		Connection cn=null;
 		PreparedStatement pstm=null;
 		try {
 			//1
 			cn=MySqlConexion.getConectar();
-			//2 
-			String sql="update bwinfxi4ncz6ryqu6s48.tb_proveedores set nroRuc=?,rzonSoc=?,estado=?,condic=?,direc=?,telf=?,codDis=? where codProv=?";
+			//2
+			String sql="update bwinfxi4ncz6ryqu6s48.tb_trabajadores set dniTrabajador=?,apeNomTrabajador=?,cargoTrabajador=?,sexo=?,codUniOrg=? where codTrab=?";
 			//3
 			pstm=cn.prepareStatement(sql);
 			//4
-			pstm.setString(1, bean.getNroRuc());
-			pstm.setString(2, bean.getRzSoc());
-			pstm.setString(3, bean.getEstado());
-			pstm.setString(4, bean.getCondic());
-			pstm.setString(5, bean.getDirec());
-			pstm.setString(6, bean.getTelf());
-			pstm.setString(7, bean.getCodDis());
-			pstm.setInt(8, bean.getCodProv());
+			pstm.setString(1, bean.getDni());
+			pstm.setString(2, bean.getNomApe());
+			pstm.setString(3, bean.getCargo());
+			pstm.setString(4, bean.getSexo());
+			pstm.setString(5, bean.getCodUnidadOrga());
+			pstm.setInt(6, bean.getCodTrab());
 			//5
 			salida=pstm.executeUpdate();
 		} catch (SQLException e) {
@@ -96,8 +91,8 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 		try {
 			//1
 			cn=MySqlConexion.getConectar();
-			//2 
-			String sql="delete from bwinfxi4ncz6ryqu6s48.tb_proveedores where codProv=?";
+			//2
+			String sql="delete from bwinfxi4ncz6ryqu6s48.tb_trabajadores where codTrab=?";
 			//3
 			pstm=cn.prepareStatement(sql);
 			//4
@@ -119,23 +114,23 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 	}
 
 	@Override
-	public Proveedor findById(int cod) {
+	public Trabajador findById(int cod) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Proveedor> listAll() {
-		List<Proveedor> data=new ArrayList<Proveedor>();
-		Proveedor bean;
+	public List<Trabajador> listAll() {
+		List<Trabajador> data=new ArrayList<Trabajador>();
+		Trabajador bean;
 		Connection cn=null;
 		PreparedStatement pstm=null;
 		ResultSet rs=null;
 		try {
 			//1
 			cn=MySqlConexion.getConectar();
-			//2 Falta modificar para la nueva estructuracion de tabla proveedores
-			String sql="SELECT * FROM bwinfxi4ncz6ryqu6s48.tb_proveedores";
+			//2
+			String sql="select *from bwinfxi4ncz6ryqu6s48.tb_trabajadores";
 			//3
 			pstm=cn.prepareStatement(sql);
 			//4 parámetros
@@ -145,16 +140,14 @@ public class MySqlProveedorDAO implements ProveedorDAO{
 			//6 bucle
 			while(rs.next()) {
 				//7 crear bean
-				bean=new Proveedor();
+				bean=new Trabajador();
 				//8
-				bean.setCodProv(rs.getInt(1));
-				bean.setNroRuc(rs.getString(2));
-				bean.setRzSoc(rs.getString(3));
-				bean.setEstado(rs.getString(4));
-				bean.setCondic(rs.getString(5));
-				bean.setDirec(rs.getString(6));
-				bean.setTelf(rs.getString(7));
-				bean.setCodDis(rs.getString(8));
+				bean.setCodTrab(rs.getInt(1));
+				bean.setDni(rs.getString(2));
+				bean.setNomApe(rs.getString(3));
+				bean.setCargo(rs.getString(4));
+				bean.setSexo(rs.getString(5));
+				bean.setCodUnidadOrga(rs.getString(6));
 				//9
 				data.add(bean);
 			}
