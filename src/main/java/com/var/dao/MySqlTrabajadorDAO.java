@@ -115,8 +115,43 @@ public class MySqlTrabajadorDAO implements TrabajadorDAO{
 
 	@Override
 	public Trabajador findById(int cod) {
-		// TODO Auto-generated method stub
-		return null;
+	 
+		List<Trabajador> lista=new ArrayList<>();
+		Connection cn=null;
+		PreparedStatement pstm=null;
+		ResultSet rs=null;
+		String sql;
+		
+		sql="select * from bwinfxi4ncz6ryqu6s48.tb_trabajadores where codTrab=?";
+		
+		
+		try {
+			
+		
+		cn=MySqlConexion.getConectar();
+		pstm=cn.prepareStatement(sql);
+		rs=pstm.executeQuery();
+		while(rs.next()) {
+			Trabajador tr=new Trabajador();
+			tr.setCodTrab(rs.getInt("Codigo"));
+			tr.setDni(rs.getString("DNI"));
+			tr.setNomApe(rs.getString("Nombres y Apellidos"));
+			tr.setCargo(rs.getString("Cargo"));
+			tr.setSexo(rs.getString("Sexo"));
+			tr.setCodUnidadOrga(rs.getString("CodUni"));
+		lista.add(tr);
+		
+		}
+		
+				
+		}catch (Exception e) {
+			
+			
+		}
+		
+	
+		return  (Trabajador) lista;
+		
 	}
 
 	@Override
