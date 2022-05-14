@@ -46,8 +46,12 @@ public class ServletTrabajador extends HttpServlet {
 			registrarTrabajador(request,response);
 		else if(accion.equals("ELIMINAR"))
 			eliminarTrabajador(request,response);	
+		else if(accion.equals("BUSCAR"))
+			buscarTrabajador(request,response);	
 		
 	}
+
+	
 
 	private void eliminarTrabajador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//recuperar el código a eliminar
@@ -136,6 +140,25 @@ public class ServletTrabajador extends HttpServlet {
 		
 	}
 
+	private void buscarTrabajador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String cod =request.getParameter("codigo");
+		
+		
+		List<Trabajador>lista=(List<Trabajador>) TrabajadorDAO.findById(Integer.parseInt(cod));
+		
+		request.setAttribute("trabajadores", lista);
+		request.getRequestDispatcher("/Trabajadores.jsp").forward(request, response);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private void listarTrabajadores(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//invocar al método listAll
 		List<Trabajador> lista=TrabajadorDAO.listAll();
