@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="Estyles/General.css">
 <header class="encabezado">
 	<div class="encabezado_logo">
-		<!--<img src="img/VAR_Logo.png">  -->
 		<object data="img/logo.svg" width="120" height="230"> </object>
 	</div>
 	

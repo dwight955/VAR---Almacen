@@ -9,44 +9,30 @@
  <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <style type="text/css">	
-		.modal-header{
-			color:#fff;
-			background: #428bca;
-			display: flex;
-	  		justify-content: center;
-	  		
-		}
-		.help-block {
-		  		color: red;
-		}
-		.form-group.has-error .form-control-label {
-		  color: red;
-		}
-		.form-group.has-error .form-control {
-		  border: 1px solid red;
-		  box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
-		}
-    </style>
+    <link href="Estyles/boostrapValidator.css" rel="stylesheet">
+    <link href="Estyles/Proveedores.css" rel="stylesheet">
+    <link rel="stylesheet" href="Estyles/General.css">
 </head>
 <body>
-	<div class="container">
-		<h1 class="text-center mt-5">Proveedores</h1>
-			
-			
+	<%@ include file="Snippets/Encabezado.jsp" %>
+	</style>
+	<div class="dashboard_content">
+			<%@ include file="Snippets/MenuLateral.jsp" %>
+		
+			<!-- Button trigger modal -->
 			<c:if test="${requestScope.MENSAJE!=null}">
 				<div class="alert alert-warning alert-dismissible fade show" role="alert">
 				  <strong>MENSAJE : </strong> ${requestScope.MENSAJE}
 				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				</div>
 			</c:if>
-		
-		
-		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-		  Registrar Proveedor
-		</button>
-		
+		<section>
+		<header class="cabezera d-block">
+			<center> <h1 >Proveedores</h1></center>
+		  	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+		  	Registrar Proveedor
+			</button>
+		</header>	
 		<!-- Modal -->
 		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered">
@@ -112,7 +98,6 @@
 		    </div>
 		  </div>
 		</div>
-		
 		<!-- modal para eliminar -->
 		<div class="modal fade" id="modalEliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered">
@@ -135,10 +120,8 @@
 		    </div>
 		  </div>
 		</div>
-		
-		
-		
-		<div class="mt-3">
+		<!-- FILAS Y COLUMNAS -->
+		<div class="container-sm ">
 			<table id="example" class="table table-striped" style="width:100%">
 		        <thead>
 		            <tr>
@@ -171,17 +154,7 @@
 			        </c:forEach>
 		        </tbody>
 	    	</table>
-		
-		
-		
 		</div>
-		
-
-
-
-
-
-
 	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>

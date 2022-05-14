@@ -1,0 +1,18 @@
+@charset "ISO-8859-1";
+.modal-header{
+			color:#fff;
+			background: #428bca;
+			display: flex;
+	  		justify-content: center;
+	  		
+		}
+		.help-block {
+		  		color: red;
+		}
+		.form-group.has-error .form-control-label {
+		  color: red;
+		}
+		.form-group.has-error .form-control {
+		  border: 1px solid red;
+		  box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
+		}
