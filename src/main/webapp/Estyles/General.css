@@ -22,9 +22,7 @@ body {
 	justify-content: space-between;
 	box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
-.encabezado > h3{
-	color: white;
-}
+
 .encabezado_logo{
 	width: 20%;
 	text-align: center;
@@ -35,12 +33,12 @@ body {
 }
 .lema{
 	font-family:'Arial';
+	color: white;
+	font-size:18pt;
 }
 .hora{
 	width:120px;
-	padding:5px 5px;
 	margin-right: 7em;
-	height:auto;
 	background: #FFD133;
 	border-radius:15px 15px;
 }

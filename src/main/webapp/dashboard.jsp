@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" href="Estyles/Generalcss">
+<link rel="stylesheet" href="Estyles/General.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <title>Mi Dashboard</title>
 </head>
 <style>
@@ -19,8 +20,8 @@
 		<%@ include file="Snippets/MenuLateral.jsp" %>
 		<section>
 			<div class="msg_bienvenida">
-			<h2>Te damos la bienvenida <%= nombre%> <%= apellido%></h2>
-			<h3>Unidad Organica: <%= unidaOrg%> </h3>
+			<h3>Te damos la bienvenida <%= nombre%> <%= apellido%></h3>
+			<h4>De: <%= unidaOrg%> </h4>
 			</div>
 		</section>
 	</div>

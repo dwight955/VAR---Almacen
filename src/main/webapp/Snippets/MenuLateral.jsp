@@ -11,9 +11,9 @@
             	<% String cargo = (String) session.getAttribute("cargo");%>
 			
 			<div class="menu__datos-user">
-				<h4><strong class="menu__titulo">Nombre de usuario</strong> </h4>
+				<h4><strong class="menu__titulo fs-5">Nombre de usuario</strong> </h4>
 				<h5><%= nombre%></h5>
-				<h4><strong class="menu__titulo">Cargo</strong> </h4>
+				<h4><strong class="menu__titulo fs-5">Cargo</strong> </h4>
 				<h5><%= cargo%></h5>
 			</div>
 			
@@ -25,7 +25,6 @@
                				%>
                 			<a href="ConsultarCuadroRqmts.jsp" id="nav02"><i class="far fa-calendar-check"></i>Bandeja de entrada</a>
                 			<a href="#" id="nav03"><i class="far fa-calendar-check"></i>Mantenimiento de Trabajadores</a>
-                			<a href="#" id="nav04"><i class="far fa-calendar-check"></i>Bandeja de Entrada</a>
                 			<%
                			}
                			else if(cargo.equals("SUB-ALMACENERO")){

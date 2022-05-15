@@ -4,18 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="Estyles/General.css" rel="stylesheet" >
 <meta charset="ISO-8859-1">
 <title>Proveedores</title>
  <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+ 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet"> 
     <link href="Estyles/boostrapValidator.css" rel="stylesheet">
     <link href="Estyles/Proveedores.css" rel="stylesheet">
-    <link rel="stylesheet" href="Estyles/General.css">
 </head>
+<style>
+</style>
 <body>
 	<%@ include file="Snippets/Encabezado.jsp" %>
-	</style>
+	
 	<div class="dashboard_content">
 			<%@ include file="Snippets/MenuLateral.jsp" %>
 		
@@ -28,7 +30,7 @@
 			</c:if>
 		<section>
 		<header class="cabezera d-block">
-			<center> <h1 >Proveedores</h1></center>
+			<center> <h1>Proveedores</h1></center>
 		  	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 		  	Registrar Proveedor
 			</button>
@@ -121,7 +123,7 @@
 		  </div>
 		</div>
 		<!-- FILAS Y COLUMNAS -->
-		<div class="container-sm ">
+		<div class="container-sm">
 			<table id="example" class="table table-striped" style="width:100%">
 		        <thead>
 		            <tr>
