@@ -21,6 +21,11 @@
 	<div class="dashboard_content">
 			<%@ include file="Snippets/MenuLateral.jsp" %>
 		
+			
+		<section>
+		<header class="cabezera d-block">
+			<center> <h1 >Proveedores</h1></center>
+			
 			<!-- Button trigger modal -->
 			<c:if test="${requestScope.MENSAJE!=null}">
 				<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -28,9 +33,14 @@
 				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				</div>
 			</c:if>
+<<<<<<< HEAD
 		<section>
 		<header class="cabezera d-block">
 			<center> <h1>Proveedores</h1></center>
+=======
+			
+			
+>>>>>>> f1d382241aa143899d956e7f153b1b1174546de7
 		  	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 		  	Registrar Proveedor
 			</button>
