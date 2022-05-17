@@ -70,7 +70,9 @@
 				  </div>
 				  <div class="form-group">
 				    <label for="exampleInputPassword1" class="form-label">Cargo</label>
-				    <input type="text" class="form-control"  name="cargo" id="idCargo">
+				   <select class="form-select"  name="cargo" id="idCargo">
+				   	  <option value="">Seleccione un Cargo</option>
+					</select>
 				  </div>
 				  <div class="form-group">
 				    <label for="exampleInputPassword1" class="form-label">Sexo</label>
@@ -81,16 +83,9 @@
 					</select>
 				  </div>
 				  <div class="form-group">
-				    <label for="exampleInputPassword1" class="form-label">Codigo UO</label>
-				   <select class="form-select"  name="coduo" id="idCodUO">
-				   	  <option value="">Seleccione Codigo de UO</option>
-					  <option value="UO0001">UO0001</option>
-					  <option value="UO0002">UO0002</option>
-					  <option value="UO0003">UO0003</option>
-					  <option value="UO0004">UO0004</option>
-					  <option value="UO0005">UO0005</option>
-					  <option value="UO0006">UO0006</option>
-					  <option value="UO0007">UO0007</option>
+				    <label for="exampleInputPassword1" class="form-label">Unidad Organica</label>
+				   <select class="form-select"  name="coduo" id="idUnidadOrganica">
+				   	  <option value="">Seleccione la UO</option>
 					</select>
 				  </div>
 				   <div class="modal-footer">
@@ -123,32 +118,12 @@
 			      	<div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" id="btn-cerrar" data-bs-dismiss="modal">Cerrar</button>
 			        <button type="submit" class="btn btn-primary">Buscar</button>
-			        
 			        </div>
 			        </form>
-			        
-			      </div>	
-			      </div>	
-			      </div>		
-			      </div>	
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+			    </div>	
+			  </div>	
+			</div>		
+	      </div>	
 		<!-- modal para eliminar -->
 		<div class="modal fade" id="modalEliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered">
@@ -171,9 +146,6 @@
 		    </div>
 		  </div>
 		</div>
-		
-		
-		
 		<div class="mt-3">
 			<table id="example" class="table table-striped" style="width:100%">
 		        <thead>
@@ -181,9 +153,9 @@
 		                <th>CÓDIGO</th>
 		                <th>DNI</th>
 		                <th>NOMBRE COMPLETO</th>
-		                <th>CARGO</th>
 		                <th>SEXO</th>
 		                <th>CODIGO UO</th>
+		                <th>CARGO</th>
 		                <th></th>
 		                <th></th>
 		            </tr>
@@ -193,34 +165,23 @@
 			            <tr>
 			                <td>${row.codTrab}</td>
 			                <td>${row.dni}</td>
-			                <td>${row.nomApe}</td>			     
-			                <td>${row.cargo}</td>
+			                <td>${row.nomApe}</td>
 			                <td>${row.sexo}</td>
 			                <td>${row.codUnidadOrga}</td>
+			                <td>${row.cargo}</td>
 			                <td><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Editar</button></td>
 			                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button></td>
 			            </tr>
 			        </c:forEach>
 		        </tbody>
-	    	</table>
-		
-		
-		
+	    	</table>		
 		</div>
-		
-
-
-
-
-
-
 	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	
 	<!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-	
 	
 	<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
@@ -231,6 +192,7 @@
 	<script>
 		$(document).ready(function() {
 		    $('#example').DataTable();
+		    leerCondicionJSON();
 		} );
 		
 		//asignar evento click a los botones con clase "btn-danger"
@@ -247,19 +209,17 @@
 			let cod,dni,nomcom,cargo,sexo,coduo;
 			//leer las columnas de según el botón editar que se pulso
 			cod=$(this).parents("tr").find("td")[0].innerHTML;
-			dni=$(this).parents("tr").find("td")[1].innerHTML;
-			nomcom=$(this).parents("tr").find("td")[2].innerHTML;
-			cargo=$(this).parents("tr").find("td")[3].innerHTML;
-			sexo=$(this).parents("tr").find("td")[4].innerHTML;
-			coduo=$(this).parents("tr").find("td")[5].innerHTML;
+			console.log(cod);
 			//mostrar en las cajas del modal con id "staticBackdrop" los valores de las variables
-			$("#idCodigo").val(cod);
-			$("#idDNI").val(dni);
-			$("#idNombreCom").val(nomcom);
-			$("#idCargo").val(cargo);
-			$("#idSexo").val(sexo);
-			$("#idCodUO").val(coduo);
-			
+			$.get("ServletTrabajadorJSON?codigo=" + cod,function(response){
+				//Las variables dentro de val() son de la clase trabajador
+				$("#idCodigo").val(cod);
+				$("#idDNI").val(response.dni);
+				$("#idNombreCom").val(response.nomApe);
+				$("#idSexo").val(response.sexo);
+				$("#idUnidadOrganica").val(response.codUnidadOrga);
+				$("#idCargo").val(response.cargo);
+			})
 		})
 		//asignar evento click al botón con id "btn-cerrar"
 		$(document).on("click","#btn-cerrar",function(){
@@ -268,6 +228,22 @@
 			$("#idRegistrar").data("bootstrapValidator").resetForm(true);
 			$("#idCodigo").val("0");
 		})
+		
+		//Rellenar ComboBox del modal registrar
+		function leerCondicionJSON(){
+			$.get("ServletCondicionJSON?comboBox=CARGO",function(response){
+				console.log(response);
+				$.each(response,function(index,item){ 
+					$("#idCargo").append("<option value='"+item.codigo+"'>"+item.nombre+"</option>");
+				})
+			})
+			$.get("ServletCondicionJSON?comboBox=UO",function(response){
+				console.log(response);
+				$.each(response,function(index,item){ 
+					$("#idUnidadOrganica").append("<option value='"+item.codigo+"'>"+item.nombre+"</option>");
+				})
+			})
+		}
 		
 		
 	</script>
@@ -339,9 +315,7 @@
             //		 			}
             //		 		}
         	//	 	}
-        	//	 	
-        		 
-        	 }
+        	//
         });   
 			
     });    

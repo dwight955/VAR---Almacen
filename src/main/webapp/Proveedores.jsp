@@ -20,12 +20,11 @@
 	
 	<div class="dashboard_content">
 			<%@ include file="Snippets/MenuLateral.jsp" %>
-		
-			
 		<section>
 		<header class="cabezera d-block">
-			<center> <h1 >Proveedores</h1></center>
-			
+			<center> <h1>Proveedores</h1></center>
+		
+		<header class="cabezera d-block">
 			<!-- Button trigger modal -->
 			<c:if test="${requestScope.MENSAJE!=null}">
 				<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -33,18 +32,11 @@
 				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				</div>
 			</c:if>
-<<<<<<< HEAD
-		<section>
-		<header class="cabezera d-block">
-			<center> <h1>Proveedores</h1></center>
-=======
-			
-			
->>>>>>> f1d382241aa143899d956e7f153b1b1174546de7
 		  	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 		  	Registrar Proveedor
 			</button>
-		</header>	
+		</header>
+		<section>	
 		<!-- Modal -->
 		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered">
@@ -225,7 +217,6 @@
 			$("#idRegistrar").data("bootstrapValidator").resetForm(true);
 			$("#idCodigo").val("0");
 		})
-		
 		
 	</script>
 	<script>    

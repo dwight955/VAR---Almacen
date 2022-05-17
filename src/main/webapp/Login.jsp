@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="Estyles/Login.css">
   <link href="Estyles/boostrapValidator.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<!-- ESTILOS DEL MODAL DEL LOGIN -->
 <style type="text/css">
 		.modal-dialog{
 			max-width: 630px;

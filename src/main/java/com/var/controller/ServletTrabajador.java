@@ -151,14 +151,6 @@ public class ServletTrabajador extends HttpServlet {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	private void listarTrabajadores(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//invocar al método listAll
 		List<Trabajador> lista=TrabajadorDAO.listAll();
