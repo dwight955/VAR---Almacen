@@ -8,4 +8,20 @@
 	<div class="hora">
 		<h4 class="hora__text my-2 fw-bolder" id="hora__text">02:09 PM</h4>
 	</div>
+	
+	
+	
+		<span class="nav-item nav-link"></span>  
+		     
+		 <a href="ServletUsuario?tipo=CERRAR" class="btn btn-default">Cerrar Sesión</a>
+	      
+  
+  
+  
+  
+  
+ 
+</body>
+	
+	
 </header>

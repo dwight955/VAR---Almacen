@@ -1,5 +1,5 @@
 package com.var.controller;
-
+import java.util.List;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,9 +31,22 @@ public class ServletUsuario extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String accion = request.getParameter("tipo");
-		if(accion.equals("INICIAR")) {
+		if(accion.equals("INICIAR")) 
 			iniciarSesion(request,response);
-		}
+		else if(accion.equals("CERRAR")) 			
+			cerrarSesion(request,response);
+		
+		
+			
+	}
+
+	private void cerrarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session=request.getSession();
+		
+		
+		session.invalidate();
+		request.setAttribute("MENSAJE", "Sesión cerrada correctamente");
+		request.getRequestDispatcher("Login.jsp").forward(request, response);
 		
 	}
 
