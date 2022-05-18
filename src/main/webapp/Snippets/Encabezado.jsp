@@ -1,4 +1,4 @@
-<!-- <link rel="stylesheet" href="Estyles/General.css"> -->
+<link rel="stylesheet" href="Estyles/General.css">
 <header class="encabezado">
 	<div class="encabezado_logo">
 		<object data="img/logo.svg" width="120" height="230"> </object>

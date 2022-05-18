@@ -142,7 +142,6 @@ public class ServletProveedor extends HttpServlet {
 
 	private void listarProveedores(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//invocar al método listAll
-		System.out.println("Listar");
 		List<Proveedor> lista=ProveedorDAO.listAll();
 		//crear un atributo y guardar el valor de "lista"
 		request.setAttribute("proveedores", lista);
