@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
 
 import com.var.entidad.Bien;
 import com.var.interfaces.BienesDAO;
@@ -13,26 +15,112 @@ import com.var.utils.MySqlConexion;
 public class MySqlBienesDAO implements BienesDAO{
 
 	@Override
-	public int Ingresar(Bien bean) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int save(Bien bean) {
+		int salida=-1;
+		Connection cn=null;
+		PreparedStatement pstm=null;
+		try {
+			//1
+			cn=MySqlConexion.getConectar();
+			//2 Modificar para agregar codprov
+			String sql="insert into bwinfxi4ncz6ryqu6s48.tb_bienes values(null,?,?,?,?,?,?)";
+			//3
+			pstm=cn.prepareStatement(sql);
+			//4
+			pstm.setString(1, bean.getDescBien());
+			pstm.setString(2, bean.getUniMed());
+			pstm.setDouble(3, bean.getPrecUni());
+			pstm.setString(4, bean.getCategoria());
+			pstm.setInt(5, bean.getStockDisponible());
+			pstm.setString(6, bean.getFecIngreso());
+			//5
+			salida=pstm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstm!=null) pstm.close();
+				if(cn!=null) cn.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return salida;
 	}
 
 	@Override
-	public int Actualizar(Bien bean) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Bien bean) {
+		int salida=-1;
+		Connection cn=null;
+		PreparedStatement pstm=null;
+		try {
+			//1
+			cn=MySqlConexion.getConectar();
+			//2 
+			String sql="update bwinfxi4ncz6ryqu6s48.tb_bienes set descripcion=?,unidMed=?,precUni=?,idCategoria=?,stockDisponible=?,fecIngreso=? where codBien=?";
+			//3
+			pstm=cn.prepareStatement(sql);
+			//4
+			pstm.setString(1, bean.getDescBien());
+			pstm.setString(2, bean.getUniMed());
+			pstm.setDouble(3, bean.getPrecUni());
+			pstm.setString(4, bean.getCategoria());
+			pstm.setInt(5, bean.getStockDisponible());
+			pstm.setString(6, bean.getFecIngreso());
+			pstm.setInt(7, bean.getCodBien());
+			//5
+			salida=pstm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstm!=null) pstm.close();
+				if(cn!=null) cn.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return salida;
 	}
 
 	@Override
-	public int Eliminar(Bien bean) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteById(int cod) {
+		int salida=-1;
+		Connection cn=null;
+		PreparedStatement pstm=null;
+		try {
+			//1
+			cn=MySqlConexion.getConectar();
+			//2 
+			String sql="delete from bwinfxi4ncz6ryqu6s48.tb_bienes where codBien=?";
+			//3
+			pstm=cn.prepareStatement(sql);
+			//4
+			pstm.setInt(1, cod);
+			//5
+			salida=pstm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstm!=null) pstm.close();
+				if(cn!=null) cn.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+
+		return salida;
 	}
+	
 
 	@Override
-	public ArrayList<Bien> ListAll() {
-		ArrayList<Bien> lista = new ArrayList<Bien>();
+	public List<Bien> listAll() {
+		List<Bien> lista = new ArrayList<Bien>();
+		Bien bean;
 		Connection cn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -46,7 +134,7 @@ public class MySqlBienesDAO implements BienesDAO{
 			while(rs.next()) {
 				Bien bie = new Bien();
 				
-				bie.setCodBien(rs.getString(1));
+				bie.setCodBien(rs.getInt(1));
 				bie.setDescBien(rs.getString(2));
 				bie.setUniMed(rs.getString(3));
 				bie.setPrecUni(rs.getDouble(4));
@@ -72,7 +160,7 @@ public class MySqlBienesDAO implements BienesDAO{
 	}
 
 	@Override
-	public String[] fieldByCod(String codBien) {
+	public Bien findById(int cod) {
 		// TODO Auto-generated method stub
 		return null;
 	}

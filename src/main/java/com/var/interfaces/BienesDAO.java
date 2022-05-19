@@ -1,13 +1,14 @@
 package com.var.interfaces;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.var.entidad.Bien;
 
+
 public interface BienesDAO {
-	public int Ingresar(Bien bean);
-	public int Actualizar(Bien bean);
-	int Eliminar(Bien bean); 
-	public ArrayList<Bien> ListAll();
-	public String[] fieldByCod(String codBien);
+	public int save(Bien bean);
+	public int update(Bien bean);
+	public int deleteById(int cod); 
+	public Bien findById(int cod);
+	public List<Bien> listAll();
 }

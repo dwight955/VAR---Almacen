@@ -7,6 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Bienes</title>
 	<%@ include file="Snippets/BooststrapEstyles.jsp" %>
+
 </head>
 <body>
 	<div class="container">
@@ -30,7 +31,7 @@
 		        <h5 class="modal-title" id="staticBackdropLabel">BIEN</h5>
 		      </div>
 		      <div class="modal-body">
-		        <form id="idRegistrar" method="post" action="ServletTrabajador?tipo=REGISTRAR">
+		        <form id="idRegistrar" method="post" action="ServletBien?tipo=REGISTRAR">
 		           <div class="form-group">
 				    <label for="exampleInputEmail1" class="form-label">Codigo</label>
 				    <input type="text" class="form-control" name="codigo" id="idCodigo" readonly value="0">
@@ -41,7 +42,11 @@
 				  </div>
 				  <div class="form-group">
 				    <label for="exampleInputPassword1" class="form-label">Unidad Medida</label>
-				    <input type="text" class="form-control"  name="unidadmedida" id="idUnidadmedida">
+				   <select class="form-select"  name="unidadmedida" id="idUnidadmedida">
+				   	  <option value="">Seleccione Unidad de Medida</option>
+				   	  <option value="UNIDAD">UNIDAD</option>
+				   	  <option value="KILO">KILO</option>				   	
+					</select>
 				  </div>
 				  <div class="form-group">
 				    <label for="exampleInputPassword1" class="form-label">Precio Unit.</label>
@@ -51,11 +56,16 @@
 				    <label for="exampleInputPassword1" class="form-label">Categoria</label>
 				   <select class="form-select"  name="categoria" id="idCategoria">
 				   	  <option value="">Seleccione Categoria</option>
+				   	  
 					</select>
 				  </div>
 				  <div class="form-group">
 				    <label for="exampleInputPassword1" class="form-label">Stock Disponible</label>
 				   <input type="text" class="form-control"  name="stock" id="idStock">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1" class="form-label">Fecha </label>
+				   <input type="text" class="form-control"  name="fecha" id="idFecha"  value="">
 				  </div>
 				   <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" id="btn-cerrar" data-bs-dismiss="modal">Cerrar</button>
@@ -76,7 +86,7 @@
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
-		        <form method="post" action="ServletTrabajador?tipo=ELIMINAR">
+		        <form method="post" action="ServletBien?tipo=ELIMINAR">
 				    <input type="hidden" class="form-control" id="idCodigoEliminar" name="codigoEliminar">
 				   <h4>Seguro de eliminar registro?</h4>
 				   <div class="modal-footer">
@@ -128,6 +138,47 @@
 		$(document).ready(function() {
 		    $('#example').DataTable();
 		} );
+		
+		//asignar evento click a los botones con clase "btn-danger"
+		$(document).on("click",".btn-danger",function(){
+			//variable para almacenar el código del proveedor según el botón eliminar que se pulso
+			let cod;
+			cod=$(this).parents("tr").find("td")[0].innerHTML;
+			$("#idCodigoEliminar").val(cod);
+		})
+		
+		//asignar evento click a los botones con clase "btn-success"
+		$(document).on("click",".btn-success",function(){
+			//variables
+			let codigo,desc,unim,pre,cate,stock,fecha;
+			//leer las columnas de según el botón editar que se pulso
+			codigo=$(this).parents("tr").find("td")[0].innerHTML;
+			desc=$(this).parents("tr").find("td")[1].innerHTML;
+			unim=$(this).parents("tr").find("td")[2].innerHTML;
+			pre=$(this).parents("tr").find("td")[3].innerHTML;
+			cate=$(this).parents("tr").find("td")[4].innerHTML;
+			stock=$(this).parents("tr").find("td")[5].innerHTML;
+			fecha=$(this).parents("tr").find("td")[6].innerHTML;
+
+			//mostrar en las cajas del modal con id "staticBackdrop" los valores de las variables
+			$("#idCodigo").val(codigo)
+			$("#idDescripcion").val(desc);
+			$("#idUnidadmedida").val(unim);
+			$("#idPrecio").val(pre);
+			$("#idCategoria").val(cate);
+			$("#idStock").val(stock);
+			$("#idFecha").val(fecha);
+
+			
+		})
+		//asignar evento click al botón con id "btn-cerrar"
+		$(document).on("click","#btn-cerrar",function(){
+			//limpiar controles del formularios
+			$("#idRegistrar").trigger("reset");
+			$("#idRegistrar").data("bootstrapValidator").resetForm(true);
+			$("#idCodigo").val("0");
+		})
+		
 	</script>
 </body>
 </html>

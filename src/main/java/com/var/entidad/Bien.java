@@ -1,9 +1,9 @@
 package com.var.entidad;
 
 public class Bien {
-	private int stockDisponible;
+	private int stockDisponible, codBien;
 	private double precUni;
-	private String descBien, uniMed, fecIngreso,codBien,categoria;
+	private String descBien, uniMed, fecIngreso,categoria;
 	
 	public String getCategoria() {
 		return categoria;
@@ -11,10 +11,10 @@ public class Bien {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-	public String getCodBien() {
+	public int getCodBien() {
 		return codBien;
 	}
-	public void setCodBien(String codBien) {
+	public void setCodBien(int codBien) {
 		this.codBien = codBien;
 	}
 	public int getStockDisponible() {
