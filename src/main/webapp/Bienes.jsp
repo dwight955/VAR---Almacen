@@ -104,7 +104,7 @@
 			<table id="example" class="table table-striped" style="width:100%">
 		        <thead>
 		            <tr>
-		                <th>C覦IGO</th>
+		                <th>C脫DIGO</th>
 		                <th>DESCRIPCION</th>
 		                <th>UNIDAD MEDIDA</th>
 		                <th>PRECIO</th>
@@ -137,11 +137,49 @@
 	<script>
 		$(document).ready(function() {
 		    $('#example').DataTable();
+		    $('#idRegistrar').bootstrapValidator({      
+	        	 fields:{
+	        		 descripcion:{
+	        			 	validators:{
+	        			 		notEmpty:{
+	        			 			message:'Campo descripcion es obligatorio'	
+	        			 		},
+	         			 		regexp:{
+	        			 			regexp:/^.{1,50}$/,
+	        			 			message:'Campo de 50 caracteres'
+	        			 		}
+	        			 	}
+	        		 },    
+	        		 precio:{
+	     			 	validators:{
+	     			 		notEmpty:{
+	     			 			message:'Campo precio es obligatorio'	
+	     			 		},
+	     			 		regexp:{
+	    			 			regexp:/^(\d{1,4}|\d{1,4}\.\d{1,2})$/,
+	    			 			message:'Campo precio hasta 4 digitos enteros y 2 decimales'
+	    			 		}
+	     			 	}
+	     		 	 },
+	     		 	 stock:{
+	     		 		 validators:{
+	     		 			 notEmpty:{
+	     		 				 message:'Campo stock es obligatorio'
+	     		 			 },
+	     		 			between:{
+	     		 				 min:1,
+	     		 				 max:850,
+	     		 				message:'No debe superar 850'
+	     		 			 }
+	     		 		 }
+	     		 	 }
+	        	 }
+	        }); 
 		} );
 		
 		//asignar evento click a los botones con clase "btn-danger"
 		$(document).on("click",".btn-danger",function(){
-			//variable para almacenar el c骴igo del proveedor seg鷑 el bot髇 eliminar que se pulso
+			//variable para almacenar el c贸digo del proveedor seg煤n el bot贸n eliminar que se pulso
 			let cod;
 			cod=$(this).parents("tr").find("td")[0].innerHTML;
 			$("#idCodigoEliminar").val(cod);
@@ -151,7 +189,7 @@
 		$(document).on("click",".btn-success",function(){
 			//variables
 			let codigo,desc,unim,pre,cate,stock,fecha;
-			//leer las columnas de seg鷑 el bot髇 editar que se pulso
+			//leer las columnas de seg煤n el bot贸n editar que se pulso
 			codigo=$(this).parents("tr").find("td")[0].innerHTML;
 			desc=$(this).parents("tr").find("td")[1].innerHTML;
 			unim=$(this).parents("tr").find("td")[2].innerHTML;
@@ -171,7 +209,7 @@
 
 			
 		})
-		//asignar evento click al bot髇 con id "btn-cerrar"
+		//asignar evento click al bot贸n con id "btn-cerrar"
 		$(document).on("click","#btn-cerrar",function(){
 			//limpiar controles del formularios
 			$("#idRegistrar").trigger("reset");
