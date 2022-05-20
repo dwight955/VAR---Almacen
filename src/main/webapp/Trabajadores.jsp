@@ -1,186 +1,237 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Trabajador</title>
-	<%@ include file="Snippets/BooststrapEstyles.jsp" %>
-    <style type="text/css">	
-		.modal-header{
-			color:#fff;
-			background: #428bca;
-			display: flex;
-	  		justify-content: center;
-	  		
-		}
-		.help-block {
-		  		color: red;
-		}
-		.form-group.has-error .form-control-label {
-		  color: red;
-		}
-		.form-group.has-error .form-control {
-		  border: 1px solid red;
-		  box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
-		}
-    </style>
+<%@ include file="Snippets/BooststrapEstyles.jsp"%>
+<style type="text/css">
+.modal-header {
+	color: #fff;
+	background: #428bca;
+	display: flex;
+	justify-content: center;
+}
+
+.help-block {
+	color: red;
+}
+
+.form-group.has-error .form-control-label {
+	color: red;
+}
+
+.form-group.has-error .form-control {
+	border: 1px solid red;
+	box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
+}
+</style>
 </head>
 <body>
 	<div class="container">
 		<h1 class="text-center mt-5">TRABAJADORES</h1>
-			
-			
-			<c:if test="${requestScope.MENSAJE!=null}">
-				<div class="alert alert-warning alert-dismissible fade show" role="alert">
-				  <strong>MENSAJE : </strong> ${requestScope.MENSAJE}
-				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-				</div>
-			</c:if>
-		
-		
+
+
+		<c:if test="${requestScope.MENSAJE!=null}">
+			<div class="alert alert-warning alert-dismissible fade show"
+				role="alert">
+				<strong>MENSAJE : </strong> ${requestScope.MENSAJE}
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+		</c:if>
+
+
 		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-		  Registrar Trabajador
-		</button>
-		
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+			data-bs-target="#staticBackdrop">Registrar Trabajador</button>
+
 		<!-- Modal -->
-		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="staticBackdropLabel">TRABAJADOR</h5>
-		      </div>
-		      <div class="modal-body">
-		        <form id="idRegistrar" method="post" action="ServletTrabajador?tipo=REGISTRAR">
-		           <div class="form-group">
-				    <label for="exampleInputEmail1" class="form-label">Codigo</label>
-				    <input type="text" class="form-control" name="codigo" id="idCodigo" readonly value="0">
-				  </div>
-				  <div class="form-group">
-				    <label for="exampleInputEmail1" class="form-label">DNI</label>
-				    <input type="text" class="form-control" name="dni" id="idDNI">
-				  </div>
-				  <div class="form-group">
-				    <label for="exampleInputPassword1" class="form-label">Nombre Completo</label>
-				    <input type="text" class="form-control"  name="nombrecom" id="idNombreCom">
-				  </div>
-				  <div class="form-group">
-				    <label for="exampleInputPassword1" class="form-label">Cargo</label>
-				   <select class="form-select"  name="cargo" id="idCargo">
-				   	  <option value="">Seleccione un Cargo</option>
-					</select>
-				  </div>
-				  <div class="form-group">
-				    <label for="exampleInputPassword1" class="form-label">Sexo</label>
-				   <select class="form-select"  name="sexo" id="idSexo">
-				   	  <option value="">Seleccione Sexo</option>
-					  <option value="FEMENINO">FEMENINO</option>
-					  <option value="MASCULINO">MASCULINO</option>
-					</select>
-				  </div>
-				  <div class="form-group">
-				    <label for="exampleInputPassword1" class="form-label">Unidad Organica</label>
-				   <select class="form-select"  name="coduo" id="idUnidadOrganica">
-				   	  <option value="">Seleccione la UO</option>
-					</select>
-				  </div>
-				   <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" id="btn-cerrar" data-bs-dismiss="modal">Cerrar</button>
-			        <button type="submit" class="btn btn-primary">Grabar</button>
-			      </div>				  
-				  
-				</form>
-		      </div>		     
-		    </div>
-		  </div>
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">TRABAJADOR</h5>
+					</div>
+					<div class="modal-body">
+						<form id="idRegistrar" method="post"
+							action="ServletTrabajador?tipo=REGISTRAR" data-toggle="validator"
+							role="form">
+							<div class="form-group">
+								<label for="exampleInputEmail1" class="form-label">Codigo</label>
+								<input type="text" class="form-control" name="codigo"
+									id="idCodigo" readonly value="0">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1" class="form-label">DNI</label> <input
+									type="text" class="form-control" name="dni" id="idDNI">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1" class="form-label">Nombre
+									Completo</label> <input type="text" class="form-control"
+									name="nombrecom" id="idNombreCom">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1" class="form-label">Cargo</label>
+								<select class="form-select" name="cargo" id="idCargo">
+									<option value="">Seleccione un Cargo</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1" class="form-label">Sexo</label>
+								<select class="form-select" name="sexo" id="idSexo">
+									<option value="">Seleccione Sexo</option>
+									<option value="FEMENINO">FEMENINO</option>
+									<option value="MASCULINO">MASCULINO</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1" class="form-label">Unidad
+									Organica</label> <select class="form-select" name="coduo"
+									id="idUnidadOrganica">
+									<option value="">Seleccione la UO</option>
+								</select>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" id="btn-cerrar"
+									data-bs-dismiss="modal">Cerrar</button>
+								<button type="submit" class="btn btn-primary">Grabar</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
-		
-		
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalBuscar">Buscar</button>
-				
-				  <!-- Modal Buscar -->
-		<div class="modal fade" id="modalBuscar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" style="display: none;" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="staticBackdropLabel">TRABAJADOR</h5>
-		      </div>
-		      <div class="modal-body">
-		        <form id="idBuscar method="post" action="ServletTrabajador?tipo=BUSCAR">
-		           <div class="form-group">
-				    <label for="exampleInputEmail1" class="form-label">Codigo</label>
-				    <input type="text" class="form-control" name="codigo" id="idCodigo" >
-				  </div>
-			      	<div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" id="btn-cerrar" data-bs-dismiss="modal">Cerrar</button>
-			        <button type="submit" class="btn btn-primary">Buscar</button>
-			        </div>
-			        </form>
-			    </div>	
-			  </div>	
-			</div>		
-	      </div>	
+
+
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+			data-bs-target="#modalBuscar">Buscar</button>
+
+		<!-- Modal Buscar -->
+		<div class="modal fade" id="modalBuscar" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" style="display: none;"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">TRABAJADOR</h5>
+					</div>
+					<div class="modal-body">
+						<form id="idBuscar method="
+							post" action="ServletTrabajador?tipo=BUSCAR">
+							<div class="form-group">
+								<label for="exampleInputEmail1" class="form-label">Codigo</label>
+								<input type="text" class="form-control" name="codigo"
+									id="idCodigo">
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" id="btn-cerrar"
+									data-bs-dismiss="modal">Cerrar</button>
+								<button type="submit" class="btn btn-primary">Buscar</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- modal para eliminar -->
-		<div class="modal fade" id="modalEliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="staticBackdropLabel">ELIMINAR</h5>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body">
-		        <form method="post" action="ServletTrabajador?tipo=ELIMINAR">
-				    <input type="hidden" class="form-control" id="idCodigoEliminar" name="codigoEliminar">
-				   <h4>Seguro de eliminar registro?</h4>
-				   <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
-			        <button type="submit" class="btn btn-primary">SI</button>
-			      </div>				  
-				  
-				</form>
-		      </div>		     
-		    </div>
-		  </div>
+		<div class="modal fade" id="modalEliminar" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">ELIMINAR</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form method="post" action="ServletTrabajador?tipo=ELIMINAR">
+							<input type="hidden" class="form-control" id="idCodigoEliminar"
+								name="codigoEliminar">
+							<h4>Seguro de eliminar registro?</h4>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-bs-dismiss="modal">NO</button>
+								<button type="submit" class="btn btn-primary">SI</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="mt-3">
-			<table id="example" class="table table-striped" style="width:100%">
-		        <thead>
-		            <tr>
-		                <th>CÓDIGO</th>
-		                <th>DNI</th>
-		                <th>NOMBRE COMPLETO</th>
-		                <th>SEXO</th>
-		                <th>CODIGO UO</th>
-		                <th>CARGO</th>
-		                <th></th>
-		                <th></th>
-		            </tr>
-		        </thead>
-		        <tbody>
-		        	<c:forEach items="${requestScope.trabajadores}" var="row">
-			            <tr>
-			                <td>${row.codTrab}</td>
-			                <td>${row.dni}</td>
-			                <td>${row.nomApe}</td>
-			                <td>${row.sexo}</td>
-			                <td>${row.codUnidadOrga}</td>
-			                <td>${row.cargo}</td>
-			                <td><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Editar</button></td>
-			                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button></td>
-			            </tr>
-			        </c:forEach>
-		        </tbody>
-	    	</table>		
+			<table id="example" class="table table-striped" style="width: 100%">
+				<thead>
+					<tr>
+						<th>CÓDIGO</th>
+						<th>DNI</th>
+						<th>NOMBRE COMPLETO</th>
+						<th>SEXO</th>
+						<th>CODIGO UO</th>
+						<th>CARGO</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${requestScope.trabajadores}" var="row">
+						<tr>
+							<td>${row.codTrab}</td>
+							<td>${row.dni}</td>
+							<td>${row.nomApe}</td>
+							<td>${row.sexo}</td>
+							<td>${row.codUnidadOrga}</td>
+							<td>${row.cargo}</td>
+							<td><button type="button" class="btn btn-success"
+									data-bs-toggle="modal" data-bs-target="#staticBackdrop">Editar</button></td>
+							<td><button type="button" class="btn btn-danger"
+									data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
-	<%@ include file="Snippets/BooststrapJS.jsp" %>
-	<script>
+	<%@ include file="Snippets/BooststrapJS.jsp"%>
+	<script type="text/javascript">
 		$(document).ready(function() {
 		    $('#example').DataTable();
 		    leerCondicionJSON();
-		} );
+		    $('#idRegistrar').bootstrapValidator({      
+	        	 fields:{
+	        		 dni:{
+	        			 	validators:{
+	        			 		notEmpty:{
+	        			 			message:'Campo DNI es obligatorio'	
+	        			 		},
+	         			 		regexp:{
+	        			 			regexp:/^[0-9]{8}$/,
+	        			 			message:'Campo de 8 digitos numericos'
+	        			 		}
+	        			 	}
+	        		 },    
+	     		 	nombrecom:{
+	     			 	validators:{
+	     			 		notEmpty:{
+	     			 			message:'Campo Nombre es obligatorio'	
+	     			 		},
+	     			 		regexp:{
+	    			 			regexp:/^[a-zA-ZÀ-ÿ\u00f1\u00d1 ]{3,30}$/,
+	    			 			message:'Campo Nombre hasta 30 digitos alfabeticos'
+	    			 		}
+	     			 	}
+	     		 	 }
+	        	 }
+	        });   
+		});
 		
 		//asignar evento click a los botones con clase "btn-danger"
 		$(document).on("click",".btn-danger",function(){
@@ -234,79 +285,6 @@
 		
 		
 	</script>
-	<script>    
-    $(document).ready(function(){     
-        $("#idRegistrar").bootstrapValidator({      
-        	// fields:{
-        	//	 	RUC:{
-        	//	 		validators:{
-        	//	 			notEmpty:{
-        	//	 				message:'Campo RUC es obligatorio'
-        	//	 			},
-        	//	 			regexp:{
-        	//	 				//regexp:/^ $/,
-        	//	 				message:'Campo RUC solo...'
-        	//	 			}
-        	//	 		}
-        	//	 	},
-        	//	 	RazonSocial:{
-        	//	 		validators:{
-        	//	 			notEmpty:{
-        	//	 				message:'Campo RazonSocial es obligatorio'
-        	//	 			},
-        	//	 			regexp:{
-        	//	 				//regexp:/^ $/,
-        	//	 				message:'Campo RazonSocial solo...'
-        	//	 			}
-        	//	 		}
-        	//	 	},
-        	//	 	Estado:{
-        	//	 		validators:{
-        	//	 			notEmpty:{
-        	//	 				message:'Campo Estado es obligatorio'
-        	//	 			}
-        	//	 		}
-        	//	 	},
-        	//	 	Condicion:{
-        	//	 		validators:{
-        	//	 			notEmpty:{
-        	//	 				message:'Campo Condicion es obligatorio'
-        	//	 			}
-        	//	 		}
-        	//	 	},
-        	//	 	Direccion:{
-        	//	 		validators:{
-        	//	 			notEmpty:{
-        	//	 				message:'Campo Direccion es obligatorio'
-        	//	 			},
-        	//	 			regexp:{
-        	//	 				//regexp:/^ $/,
-        	//	 				message:'Campo Direccion solo...'
-        	//	 			}
-        	//	 		}
-        	//	 	},
-        	//	 	Telefono:{
-        	//	 		validators:{
-        	//	 			notEmpty:{
-        	//	 				message:'Campo Telefono es obligatorio'
-        	//	 			},
-        	//	 			regexp:{
-        	//	 				//regexp:/^ $/,
-        	//	 				message:'Campo Telefono solo...'
-        	//	 			}
-        	//	 		},
-            //		 	Distrito:{
-            //		 		validators:{
-            //		 			notEmpty:{
-            //		 				message:'Campo sexo es obligatorio'
-            //		 			}
-            //		 		}
-        	//	 	}
-        	//
-        });   
-			
-    });    
-</script>
 </body>
 </html>
 

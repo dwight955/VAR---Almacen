@@ -30,7 +30,7 @@
 		        <h5 class="modal-title" id="staticBackdropLabel">BIEN</h5>
 		      </div>
 		      <div class="modal-body">
-		        <form id="idRegistrar" method="post" action="ServletTrabajador?tipo=REGISTRAR">
+		        <form id="idRegistrar" method="post" action="ServletTrabajador?tipo=REGISTRAR" data-toggle="validator" role="form">
 		           <div class="form-group">
 				    <label for="exampleInputEmail1" class="form-label">Codigo</label>
 				    <input type="text" class="form-control" name="codigo" id="idCodigo" readonly value="0">
@@ -127,6 +127,44 @@
 	<script>
 		$(document).ready(function() {
 		    $('#example').DataTable();
+		    $('#idRegistrar').bootstrapValidator({      
+	        	 fields:{
+	        		 descripcion:{
+	        			 	validators:{
+	        			 		notEmpty:{
+	        			 			message:'Campo descripcion es obligatorio'	
+	        			 		},
+	         			 		regexp:{
+	        			 			regexp:/^.{1,50}$/,
+	        			 			message:'Campo de 50 caracteres'
+	        			 		}
+	        			 	}
+	        		 },    
+	        		 precio:{
+	     			 	validators:{
+	     			 		notEmpty:{
+	     			 			message:'Campo precio es obligatorio'	
+	     			 		},
+	     			 		regexp:{
+	    			 			regexp:/^(\d{1,4}|\d{1,4}\.\d{1,2})$/,
+	    			 			message:'Campo precio hasta 4 digitos enteros y 2 decimales'
+	    			 		}
+	     			 	}
+	     		 	 },
+	     		 	 stock:{
+	     		 		 validators:{
+	     		 			 notEmpty:{
+	     		 				 message:'Campo stock es obligatorio'
+	     		 			 },
+	     		 			between:{
+	     		 				 min:1,
+	     		 				 max:850,
+	     		 				message:'No debe superar 850'
+	     		 			 }
+	     		 		 }
+	     		 	 }
+	        	 }
+	        }); 
 		} );
 	</script>
 </body>
