@@ -8,10 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
+import java.time.LocalDate; 
 
 import com.var.dao.MySqlBienesDAO;
 import com.var.entidad.Bien;
-import com.var.entidad.Proveedor;
+
 
 /**
  * Servlet implementation class ServletBien
@@ -33,17 +36,127 @@ public class ServletBien extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String accion = request.getParameter("tipo");
-		if(accion.equals("LISTAR")) {
+		if(accion.equals("LISTAR")) 
 			listarBienes(request, response);
+			else if(accion.equals("REGISTRAR"))
+				registrarBien(request,response);
+			else if(accion.equals("ELIMINAR"))
+				eliminarBien(request,response);
+		
+	}
+	
+		
+	private void eliminarBien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			//recuperar el código a eliminar
+			String cod;
+			cod=request.getParameter("codigoEliminar");
+			//invocar al método deleteById y enviar la variable cod
+			int salida;
+			salida=bienesDAO.deleteById(Integer.parseInt(cod));
+			//
+			if(salida>0) {
+				//crear atributo MENSAJE
+				request.setAttribute("MENSAJE", "Proveedor eliminado...");
+				//
+				//request.getRequestDispatcher("/Proveedor.jsp").forward(request, response);
+				listarBienes(request,response);
+			}
+			else {
+				//crear atributo MENSAJE
+				request.setAttribute("MENSAJE", "Error en la eliminación...");
+				//
+				//request.getRequestDispatcher("/Proveedor.jsp").forward(request, response);
+				listarBienes(request,response);
+			}
+			
+	}	
+
+	private void registrarBien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//variables
+		String codBien,descripcion,unidMed,precUni,idCategoria,stockDisponible,fecIngreso;
+		//leer los controles del formulario que se encuentra en la página Bienes.jsp "usar el name de cada control"
+		codBien=request.getParameter("codigo");
+		descripcion=request.getParameter("descripcion");
+		unidMed=request.getParameter("unidadmedida");
+		precUni=request.getParameter("precio");
+		idCategoria=request.getParameter("categoria");
+		stockDisponible=request.getParameter("stock");
+		fecIngreso=request.getParameter("fechaingreso");
+		//crear un objeto de la clase Proveedor
+		Bien bean=new Bien();
+		//setear objeto con las variables
+		bean.setDescBien(descripcion);
+		bean.setUniMed(unidMed);
+		bean.setPrecUni(Double.parseDouble(precUni));
+		bean.setCategoria(idCategoria);
+		bean.setStockDisponible(Integer.parseInt(stockDisponible));
+		bean.setFecIngreso(fecIngreso);
+		//De aqui para abajo modificar
+		//validar variable codigo bien (cambiar)
+		if(Integer.parseInt(codBien)==0) {
+			//invocar al mètodo save y enviar el objeto "bean"
+
+			int salida;
+			salida=bienesDAO.save(bean);
+			if(salida>0) {
+				//crear atributo MENSAJE
+				request.setAttribute("MENSAJE", "Bienes registrado...");
+				
+				//request.getRequestDispatcher("/Bienes.jsp").forward(request, response);
+				listarBienes(request,response);
+			}
+			else {
+				//crear atributo MENSAJE
+				request.setAttribute("MENSAJE", "Error en el registro...");
+				
+				//request.getRequestDispatcher("/Bienes.jsp").forward(request, response);
+				listarBienes(request,response);
+			}
 		}
+		else {
+					
+			//setear el atributo codigo
+			bean.setCodBien(Integer.parseInt(codBien));
+			//invocar al mètodo update y enviar el objeto "bean"
+			int salida;
+			salida=bienesDAO.update(bean);			
+			if(salida>0) {
+				//crear atributo MENSAJE
+				request.setAttribute("MENSAJE", "Bien actualizado...");
+				
+				//request.getRequestDispatcher("/Bienes.jsp").forward(request, response);
+				listarBienes(request,response);
+			}
+			else {
+				//crear atributo MENSAJE
+				request.setAttribute("MENSAJE", "Error en la actualización...");
+				
+				//request.getRequestDispatcher("/Bienes.jsp").forward(request, response);
+				listarBienes(request,response);
+			}
+		}
+		
 	}
 
 	private void listarBienes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Bien> lista = bienesDAO.ListAll();
+		List<Bien> lista = bienesDAO.listAll();
 		//crear un atributo y guardar el valor de "lista"
 		request.setAttribute("bienes", lista);
-		//enviar atributo "docentes" a la página docente.jsp
+		//enviar atributo "bienes" a la página Bienes.jsp
 		request.getRequestDispatcher("/Bienes.jsp").forward(request, response);
 	}
+	
+	//Probando fecha
+	
+	public class DemoOfDate {
+		  public static void main(String[] args) {
+		 
+		    //create an object for date
+		    LocalDate date_of_today = LocalDate.now();
+
+		    //Display the date
+		    System.out.println(date_of_today); 
+		  }
+		}
 
 }
