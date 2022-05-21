@@ -7,22 +7,27 @@
 <meta charset="ISO-8859-1">
 <title>Bienes</title>
 	<%@ include file="Snippets/BooststrapEstyles.jsp" %>
-
+	<link href="Estyles/General.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container">
-		<h1 class="text-center mt-5">BIENES</h1>
+	<%@ include file="Snippets/Encabezado.jsp" %>
+	
+	<div class="dashboard_content">
+			<%@ include file="Snippets/MenuLateral.jsp" %>
+		<section>
+			<center><h1>BIENES</h1></center>
+		<header class="cabezera d-block">
 			<c:if test="${requestScope.MENSAJE!=null}">
 				<div class="alert alert-warning alert-dismissible fade show" role="alert">
 				  <strong>MENSAJE : </strong> ${requestScope.MENSAJE}
 				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				</div>
 			</c:if>
-		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-		  Registrar un BIEN
-		</button>
-		
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+			  Registrar un BIEN
+			</button>
+		</header>	
 		<!-- Modal -->
 		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered">
@@ -127,6 +132,7 @@
 		        </tbody>
 	    	</table>		
 		</div>
+		</section>
 	</div>
 	<%@ include file="Snippets/BooststrapJS.jsp" %>
 	<script>

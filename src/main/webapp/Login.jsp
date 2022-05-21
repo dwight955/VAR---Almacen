@@ -16,6 +16,7 @@
 <style type="text/css">
 		.modal-dialog{
 			max-width: 630px;
+			margin-top: 6em;
 		}
 		.modal-login__img{
 			width:280px;

@@ -7,8 +7,8 @@
 <link href="Estyles/General.css" rel="stylesheet" >
 <meta charset="ISO-8859-1">
 <title>Proveedores</title>
-	<%@ include file="Snippets/BooststrapEstyles.jsp" %>
-    <style type="text/css">
+<%@ include file="Snippets/BooststrapEstyles.jsp" %>
+<style type="text/css">
 		.modal-header {
 			color: #fff;
 			background: #428bca;
@@ -235,7 +235,7 @@
 		   		 				message:'Campo Razon Social es obligatorio'
 		   		 			},
 		   		 			regexp:{
-		   		 				regexp:/^[A-Za-z\ñ\Á\É\Í\Ó\Ú\á\é\í\ó\ú\Ñ\s\´\]{5,40}$/,
+		   		 				regexp:/^[A-Za-z\ñ\Á\É\Í\Ó\Ú\á\é\í\ó\ú\Ñ\s]{5,40}$/,
 		   		 				message:'Campo RazonSocial solo letras | Maximo: 40 letras'
 		   		 			}
 		   		 		}

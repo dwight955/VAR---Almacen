@@ -6,6 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Trabajador</title>
+<link href="Estyles/General.css" rel="stylesheet">
 <%@ include file="Snippets/BooststrapEstyles.jsp"%>
 <style type="text/css">
 .modal-header {
@@ -30,20 +31,26 @@
 </style>
 </head>
 <body>
-	<div class="container">
-		<h1 class="text-center mt-5">TRABAJADORES</h1>
-		<c:if test="${requestScope.MENSAJE!=null}">
-			<div class="alert alert-warning alert-dismissible fade show"
-				role="alert">
-				<strong>MENSAJE : </strong> ${requestScope.MENSAJE}
-				<button type="button" class="btn-close" data-bs-dismiss="alert"
-					aria-label="Close"></button>
-			</div>
-		</c:if>
-		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#staticBackdrop">Registrar Trabajador</button>
-
+	<%@ include file="Snippets/Encabezado.jsp" %>
+	
+	<div class="dashboard_content">
+			<%@ include file="Snippets/MenuLateral.jsp" %>
+		<section>
+				<center><h1>Trabajadores</h1></center>
+		<header class="cabezera d-block">
+			<c:if test="${requestScope.MENSAJE!=null}">
+				<div class="alert alert-warning alert-dismissible fade show"
+					role="alert">
+					<strong>MENSAJE : </strong> ${requestScope.MENSAJE}
+					<button type="button" class="btn-close" data-bs-dismiss="alert"
+						aria-label="Close"></button>
+				</div>
+			</c:if>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+			Registrar Trabajador
+			</button>
+		</header>
 		<!-- Modal -->
 		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
 			data-bs-keyboard="false" tabindex="-1"
@@ -162,6 +169,7 @@
 				</tbody>
 			</table>
 		</div>
+		</section>
 	</div>
 	<%@ include file="Snippets/BooststrapJS.jsp"%>
 	<script type="text/javascript">
@@ -245,6 +253,13 @@
 				})
 			})
 		}
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#nav01").removeClass("active");
+		$("#nav02").removeClass("active");
+		$("#nav03").addClass("active");
+	})
 	</script>
 </body>
 </html>
