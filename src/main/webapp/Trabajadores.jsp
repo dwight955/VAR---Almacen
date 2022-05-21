@@ -32,8 +32,6 @@
 <body>
 	<div class="container">
 		<h1 class="text-center mt-5">TRABAJADORES</h1>
-
-
 		<c:if test="${requestScope.MENSAJE!=null}">
 			<div class="alert alert-warning alert-dismissible fade show"
 				role="alert">
@@ -42,8 +40,6 @@
 					aria-label="Close"></button>
 			</div>
 		</c:if>
-
-
 		<!-- Button trigger modal -->
 		<button type="button" class="btn btn-primary" data-bs-toggle="modal"
 			data-bs-target="#staticBackdrop">Registrar Trabajador</button>
@@ -107,39 +103,6 @@
 				</div>
 			</div>
 		</div>
-
-
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#modalBuscar">Buscar</button>
-
-		<!-- Modal Buscar -->
-		<div class="modal fade" id="modalBuscar" data-bs-backdrop="static"
-			data-bs-keyboard="false" tabindex="-1"
-			aria-labelledby="staticBackdropLabel" style="display: none;"
-			aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="staticBackdropLabel">TRABAJADOR</h5>
-					</div>
-					<div class="modal-body">
-						<form id="idBuscar method="
-							post" action="ServletTrabajador?tipo=BUSCAR">
-							<div class="form-group">
-								<label for="exampleInputEmail1" class="form-label">Codigo</label>
-								<input type="text" class="form-control" name="codigo"
-									id="idCodigo">
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" id="btn-cerrar"
-									data-bs-dismiss="modal">Cerrar</button>
-								<button type="submit" class="btn btn-primary">Buscar</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		<!-- modal para eliminar -->
 		<div class="modal fade" id="modalEliminar" data-bs-backdrop="static"
 			data-bs-keyboard="false" tabindex="-1"
@@ -175,7 +138,7 @@
 						<th>DNI</th>
 						<th>NOMBRE COMPLETO</th>
 						<th>SEXO</th>
-						<th>CODIGO UO</th>
+						<th>UNIDAD ORGANICA</th>
 						<th>CARGO</th>
 						<th></th>
 						<th></th>
@@ -282,8 +245,6 @@
 				})
 			})
 		}
-		
-		
 	</script>
 </body>
 </html>

@@ -15,7 +15,7 @@ import com.var.utils.MySqlConexion;
 public class MySqlCondicionDAO implements CondicionDAO{
 	//Listado para rellenar ComboBox
 	@Override
-	public List<Condicion> listarCargo() {
+	public List<Condicion> listarCondicion(String table) {
 		List<Condicion> data=new ArrayList<Condicion>();
 		Condicion bean;
 		Connection cn=null;
@@ -23,41 +23,7 @@ public class MySqlCondicionDAO implements CondicionDAO{
 		ResultSet rs=null;
 		try {
 			cn=MySqlConexion.getConectar();
-			String sql="select * from  tb_cargos";
-			pstm=cn.prepareStatement(sql);
-			rs=pstm.executeQuery();
-			while(rs.next()) {
-				bean=new Condicion();
-				bean.setCod(rs.getString(1));
-				bean.setNom(rs.getString(2));
-				data.add(bean);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.print("ERROR al listar cargos");
-		}
-		finally {
-			try {
-				if(rs!=null) rs.close();
-				if(pstm!=null) pstm.close();
-				if(cn!=null) cn.close();
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-			}
-		}
-		return data;
-	}
-
-	@Override
-	public List<Condicion> listarUO() {
-		List<Condicion> data=new ArrayList<Condicion>();
-		Condicion bean;
-		Connection cn=null;
-		PreparedStatement pstm=null;
-		ResultSet rs=null;
-		try {
-			cn=MySqlConexion.getConectar();
-			String sql="select codUniOrg, nomUniOrg from  tb_unidadorganica; ";
+			String sql="select * from " + table;
 			pstm=cn.prepareStatement(sql);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
@@ -80,6 +46,4 @@ public class MySqlCondicionDAO implements CondicionDAO{
 		}
 		return data;
 	}
-	
-
 }

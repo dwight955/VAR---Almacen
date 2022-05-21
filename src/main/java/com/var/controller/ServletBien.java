@@ -63,7 +63,7 @@ public class ServletBien extends HttpServlet {
 			}
 			else {
 				//crear atributo MENSAJE
-				request.setAttribute("MENSAJE", "Error en la eliminación...");
+				request.setAttribute("MENSAJE", "El Bien esta en uso...");
 				//
 				//request.getRequestDispatcher("/Proveedor.jsp").forward(request, response);
 				listarBienes(request,response);
@@ -145,18 +145,4 @@ public class ServletBien extends HttpServlet {
 		//enviar atributo "bienes" a la página Bienes.jsp
 		request.getRequestDispatcher("/Bienes.jsp").forward(request, response);
 	}
-	
-	//Probando fecha
-	
-	public class DemoOfDate {
-		  public static void main(String[] args) {
-		 
-		    //create an object for date
-		    LocalDate date_of_today = LocalDate.now();
-
-		    //Display the date
-		    System.out.println(date_of_today); 
-		  }
-		}
-
 }

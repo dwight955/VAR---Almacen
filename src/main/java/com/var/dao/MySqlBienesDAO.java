@@ -9,6 +9,7 @@ import java.util.List;
 
 
 import com.var.entidad.Bien;
+import com.var.entidad.Trabajador;
 import com.var.interfaces.BienesDAO;
 import com.var.utils.MySqlConexion;
 
@@ -23,7 +24,7 @@ public class MySqlBienesDAO implements BienesDAO{
 			//1
 			cn=MySqlConexion.getConectar();
 			//2 Modificar para agregar codprov
-			String sql="insert into bwinfxi4ncz6ryqu6s48.tb_bienes values(null,?,?,?,?,?,?)";
+			String sql="insert into tb_bienes values(null,?,?,?,?,?,CURDATE())";
 			//3
 			pstm=cn.prepareStatement(sql);
 			//4
@@ -32,7 +33,6 @@ public class MySqlBienesDAO implements BienesDAO{
 			pstm.setDouble(3, bean.getPrecUni());
 			pstm.setString(4, bean.getCategoria());
 			pstm.setInt(5, bean.getStockDisponible());
-			pstm.setString(6, bean.getFecIngreso());
 			//5
 			salida=pstm.executeUpdate();
 		} catch (SQLException e) {
@@ -58,7 +58,7 @@ public class MySqlBienesDAO implements BienesDAO{
 			//1
 			cn=MySqlConexion.getConectar();
 			//2 
-			String sql="update bwinfxi4ncz6ryqu6s48.tb_bienes set descripcion=?,unidMed=?,precUni=?,idCategoria=?,stockDisponible=?,fecIngreso=? where codBien=?";
+			String sql="update tb_bienes set descripcion=?,unidMed=?,precUni=?,idCategoria=?,stockDisponible=?,fecIngreso=CURDATE() where codBien=?";
 			//3
 			pstm=cn.prepareStatement(sql);
 			//4
@@ -67,8 +67,7 @@ public class MySqlBienesDAO implements BienesDAO{
 			pstm.setDouble(3, bean.getPrecUni());
 			pstm.setString(4, bean.getCategoria());
 			pstm.setInt(5, bean.getStockDisponible());
-			pstm.setString(6, bean.getFecIngreso());
-			pstm.setInt(7, bean.getCodBien());
+			pstm.setInt(6, bean.getCodBien());
 			//5
 			salida=pstm.executeUpdate();
 		} catch (SQLException e) {
@@ -94,7 +93,7 @@ public class MySqlBienesDAO implements BienesDAO{
 			//1
 			cn=MySqlConexion.getConectar();
 			//2 
-			String sql="delete from bwinfxi4ncz6ryqu6s48.tb_bienes where codBien=?";
+			String sql="delete from tb_bienes where codBien=?";
 			//3
 			pstm=cn.prepareStatement(sql);
 			//4
@@ -161,8 +160,39 @@ public class MySqlBienesDAO implements BienesDAO{
 
 	@Override
 	public Bien findById(int cod) {
-		// TODO Auto-generated method stub
-		return null;
+		Bien bean = null;
+		Connection cn=null;
+		PreparedStatement pstm=null;
+		ResultSet rs=null;
+		String sql;
+		sql="select * from tb_bienes where codBien=?";
+		try {
+		cn=MySqlConexion.getConectar();
+		pstm=cn.prepareStatement(sql);
+		pstm.setInt(1, cod);
+		rs=pstm.executeQuery();
+		if(rs.next()) {
+			bean = new Bien();
+			bean.setCodBien(rs.getInt(1));
+			bean.setDescBien(rs.getString(2));
+			bean.setUniMed(rs.getString(3));
+			bean.setPrecUni(rs.getDouble(4));
+			bean.setCategoria(rs.getString(5));
+			bean.setStockDisponible(rs.getInt(6));
+		}	
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.print("Error en FindById Bien");
+		}finally {
+			try {
+				if(cn!=null) cn.close();
+				if(pstm!=null)pstm.close();
+				if(rs!=null)rs.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return bean;
 	}
 	
 }

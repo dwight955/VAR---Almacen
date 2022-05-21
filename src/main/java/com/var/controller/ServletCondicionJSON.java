@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.var.dao.MySqlBienesDAO;
 import com.var.dao.MySqlCondicionDAO;
 import com.var.entidad.Condicion;
 
@@ -20,7 +21,7 @@ import com.var.entidad.Condicion;
 @WebServlet("/ServletCondicionJSON")
 public class ServletCondicionJSON extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private MySqlCondicionDAO condicionDAO;   
+    private MySqlCondicionDAO condicionDAO;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -40,10 +41,34 @@ public class ServletCondicionJSON extends HttpServlet {
 				if(accion.equals("UO")) {
 					cargarUO(request, response);
 				}
+				if(accion.equals("CATEGORIAS")) {
+					cargarCategorias(request, response);
+				}
+				if(accion.equals("DISTRITOS")) {
+					cargarDistritos(request, response);
+				}
+	}
+
+	private void cargarDistritos(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			List<Condicion> data = condicionDAO.listarCondicion("tb_distrito"); 
+			Gson gson=new Gson();
+			String json = gson.toJson(data);
+			response.setContentType("application/json;charset=UTF-8");
+			PrintWriter salida=response.getWriter();
+			salida.println(json);
+	}
+
+	private void cargarCategorias(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			List<Condicion> data = condicionDAO.listarCondicion("tb_categorias"); 
+			Gson gson=new Gson();
+			String json = gson.toJson(data);
+			response.setContentType("application/json;charset=UTF-8");
+			PrintWriter salida=response.getWriter();
+			salida.println(json);
 	}
 
 	private void cargarUO(HttpServletRequest request, HttpServletResponse response) throws IOException {
-			List<Condicion> data = condicionDAO.listarUO(); 
+			List<Condicion> data = condicionDAO.listarCondicion("tb_unidadorganica"); 
 			Gson gson=new Gson();
 			String json = gson.toJson(data);
 			response.setContentType("application/json;charset=UTF-8");
@@ -52,7 +77,7 @@ public class ServletCondicionJSON extends HttpServlet {
 	}
 
 	private void cargarCargos(HttpServletRequest request, HttpServletResponse response) throws IOException {
-			List<Condicion> data = condicionDAO.listarCargo(); 
+			List<Condicion> data = condicionDAO.listarCondicion("tb_cargos"); 
 			Gson gson=new Gson();
 			String json = gson.toJson(data);
 			response.setContentType("application/json;charset=UTF-8");

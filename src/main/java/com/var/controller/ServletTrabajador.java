@@ -70,7 +70,7 @@ public class ServletTrabajador extends HttpServlet {
 		}
 		else {
 			//crear atributo MENSAJE
-			request.setAttribute("MENSAJE", "Error en la eliminación...");
+			request.setAttribute("MENSAJE", "Este trabajador esta en uso...");
 			
 			//request.getRequestDispatcher("/Trabajadores.jsp").forward(request, response);
 			listarTrabajadores(request,response);
@@ -117,23 +117,15 @@ public class ServletTrabajador extends HttpServlet {
 			}
 		}
 		else {
-			//setear el atyributo codigo
 			bean.setCodTrab(Integer.parseInt(codigo));
-			//invocar al mètodo update y enviar el objeto "bean"
 			int salida;
 			salida=TrabajadorDAO.update(bean);			
 			if(salida>0) {
-				//crear atributo MENSAJE
 				request.setAttribute("MENSAJE", "Trabajador actualizado...");
-				//
-				//request.getRequestDispatcher("/Trabajadores.jsp").forward(request, response);
 				listarTrabajadores(request,response);
 			}
 			else {
-				//crear atributo MENSAJE
 				request.setAttribute("MENSAJE", "Error en la actualización...");
-				//
-				//request.getRequestDispatcher("/Trabajadores.jsp").forward(request, response);
 				listarTrabajadores(request,response);
 			}
 		}
@@ -142,21 +134,14 @@ public class ServletTrabajador extends HttpServlet {
 
 	private void buscarTrabajador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cod =request.getParameter("codigo");
-		
-		
 		List<Trabajador>lista=(List<Trabajador>) TrabajadorDAO.findById(Integer.parseInt(cod));
-		
 		request.setAttribute("trabajadores", lista);
 		request.getRequestDispatcher("/Trabajadores.jsp").forward(request, response);
-		
 	}
 	
 	private void listarTrabajadores(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//invocar al método listAll
 		List<Trabajador> lista=TrabajadorDAO.listAll();
-		//crear un atributo y guardar el valor de "lista"
 		request.setAttribute("trabajadores", lista);
-		//enviar atributo "docentes" a la página Trabajadores.jsp
 		request.getRequestDispatcher("/Trabajadores.jsp").forward(request, response);
 	}
 

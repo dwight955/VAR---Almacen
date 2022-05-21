@@ -19,30 +19,28 @@ public class MySqlTrabajadorDAO implements TrabajadorDAO{
 		int salida=-1;
 		Connection cn=null;
 		PreparedStatement pstm=null;
-		try {
-			//1
-			cn=MySqlConexion.getConectar();
-			//2
-			String sql="insert into bwinfxi4ncz6ryqu6s48.tb_trabajadores values(null,?,?,?,?,?)";
-			//3
-			pstm=cn.prepareStatement(sql);
-			//4
-			pstm.setString(1, bean.getDni());
-			pstm.setString(2, bean.getNomApe());
-			pstm.setString(3, bean.getSexo());
-			pstm.setString(4, bean.getCodUnidadOrga());
-			pstm.setString(5, bean.getCargo());
-			//5
-			salida=pstm.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
+		if(isDNIRepeat(bean) != true) {
 			try {
-				if(pstm!=null) pstm.close();
-				if(cn!=null) cn.close();
-			} catch (SQLException e2) {
-				e2.printStackTrace();
+				cn=MySqlConexion.getConectar();
+				String sql="insert into tb_trabajadores values(null,?,?,?,?,?)";
+				pstm=cn.prepareStatement(sql);
+				pstm.setString(1, bean.getDni());
+				pstm.setString(2, bean.getNomApe());
+				pstm.setString(3, bean.getSexo());
+				pstm.setString(4, bean.getCodUnidadOrga());
+				pstm.setString(5, bean.getCargo());
+				
+				salida=pstm.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					if(pstm!=null) pstm.close();
+					if(cn!=null) cn.close();
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
 			}
 		}
 		return salida;
@@ -54,20 +52,15 @@ public class MySqlTrabajadorDAO implements TrabajadorDAO{
 		Connection cn=null;
 		PreparedStatement pstm=null;
 		try {
-			//1
 			cn=MySqlConexion.getConectar();
-			//2
-			String sql="update bwinfxi4ncz6ryqu6s48.tb_trabajadores set dniTrabajador=?,apeNomTrabajador=?,cargo=?,sexo=?,codUniOrg=? where codTrab=?";
-			//3
+			String sql="update tb_trabajadores set dniTrabajador=?,apeNomTrabajador=?,cargo=?,sexo=?,codUniOrg=? where codTrab=?";
 			pstm=cn.prepareStatement(sql);
-			//4
 			pstm.setString(1, bean.getDni());
 			pstm.setString(2, bean.getNomApe());
 			pstm.setString(3, bean.getCargo());
 			pstm.setString(4, bean.getSexo());
 			pstm.setString(5, bean.getCodUnidadOrga());
 			pstm.setInt(6, bean.getCodTrab());
-			//5
 			salida=pstm.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -89,15 +82,10 @@ public class MySqlTrabajadorDAO implements TrabajadorDAO{
 		Connection cn=null;
 		PreparedStatement pstm=null;
 		try {
-			//1
 			cn=MySqlConexion.getConectar();
-			//2
-			String sql="delete from bwinfxi4ncz6ryqu6s48.tb_trabajadores where codTrab=?";
-			//3
+			String sql="delete from tb_trabajadores where codTrab=?";
 			pstm=cn.prepareStatement(sql);
-			//4
 			pstm.setInt(1, cod);
-			//5
 			salida=pstm.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -120,7 +108,7 @@ public class MySqlTrabajadorDAO implements TrabajadorDAO{
 		PreparedStatement pstm=null;
 		ResultSet rs=null;
 		String sql;
-		sql="select * from bwinfxi4ncz6ryqu6s48.tb_trabajadores where codTrab=?";
+		sql="select * from tb_trabajadores where codTrab=?";
 		try {
 		cn=MySqlConexion.getConectar();
 		pstm=cn.prepareStatement(sql);
@@ -158,28 +146,18 @@ public class MySqlTrabajadorDAO implements TrabajadorDAO{
 		PreparedStatement pstm=null;
 		ResultSet rs=null;
 		try {
-			//1
 			cn=MySqlConexion.getConectar();
-			//2
 			String sql="call usp_listar_trabajadores";
-			//3
 			pstm=cn.prepareStatement(sql);
-			//4 parámetros
-			
-			//5
 			rs=pstm.executeQuery();
-			//6 bucle
 			while(rs.next()) {
-				//7 crear bean
 				bean=new Trabajador();
-				//8
 				bean.setCodTrab(rs.getInt(1));
 				bean.setDni(rs.getString(2));
 				bean.setNomApe(rs.getString(3));
 				bean.setSexo(rs.getString(4));
 				bean.setCodUnidadOrga(rs.getString(5));
 				bean.setCargo(rs.getString(6));
-				//9
 				data.add(bean);
 			}
 		} catch (SQLException e) {
@@ -196,8 +174,15 @@ public class MySqlTrabajadorDAO implements TrabajadorDAO{
 		}
 		return data;
 	}
-
-
+	private boolean isDNIRepeat(Trabajador bean) {
+		List<Trabajador> data = this.listAll();
+		for(int i = 0; i < data.size(); i++) {
+			if(bean.getDni().equals(data.get(i).getDni())) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
 
 

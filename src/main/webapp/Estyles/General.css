@@ -36,9 +36,14 @@ body {
 	color: white;
 	font-size:18pt;
 }
+.cerrarSesion{
+	color: white;
+	padding-right: 3em;
+	font-size: 13pt;
+}
 .hora{
 	width:120px;
-	margin-right: 7em;
+	margin-right: 2em;
 	background: #FFD133;
 	border-radius:15px 15px;
 }

@@ -63,10 +63,6 @@
 				    <label for="exampleInputPassword1" class="form-label">Stock Disponible</label>
 				   <input type="text" class="form-control"  name="stock" id="idStock">
 				  </div>
-				  <div class="form-group">
-				    <label for="exampleInputPassword1" class="form-label">Fecha </label>
-				   <input type="text" class="form-control"  name="fecha" id="idFecha"  value="">
-				  </div>
 				   <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" id="btn-cerrar" data-bs-dismiss="modal">Cerrar</button>
 			        <button type="submit" class="btn btn-primary">Grabar</button>
@@ -92,8 +88,7 @@
 				   <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
 			        <button type="submit" class="btn btn-primary">SI</button>
-			      </div>				  
-				  
+			      </div>
 				</form>
 		      </div>		     
 		    </div>
@@ -104,7 +99,7 @@
 			<table id="example" class="table table-striped" style="width:100%">
 		        <thead>
 		            <tr>
-		                <th>CÃ“DIGO</th>
+		                <th>CODIGO</th>
 		                <th>DESCRIPCION</th>
 		                <th>UNIDAD MEDIDA</th>
 		                <th>PRECIO</th>
@@ -137,6 +132,7 @@
 	<script>
 		$(document).ready(function() {
 		    $('#example').DataTable();
+		    leerCondicion();
 		    $('#idRegistrar').bootstrapValidator({      
 	        	 fields:{
 	        		 descripcion:{
@@ -191,23 +187,14 @@
 			let codigo,desc,unim,pre,cate,stock,fecha;
 			//leer las columnas de segÃºn el botÃ³n editar que se pulso
 			codigo=$(this).parents("tr").find("td")[0].innerHTML;
-			desc=$(this).parents("tr").find("td")[1].innerHTML;
-			unim=$(this).parents("tr").find("td")[2].innerHTML;
-			pre=$(this).parents("tr").find("td")[3].innerHTML;
-			cate=$(this).parents("tr").find("td")[4].innerHTML;
-			stock=$(this).parents("tr").find("td")[5].innerHTML;
-			fecha=$(this).parents("tr").find("td")[6].innerHTML;
-
-			//mostrar en las cajas del modal con id "staticBackdrop" los valores de las variables
-			$("#idCodigo").val(codigo)
-			$("#idDescripcion").val(desc);
-			$("#idUnidadmedida").val(unim);
-			$("#idPrecio").val(pre);
-			$("#idCategoria").val(cate);
-			$("#idStock").val(stock);
-			$("#idFecha").val(fecha);
-
-			
+			$.get("ServletBienJSON?codigo=" + codigo, function(response){
+				$("#idCodigo").val(response.codBien);
+				$("#idDescripcion").val(response.descBien);
+				$("#idUnidadmedida").val(response.uniMed);
+				$("#idPrecio").val(response.precUni);
+				$("#idCategoria").val(response.categoria);
+				$("#idStock").val(response.stockDisponible);
+			});
 		})
 		//asignar evento click al botÃ³n con id "btn-cerrar"
 		$(document).on("click","#btn-cerrar",function(){
@@ -216,7 +203,19 @@
 			$("#idRegistrar").data("bootstrapValidator").resetForm(true);
 			$("#idCodigo").val("0");
 		})
-		
+		$(document).on("click",".btn-danger",function(){
+			//variable para almacenar el código del docente según el botón eliminar que se pulso
+			let cod;
+			cod=$(this).parents("tr").find("td")[0].innerHTML;
+			$("#idCodigoEliminar").val(cod);
+		})
+		function leerCondicion(){
+			$.get("ServletCondicionJSON?comboBox=CATEGORIAS", function(response){
+				$.each(response,function(index,item){
+					$("#idCategoria").append("<option value='"+item.codigo+"'>"+item.nombre+"</option>");
+				});
+			});
+		}
 	</script>
 </body>
 </html>
