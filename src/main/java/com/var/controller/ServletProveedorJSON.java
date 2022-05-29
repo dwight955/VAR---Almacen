@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.var.dao.MySqlProveedorDAO;
 import com.var.entidad.Proveedor;
+import com.var.services.ProveedorService;
 
 /**
  * Servlet implementation class ServletProveedorJSON
@@ -19,13 +20,13 @@ import com.var.entidad.Proveedor;
 @WebServlet("/ServletProveedorJSON")
 public class ServletProveedorJSON extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private MySqlProveedorDAO proveedorDAO; 
+    private ProveedorService servicio; 
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ServletProveedorJSON() {
         super();
-        proveedorDAO = new MySqlProveedorDAO();
+        servicio = new ProveedorService();
     }
 
 	/**
@@ -33,7 +34,7 @@ public class ServletProveedorJSON extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String codigo = request.getParameter("codigo");
-		Proveedor data = proveedorDAO.findById(Integer.parseInt(codigo)); 
+		Proveedor data = servicio.buscarPorId(Integer.parseInt(codigo)); 
 		
 		Gson gson=new Gson();
 		String json = gson.toJson(data);

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.var.dao.MySqlUsuarioDAO;
 import com.var.entidad.Usuario;
+import com.var.services.UsuarioService;
 
 /**
  * Servlet implementation class ServletUsuario
@@ -17,13 +18,13 @@ import com.var.entidad.Usuario;
 @WebServlet("/ServletUsuario")
 public class ServletUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MySqlUsuarioDAO usuarioDAO;   
+	private UsuarioService servicio;   
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ServletUsuario() {
         super();
-        usuarioDAO = new MySqlUsuarioDAO();
+        servicio = new UsuarioService();
     }
 
 	/**
@@ -34,20 +35,14 @@ public class ServletUsuario extends HttpServlet {
 		if(accion.equals("INICIAR")) 
 			iniciarSesion(request,response);
 		else if(accion.equals("CERRAR")) 			
-			cerrarSesion(request,response);
-		
-		
-			
+			cerrarSesion(request,response);	
 	}
 
 	private void cerrarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		
-		
 		session.invalidate();
 		request.setAttribute("MENSAJE", "Sesión cerrada correctamente");
 		request.getRequestDispatcher("Login.jsp").forward(request, response);
-		
 	}
 
 	private void iniciarSesion(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -57,7 +52,7 @@ public class ServletUsuario extends HttpServlet {
 		clave = request.getParameter("clave");
 		System.out.println(username + " " + clave);
 		
-		Usuario result = usuarioDAO.iniciarSesion(username, clave);
+		Usuario result = servicio.SignIn(username, clave);
 		
 		if(result != null) {
 			HttpSession session = request.getSession();

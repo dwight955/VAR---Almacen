@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.var.dao.MySqlBienesDAO;
 import com.var.entidad.Bien;
 import com.var.entidad.Trabajador;
+import com.var.services.BienService;
 
 /**
  * Servlet implementation class ServletBienJSON
@@ -20,13 +21,13 @@ import com.var.entidad.Trabajador;
 @WebServlet("/ServletBienJSON")
 public class ServletBienJSON extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private MySqlBienesDAO bienesDAO;   
+    private BienService servicio;   
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ServletBienJSON() {
         super();
-        bienesDAO = new MySqlBienesDAO();
+        servicio = new BienService();
     }
 
 	/**
@@ -34,7 +35,7 @@ public class ServletBienJSON extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String codigo = request.getParameter("codigo");
-		Bien data = bienesDAO.findById(Integer.parseInt(codigo));
+		Bien data = servicio.buscarPorId(Integer.parseInt(codigo));
 		
 		Gson gson=new Gson();
 		String json = gson.toJson(data);

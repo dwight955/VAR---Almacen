@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.var.dao.MySqlProveedorDAO;
 import com.var.entidad.Proveedor;
+import com.var.services.ProveedorService;
 
 /**
  * Servlet implementation class ServletDocente
@@ -19,16 +20,14 @@ import com.var.entidad.Proveedor;
 public class ServletProveedor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     //declarar objeto de la clase MySqlProveedorDAO
-	private MySqlProveedorDAO ProveedorDAO;
+	private ProveedorService servicio;
 	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ServletProveedor() {
         super();
-        //crear
-        ProveedorDAO=new MySqlProveedorDAO();
-        // TODO Auto-generated constructor stub
+        servicio = new ProveedorService();
     }
 
 	/**
@@ -55,7 +54,7 @@ public class ServletProveedor extends HttpServlet {
 		cod=request.getParameter("codigoEliminar");
 		//invocar al método deleteById y enviar la variable cod
 		int salida;
-		salida=ProveedorDAO.deleteById(Integer.parseInt(cod));
+		salida = servicio.eliminarPorId(Integer.parseInt(cod));
 		//
 		if(salida>0) {
 			//crear atributo MENSAJE
@@ -100,7 +99,7 @@ public class ServletProveedor extends HttpServlet {
 		if(Integer.parseInt(codProv)==0) {
 			//invocar al mètodo save y enviar el objeto "bean"
 			int salida;
-			salida=ProveedorDAO.save(bean);
+			salida=servicio.registrar(bean);
 			if(salida>0) {
 				//crear atributo MENSAJE
 				request.setAttribute("MENSAJE", "Proveedor registrado...");
@@ -121,7 +120,7 @@ public class ServletProveedor extends HttpServlet {
 			bean.setCodProv(Integer.parseInt(codProv));
 			//invocar al mètodo update y enviar el objeto "bean"
 			int salida;
-			salida=ProveedorDAO.update(bean);			
+			salida=servicio.actualizar(bean);			
 			if(salida>0) {
 				//crear atributo MENSAJE
 				request.setAttribute("MENSAJE", "Proveedor actualizado...");
@@ -142,7 +141,7 @@ public class ServletProveedor extends HttpServlet {
 
 	private void listarProveedores(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//invocar al método listAll
-		List<Proveedor> lista=ProveedorDAO.listAll();
+		List<Proveedor> lista=servicio.listarTodo();
 		//crear un atributo y guardar el valor de "lista"
 		request.setAttribute("proveedores", lista);
 		//enviar atributo "docentes" a la página docente.jsp

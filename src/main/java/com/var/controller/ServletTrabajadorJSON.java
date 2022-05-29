@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.var.dao.MySqlTrabajadorDAO;
 import com.var.entidad.Condicion;
 import com.var.entidad.Trabajador;
+import com.var.services.TrabajadorService;
 
 /**
  * Servlet implementation class ServletTrabajadorJSON
@@ -21,13 +22,13 @@ import com.var.entidad.Trabajador;
 @WebServlet("/ServletTrabajadorJSON")
 public class ServletTrabajadorJSON extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private MySqlTrabajadorDAO trabajadorDAO;   
+    private TrabajadorService servicio;   
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ServletTrabajadorJSON() {
         super();
-        trabajadorDAO = new MySqlTrabajadorDAO();
+        servicio = new TrabajadorService();
     }
 
 	/**
@@ -35,7 +36,7 @@ public class ServletTrabajadorJSON extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String codigo = request.getParameter("codigo");
-		Trabajador data = trabajadorDAO.findById(Integer.parseInt(codigo)); 
+		Trabajador data = servicio.buscarPorId(Integer.parseInt(codigo)); 
 		
 		Gson gson=new Gson();
 		String json = gson.toJson(data);

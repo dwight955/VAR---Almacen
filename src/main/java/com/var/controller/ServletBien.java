@@ -14,6 +14,7 @@ import java.time.LocalDate;
 
 import com.var.dao.MySqlBienesDAO;
 import com.var.entidad.Bien;
+import com.var.services.BienService;
 
 
 /**
@@ -22,13 +23,13 @@ import com.var.entidad.Bien;
 @WebServlet("/ServletBien")
 public class ServletBien extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private MySqlBienesDAO bienesDAO;   
+    private BienService servicio;   
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ServletBien() {
         super();
-        bienesDAO = new MySqlBienesDAO();
+        servicio = new BienService();
     }
 
 	/**
@@ -43,16 +44,14 @@ public class ServletBien extends HttpServlet {
 			else if(accion.equals("ELIMINAR"))
 				eliminarBien(request,response);
 		
-	}
-	
-		
+	}	
 	private void eliminarBien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			//recuperar el código a eliminar
 			String cod;
 			cod=request.getParameter("codigoEliminar");
 			//invocar al método deleteById y enviar la variable cod
 			int salida;
-			salida=bienesDAO.deleteById(Integer.parseInt(cod));
+			salida=servicio.eliminarPorId(Integer.parseInt(cod));
 			//
 			if(salida>0) {
 				//crear atributo MENSAJE
@@ -97,7 +96,7 @@ public class ServletBien extends HttpServlet {
 			//invocar al mètodo save y enviar el objeto "bean"
 
 			int salida;
-			salida=bienesDAO.save(bean);
+			salida=servicio.registrar(bean);
 			if(salida>0) {
 				//crear atributo MENSAJE
 				request.setAttribute("MENSAJE", "Bienes registrado...");
@@ -119,7 +118,7 @@ public class ServletBien extends HttpServlet {
 			bean.setCodBien(Integer.parseInt(codBien));
 			//invocar al mètodo update y enviar el objeto "bean"
 			int salida;
-			salida=bienesDAO.update(bean);			
+			salida=servicio.actualizar(bean);			
 			if(salida>0) {
 				//crear atributo MENSAJE
 				request.setAttribute("MENSAJE", "Bien actualizado...");
@@ -139,7 +138,7 @@ public class ServletBien extends HttpServlet {
 	}
 
 	private void listarBienes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Bien> lista = bienesDAO.listAll();
+		List<Bien> lista = servicio.listarTodo();
 		//crear un atributo y guardar el valor de "lista"
 		request.setAttribute("bienes", lista);
 		//enviar atributo "bienes" a la página Bienes.jsp

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.var.dao.MySqlTrabajadorDAO;
 import com.var.entidad.Trabajador;
+import com.var.services.TrabajadorService;
 
 /**
  * Servlet implementation class ServletDocente
@@ -19,7 +20,7 @@ import com.var.entidad.Trabajador;
 public class ServletTrabajador extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     //declarar objeto de la clase MySqlDocenteDAO
-	private MySqlTrabajadorDAO TrabajadorDAO;
+	private TrabajadorService servicio;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -27,7 +28,7 @@ public class ServletTrabajador extends HttpServlet {
     public ServletTrabajador() {
         super();
         //crear
-        TrabajadorDAO=new MySqlTrabajadorDAO();
+        servicio=new TrabajadorService();
         // TODO Auto-generated constructor stub
     }
 
@@ -59,7 +60,7 @@ public class ServletTrabajador extends HttpServlet {
 		cod=request.getParameter("codigoEliminar");
 		//invocar al método deleteById y enviar la variable cod
 		int salida;
-		salida=TrabajadorDAO.deleteById(Integer.parseInt(cod));
+		salida=servicio.eliminarPorId(Integer.parseInt(cod));
 		//
 		if(salida>0) {
 			//crear atributo MENSAJE
@@ -100,7 +101,7 @@ public class ServletTrabajador extends HttpServlet {
 		if(Integer.parseInt(codigo)==0) {
 			//invocar al mètodo save y enviar el objeto "bean"
 			int salida;
-			salida=TrabajadorDAO.save(bean);
+			salida=servicio.registrar(bean);
 			if(salida>0) {
 				//crear atributo MENSAJE
 				request.setAttribute("MENSAJE", "Trabajador registrado...");
@@ -119,7 +120,7 @@ public class ServletTrabajador extends HttpServlet {
 		else {
 			bean.setCodTrab(Integer.parseInt(codigo));
 			int salida;
-			salida=TrabajadorDAO.update(bean);			
+			salida=servicio.actualizar(bean);			
 			if(salida>0) {
 				request.setAttribute("MENSAJE", "Trabajador actualizado...");
 				listarTrabajadores(request,response);
@@ -134,13 +135,13 @@ public class ServletTrabajador extends HttpServlet {
 
 	private void buscarTrabajador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cod =request.getParameter("codigo");
-		List<Trabajador>lista=(List<Trabajador>) TrabajadorDAO.findById(Integer.parseInt(cod));
+		List<Trabajador>lista=(List<Trabajador>) servicio.buscarPorId(Integer.parseInt(cod));
 		request.setAttribute("trabajadores", lista);
 		request.getRequestDispatcher("/Trabajadores.jsp").forward(request, response);
 	}
 	
 	private void listarTrabajadores(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Trabajador> lista=TrabajadorDAO.listAll();
+		List<Trabajador> lista=servicio.listarTodo();
 		request.setAttribute("trabajadores", lista);
 		request.getRequestDispatcher("/Trabajadores.jsp").forward(request, response);
 	}
