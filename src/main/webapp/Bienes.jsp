@@ -24,7 +24,7 @@
 				</div>
 			</c:if>
 			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+			<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 			  Registrar un BIEN
 			</button>
 		</header>	
@@ -92,7 +92,7 @@
 				   <h4>Seguro de eliminar registro?</h4>
 				   <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
-			        <button type="submit" class="btn btn-primary">SI</button>
+			        <button type="submit" class="btn btn-success">SI</button>
 			      </div>
 				</form>
 		      </div>		     

@@ -24,8 +24,9 @@
 						if(unidaOrg.equals("LOGISTICA")){
 	               			if(cargo.equals("DIRECTOR EJECUTIVO")){
 	               				%>
-	                			<a href="ConsultarCuadroRqmts.jsp" id="nav02"><i class="far fa-calendar-check"></i>Bandeja de entrada</a>
+	                			<a href="#" id="nav02"><i class="far fa-calendar-check"></i>Bandeja de entrada</a>
 	                			<a href="ServletTrabajador?tipo=LISTAR" id="nav03"><i class="far fa-calendar-check"></i>Mantenimiento de Trabajadores</a>
+	                			<a href="ConsultarCuadroRqmts.jsp" id="nav04"><i class="far fa-calendar-check"></i>Consultar Cuadro de Requerimientos</a>
 	                			<%
 	               			}
 	               			else if(cargo.equals("SUB-ALMACENERO")){
@@ -48,8 +49,8 @@
 	               			//MENU PARA LOS DIRECTIVOS
 	               		}else{
 	               				%>
-		               			<a href="#" id="nav14"><i class="far fa-calendar-check"></i> Generar Cuadro de Necesidades</a>
-		               			<a href="#" id="nav15"><i class="far fa-calendar-check"></i> Consultar Cuadro de Necesidades</a>
+		               			<a href="#" id="nav14"><i class="far fa-calendar-check"></i> Generar Cuadro de Requerimientos</a>
+		               			<a href="#" id="nav15"><i class="far fa-calendar-check"></i> Consultar Cuadro de Requerimientos</a>
 		               			<a href="#" id="nav16"><i class="far fa-calendar-check"></i> Generar Reporte</a>
 	               				<%
 	               		}

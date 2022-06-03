@@ -11,7 +11,8 @@ body {
 .dashboard_content{
 		display: flex;
 		align-items: flex-start;
-	}
+}
+	
 /*ENCABEZADO*/
 .encabezado{
 	width:100%;
@@ -46,10 +47,12 @@ body {
 	margin-right: 2em;
 	background: #FFD133;
 	border-radius:15px 15px;
+	padding: 5px 0px 3px 0px;
 }
 .hora__text{
+	box-sizing: content-box;
 	text-align: center;
-	font-size:13pt;
+	font-size: 15pt;
 	font-family:'Arial';
 }
 /*MENU LATERAL*/
@@ -103,6 +106,8 @@ body {
 	background: #FFD133;
 }
 /*TABLAS*/
-.dashboard_content > section{
+.dashboard_content > .consultaRequ{
 	margin-top: 2em;
+	width: 76%;
+	height: 80vh;
 }

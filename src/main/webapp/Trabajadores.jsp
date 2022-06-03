@@ -8,27 +8,6 @@
 <title>Trabajador</title>
 <link href="Estyles/General.css" rel="stylesheet">
 <%@ include file="Snippets/BooststrapEstyles.jsp"%>
-<style type="text/css">
-.modal-header {
-	color: #fff;
-	background: #428bca;
-	display: flex;
-	justify-content: center;
-}
-
-.help-block {
-	color: red;
-}
-
-.form-group.has-error .form-control-label {
-	color: red;
-}
-
-.form-group.has-error .form-control {
-	border: 1px solid red;
-	box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
-}
-</style>
 </head>
 <body>
 	<%@ include file="Snippets/Encabezado.jsp" %>
@@ -47,7 +26,7 @@
 				</div>
 			</c:if>
 			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+			<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 			Registrar Trabajador
 			</button>
 		</header>
@@ -102,7 +81,7 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" id="btn-cerrar"
 									data-bs-dismiss="modal">Cerrar</button>
-								<button type="submit" class="btn btn-primary">Grabar</button>
+								<button type="submit" class="btn btn-success">Grabar</button>
 							</div>
 
 						</form>

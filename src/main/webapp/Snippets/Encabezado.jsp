@@ -8,7 +8,12 @@
 	<h3 class="lema fs-5 fw-bolder mt-2" id="lema">ALMACENES PARA TODO EL PERÚ</h3>
 	<div class="d-flex">
 		<div class="hora">
-		
+			<div class="hora__text" id="reloj"></div> 		
+		</div>
+	<a href="ServletUsuario?tipo=CERRAR" class="btn btn-default cerrarSesion">Cerrar Sesión</a>
+	</div>
+	</header>
+				
 <script type="text/javascript">
 	function startTime(){
 	today=new Date();
@@ -23,10 +28,4 @@
 	{if (i<10) {i="0" + i;}return i;}
 	window.onload=function(){startTime();}
 </script>
-<div id="reloj" style="font-size:20px; padding-left:25px;padding-top:5px;"></div> 		
-	</div>
-	
-	<a href="ServletUsuario?tipo=CERRAR" class="btn btn-default cerrarSesion">Cerrar Sesión</a>
-	</div>
-	</header>
 </body>	
