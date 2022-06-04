@@ -49,7 +49,7 @@
 	               			//MENU PARA LOS DIRECTIVOS
 	               		}else{
 	               				%>
-		               			<a href="#" id="nav14"><i class="far fa-calendar-check"></i> Generar Cuadro de Requerimientos</a>
+		               			<a href="GenerarCuadroRqmts.jsp" id="nav14"><i class="far fa-calendar-check"></i> Generar Cuadro de Requerimientos</a>
 		               			<a href="#" id="nav15"><i class="far fa-calendar-check"></i> Consultar Cuadro de Requerimientos</a>
 		               			<a href="#" id="nav16"><i class="far fa-calendar-check"></i> Generar Reporte</a>
 	               				<%
