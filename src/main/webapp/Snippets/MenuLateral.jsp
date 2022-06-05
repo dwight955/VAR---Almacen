@@ -50,7 +50,7 @@
 	               		}else{
 	               				%>
 		               			<a href="GenerarCuadroRqmts.jsp" id="nav14"><i class="far fa-calendar-check"></i> Generar Cuadro de Requerimientos</a>
-		               			<a href="#" id="nav15"><i class="far fa-calendar-check"></i> Consultar Cuadro de Requerimientos</a>
+		               			<a href="UnidadOrg-ConsultarCuadroRqmts.jsp" id="nav15"><i class="far fa-calendar-check"></i> Consultar Cuadro de Requerimientos</a>
 		               			<a href="#" id="nav16"><i class="far fa-calendar-check"></i> Generar Reporte</a>
 	               				<%
 	               		}

@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.var.dao.MySqlBienesDAO;
 import com.var.entidad.Bien;
-import com.var.entidad.Trabajador;
 import com.var.services.BienService;
 
 /**
