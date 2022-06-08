@@ -31,18 +31,29 @@ public class ServletTrabajadorJSON extends HttpServlet {
         servicio = new TrabajadorService();
     }
 
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String codigo = request.getParameter("codigo");
-		Trabajador data = servicio.buscarPorId(Integer.parseInt(codigo)); 
-		
-		Gson gson=new Gson();
-		String json = gson.toJson(data);
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter salida=response.getWriter();
-		salida.println(json);
+		if(codigo!=null) {
+			Trabajador data = servicio.buscarPorId(Integer.parseInt(codigo)); 
+			
+			Gson gson=new Gson();
+			String json = gson.toJson(data);
+			response.setContentType("application/json;charset=UTF-8");
+			PrintWriter salida=response.getWriter();
+			salida.println(json);
+		}else {
+			String dni = request.getParameter("dni");
+			String nom_ape = request.getParameter("nomApe");
+			String unidadOrg = request.getParameter("unidadOrg");
+			
+			List<Trabajador> listTrabajador = servicio.findByCriterios(dni, nom_ape, unidadOrg);
+			
+			Gson gson=new Gson();
+			String json = gson.toJson(listTrabajador);
+			response.setContentType("application/json;charset=UTF-8");
+			PrintWriter salida=response.getWriter();
+			salida.println(json);
+		}
 	}
 
 }

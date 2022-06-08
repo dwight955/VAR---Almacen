@@ -31,4 +31,7 @@ public class TrabajadorService {
 	public List<Condicion> listCondition(String table){
 		return objCondicion.listarCondicion(table);
 	}
+	public List<Trabajador> findByCriterios(String dni, String nomApe, String UnidadOrg) {
+		return objTrabajador.findByCriterios(dni, nomApe, UnidadOrg);
+	}
 }

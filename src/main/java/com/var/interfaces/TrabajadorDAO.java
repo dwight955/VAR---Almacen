@@ -10,5 +10,5 @@ public interface TrabajadorDAO {
 	public int deleteById(int cod);
 	public Trabajador findById(int cod);
 	public List<Trabajador> listAll();
-	
+	public List<Trabajador> findByCriterios(String dni,String nomApe, String UnidadOrg);
 }

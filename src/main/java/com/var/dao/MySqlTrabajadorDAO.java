@@ -183,6 +183,45 @@ public class MySqlTrabajadorDAO implements TrabajadorDAO{
 		}
 		return false;
 	}
+
+	@Override
+	public List<Trabajador> findByCriterios(String dni, String nomApe, String UnidadOrg) {
+		List<Trabajador> data = new ArrayList<Trabajador>();
+		Trabajador bean = null;
+		Connection cn=null;
+		PreparedStatement pstm=null;
+		ResultSet rs=null;
+		String sql;
+		sql="call usp_buscar_trabajador(?,?,?);";
+		try {
+		cn=MySqlConexion.getConectar();
+		pstm=cn.prepareStatement(sql);
+		pstm.setString(1, dni);
+		pstm.setString(2, nomApe);
+		pstm.setString(3, UnidadOrg);
+		rs=pstm.executeQuery();
+		while(rs.next()) {
+			bean=new Trabajador();
+			bean.setDni(rs.getString(1));
+			bean.setNomApe(rs.getString(2));
+			bean.setCodUnidadOrga(rs.getString(3));
+			bean.setCodTrab(rs.getInt(4));
+			data.add(bean);
+		}
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.print("Error en findByCriterios => Trabajador");
+		}finally {
+			try {
+				if(cn!=null) cn.close();
+				if(pstm!=null)pstm.close();
+				if(rs!=null)rs.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return data;
+	}
 }
 
 
