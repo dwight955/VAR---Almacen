@@ -9,7 +9,7 @@ import java.util.List;
 
 
 import com.var.entidad.Bien;
-import com.var.entidad.Trabajador;
+
 import com.var.interfaces.BienesDAO;
 import com.var.utils.MySqlConexion;
 
@@ -157,6 +157,50 @@ public class MySqlBienesDAO implements BienesDAO{
 		}
 		return lista;
 	}
+	
+	@Override
+	public List<Bien> lisreq() {
+		List<Bien> data=new ArrayList<Bien>();
+		Bien bean;
+		Connection cn=null;
+		PreparedStatement pstm=null;
+		ResultSet rs=null;
+		try {
+			
+			cn=MySqlConexion.getConectar();
+			
+			String sql="select *from tb_bienes";
+			
+			pstm=cn.prepareStatement(sql);	
+			
+		
+			rs=pstm.executeQuery();
+		
+			while(rs.next()) {
+				
+				bean=new Bien();
+				
+				bean.setCodBien(rs.getInt(1));     				
+				bean.setDescBien(rs.getString(2));
+				bean.setUniMed(rs.getString(3));
+			
+				data.add(bean);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstm!=null) pstm.close();
+				if(cn!=null) cn.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return data;			
+	
+	}
 
 	@Override
 	public Bien findById(int cod) {
@@ -194,5 +238,7 @@ public class MySqlBienesDAO implements BienesDAO{
 		}
 		return bean;
 	}
+	
+	
 	
 }

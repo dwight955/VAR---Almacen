@@ -11,4 +11,5 @@ public interface BienesDAO {
 	public int deleteById(int cod); 
 	public Bien findById(int cod);
 	public List<Bien> listAll();
+	public List<Bien> lisreq();
 }
