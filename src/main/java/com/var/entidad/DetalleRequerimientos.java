@@ -1,8 +1,8 @@
 package com.var.entidad;
 
 public class DetalleRequerimientos{
-	private int  cant;
-	private String  codBien,numReq,uniMed;
+	private int  cant, codBien;
+	private String numReq,uniMed;
 	
 	//varibales extras
 	private String descripcion;
@@ -32,10 +32,10 @@ public class DetalleRequerimientos{
 	public void setCant(int cant) {
 		this.cant = cant;
 	}
-	public String getCodBien() {
+	public int getCodBien() {
 		return codBien;
 	}
-	public void setCodBien(String codBien) {
+	public void setCodBien(int codBien) {
 		this.codBien = codBien;
 	}
 	public double getPreUni() {
