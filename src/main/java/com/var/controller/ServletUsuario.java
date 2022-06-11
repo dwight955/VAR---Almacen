@@ -64,10 +64,7 @@ public class ServletUsuario extends HttpServlet {
 			
 			request.getSession().setAttribute("CODIGO", result.getCodUsuario());
 			request.getSession().setAttribute("DATOS", result.getNombre()+" "+result.getApellido());
-			request.getSession().setAttribute("CARGO", result.getNomUnidadOrganica());
-			
-			
-			
+			request.getSession().setAttribute("UNIDAD_ORGANICA", result.getNomUnidadOrganica());
 			
 			response.sendRedirect("dashboard.jsp"); 
 		}else {

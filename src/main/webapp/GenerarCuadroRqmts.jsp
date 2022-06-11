@@ -91,7 +91,7 @@
 								<div class="input-group input-group-sm mb-3  grid-unidadOrganica">
 									<span class="input-group-text" id="inputGroup-sizing-sm">De:</span>
 									<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="responsable"
-										id="idResponsable" readonly value="${sessionScope.CARGO}" >
+										id="idResponsable" readonly value="${sessionScope.UNIDAD_ORGANICA}" >
 								</div>
 							</div>
 							<div class="modal-body__block-destinatario">
@@ -146,15 +146,6 @@
 										</tr>
 									</thead>
 									<tbody>
-									
-											<tr>
-												<td>1</td>
-												<td>Pantalones Jeans</td>			  
-												<td>UNIDAD</td>
-												<td>15</td>
-												<td><button type="button" class="btn btn-primary"
-														data-bs-toggle="modal" data-bs-target="#staticBackdrop">X</button></td>
-											</tr>
 									</tbody>
 								</table>
 			                </div>
@@ -168,68 +159,7 @@
 			</div>
 		</div>
 		<!-- FIN DE MODAL PRINCIPAL -->			
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>		
-
-<script type="text/javascript">
-var fecha = new Date();
-document.getElementById("idFecha").value = fecha.toJSON().slice(0,10);
-</script>   
-		
-<script>	
-	
-$(document).ready(function() {
-	cargarRequerimientos();
-	
-} );
-function cargarRequerimientos(){
-	$.get("ServletBienReqJSON",function(response){
-		$.each(response,function(index,item){
-			$("#tableBienes").append("<tr><td>"+item.codBien+"</td><td>"+item.descBien+"</td><td>"+item.uniMed+"</td><td>"+
-					"<button type='button' class='btn btn-success btn-adicionar'>+</button></td></tr>");	
-			
-		})
-		 
-	})
-}
-function cargarBienes(){
-	
-}
-$(document).on("click",".btn-adicionar",function(){
-	let cod,des,uni,can;
-	cod=$(this).parents("tr").find("td")[0].innerHTML;
-	des=$(this).parents("tr").find("td")[1].innerHTML;	
-	uni=$(this).parents("tr").find("td")[2].innerHTML;
-	can=$("#idCantidad").val();
-	$("#tableDetalle tbody").empty();
-	$.get("ServletRequerimiento?accion=ADICIONAR&codigo="+cod+"&descripcion="+des+"&unidad="+uni+"&cantidad="+can,function(response){
-		$.each(response,function(index,item){
-			$("#tableDetalle").append("<tr><td>"+item.codBien+"</td><td>"+item.descripcion+"</td><td>"+item.uniMed+"</td><td>"+item.cant+"</td><td>"+
-			"<button type='button' class='btn btn-primary btn-eliminar'>x</button></td></tr>");		
-		})
-
-	})
-	
-})
-
-$(document).on("click",".btn-eliminar",function(){
-	let cod;
-	cod=$(this).parents("tr").find("td")[0].innerHTML;
-	$("#tableDetalle tbody").empty();
-	$.get("ServletRequerimiento?accion=ELIMINAR&codigo="+cod,function(response){
-		$.each(response,function(index,item){
-			$("#tableDetalle").append("<tr><td>"+item.codBien+"</td><td>"+item.descripcion+"</td><td>"+item.uniMed+"</td><td>"+item.cant+"</td><td>"+
-					"<button type='button' class='btn btn-primary btn-eliminar'>x</button></td></tr>");	
-		})
-		         
-	})
-	
-	
-})
-</script>	
-
-		
-		<!-- MODAL BUSCAR TRABAJADOR -->
+ 		<!-- MODAL BUSCAR TRABAJADOR -->
 		<div class="modal fade" id="idBuscarTrabajador" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered modal-lg">
 		    <div class="modal-content">
@@ -281,6 +211,7 @@ $(document).on("click",".btn-eliminar",function(){
 <script type="text/javascript">
 	$(document).ready(function() {
 		leerCondicionJSON();
+		cargarRequerimientos();
 		$('#idBuscar').bootstrapValidator({
 			fields:{
 				dniTrabajador:{
@@ -347,6 +278,50 @@ $(document).on("click",".btn-eliminar",function(){
 		$("#tblBuscarTrabajador tbody").empty();
 	})	
 	
+</script>
+<script>
+function cargarRequerimientos(){
+	$.get("ServletBienReqJSON",function(response){
+		$.each(response,function(index,item){
+			$("#tableBienes").append("<tr><td>"+item.codBien+"</td><td>"+item.descBien+"</td><td>"+item.uniMed+"</td><td>"+
+					"<button type='button' class='btn btn-success btn-adicionar'>+</button></td></tr>");	
+			
+		})
+		 
+	})
+}
+$(document).on("click",".btn-adicionar",function(){
+	let cod,des,uni,can;
+	cod=$(this).parents("tr").find("td")[0].innerHTML;
+	des=$(this).parents("tr").find("td")[1].innerHTML;	
+	uni=$(this).parents("tr").find("td")[2].innerHTML;
+	can=$("#idCantidad").val();
+	$("#tableDetalle tbody").empty();
+	$.get("ServletRequerimiento?accion=ADICIONAR&codigo="+cod+"&descripcion="+des+"&unidad="+uni+"&cantidad="+can,function(response){
+		$.each(response,function(index,item){
+			$("#tableDetalle").append("<tr><td>"+item.codBien+"</td><td>"+item.descripcion+"</td><td>"+item.uniMed+"</td><td>"+item.cant+"</td><td>"+
+			"<button type='button' class='btn btn-primary btn-eliminar'>x</button></td></tr>");		
+		})
+
+	})
+	
+})
+
+$(document).on("click",".btn-eliminar",function(){
+	let cod;
+	cod=$(this).parents("tr").find("td")[0].innerHTML;
+	$("#tableDetalle tbody").empty();
+	$.get("ServletRequerimiento?accion=ELIMINAR&codigo="+cod,function(response){
+		$.each(response,function(index,item){
+			$("#tableDetalle").append("<tr><td>"+item.codBien+"</td><td>"+item.descripcion+"</td><td>"+item.uniMed+"</td><td>"+item.cant+"</td><td>"+
+					"<button type='button' class='btn btn-primary btn-eliminar'>x</button></td></tr>");	
+		})
+		         
+	})
+})
+var fecha = new Date();
+document.getElementById("idFecha").value = fecha.toJSON().slice(0,10);
+</script>  
 </script>
 </body>
 </html>

@@ -31,6 +31,7 @@ public class MySqlUsuarioDAO implements UsuarioDAO{
 				bean.setApellido(rs.getString(3));
 				bean.setCargo(rs.getString(4));
 				bean.setNomUnidadOrganica(rs.getString(5));
+				bean.setCodUsuario(rs.getInt(6));
 			}
 			
 		}catch(SQLException ex) {
