@@ -70,6 +70,7 @@
 .modal-body__block-table-detalle{
 	grid-column: 1 / 13;
 	grid-row: 4 / 6;
+	margin-top: .5em;
 }
 
 .modal-body__perfil{

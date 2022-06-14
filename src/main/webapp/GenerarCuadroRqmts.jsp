@@ -73,15 +73,15 @@
 							</div>
 							<div class="form-group input-group-sm">
 									<label for="exampleInputEmail1" class="form-label">Fecha de Emisión</label>
-									<input type="date" class="form-control" name="fecha"
-										id="idFecha" readonly value="">										
+									<input type=date class="form-control" name="fecha"
+										id="idFecha" readonly>										
 							</div>
-							<div class="modal-body__block-responsable">
+							<div class="form-group modal-body__block-responsable">
 								<img class="modal-body__perfil grid-perfil-responsable" src="img/perfil.png">
 								<div class="form-group input-group-sm">
 									<label for="exampleInputEmail1" class="form-label">Código</label>
 									<input type="text" class="form-control" name="CodUsuario"
-										id="idCoUsuario" readonly value="${sessionScope.CODIGO}">
+										id="idCodUsuario" readonly value="${sessionScope.CODIGO}">
 								</div>
 								<div class="form-group grid-responsable input-group-sm">
 									<label for="exampleInputEmail1" class="form-label"> Nombres </label>
@@ -91,10 +91,10 @@
 								<div class="input-group input-group-sm mb-3  grid-unidadOrganica">
 									<span class="input-group-text" id="inputGroup-sizing-sm">De:</span>
 									<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="responsable"
-										id="idResponsable" readonly value="${sessionScope.UNIDAD_ORGANICA}" >
+										id="idUnidadResponsable" readonly value="${sessionScope.UNIDAD_ORGANICA}" >
 								</div>
 							</div>
-							<div class="modal-body__block-destinatario">
+							<div class="form-group modal-body__block-destinatario">
 								<div class="input-group input-group-sm mb-3  grid-destinario">
 									<span class="input-group-text" id="inputGroup-sizing-sm">Destinatario:</span>
 									<!-- Button Modal -->
@@ -114,6 +114,7 @@
 								</div>
 								<img class="modal-body__perfil grid-perfil-destinatario" src="img/trabajador.png">
 							</div>
+							
 							<div class="modal-body__block-table-bienes tbodyDiv">
 								<table id="tableBienes" class="table table-bordered text-center table-sm table-hover" style="width: 100%">
 									<thead class="table-light sticky-top">
@@ -181,7 +182,7 @@
 								</tbody>
 							</table>
 		                </div>
-				        <form id="idBuscar" method="post" action="" class="criterios_Trabajador">
+				        <form id="idBuscar" method="post" class="criterios_Trabajador">
 				        	<div class="form-group input-group-sm">
 								<label for="exampleInputEmail1" class="form-label"> DNI </label>
 								<input type="text" class="form-control" name="dniTrabajador"
@@ -209,30 +210,83 @@
 	<!-- FIN DE MODAL BUSCAR TRABAJADOR -->
 <%@ include file="Snippets/BooststrapJS.jsp" %>
 <script type="text/javascript">
+let cod,nom,uni,fec,num, codDest,nomDest, uniDest;
+cod = $("#idCodUsuario").val();
+nom = $("#idResponsable").val();
+uni = $("#idUnidadResponsable").val();
 	$(document).ready(function() {
 		leerCondicionJSON();
 		cargarRequerimientos();
-		$('#idBuscar').bootstrapValidator({
-			fields:{
-				dniTrabajador:{
-					validators:{
-						regexp:{
-				 			regexp:/^(\d{8})$/,
-				 			message:'Debe tener 8 digitos'
-				 		}
-					}
-				},
-				nombreTrabajador:{
-					validators:{
-						regexp:{
-				 			regexp:/^[a-zA-ZÀ-ÿ\u00f1\u00d1 ]{3,30}$/,
-				 			message:'Campo Nombre hasta 30 digitos alfabeticos'
-				 		}
-					}
+		asignarfecha();
+	});
+	$('#idBuscar').bootstrapValidator({
+		fields:{
+			dniTrabajador:{
+				validators:{
+					regexp:{
+			 			regexp:/^(\d{8})$/,
+			 			message:'Debe tener 8 digitos'
+			 		}
+				}
+			},
+			nombreTrabajador:{
+				validators:{
+					regexp:{
+			 			regexp:/^[a-zA-ZÀ-ÿ\u00f1\u00d1 ]{3,30}$/,
+			 			message:'Campo Nombre hasta 30 digitos alfabeticos'
+			 		}
 				}
 			}
-		});
+		}
 	});
+	$("#form-generarCuadroRqmt").bootstrapValidator({
+		fields:{
+			cantidad:{
+				validators:{
+					regexp:{
+			 			regexp:/^[0-9]{1,10}$/,
+			 			message:'Solo números'
+			 		},
+					between:{
+		 				 min:1,
+		 				 max:45,
+		 				 message:'Ha superado la cantidad maxima'
+		 			}
+				}
+			},
+			CodDestinatario:{
+				validators:{
+					notEmpty:{
+					}	
+				}
+			}
+		}
+	});
+	$(document).on("click","#btnGenerar", function(){
+		$.get("ServletRequerimiento?accion=CORRELATIVO",function(response){
+			$("#idNumero").val(response);
+		})
+	});
+	$(document).on("click","#btnBuscarTrabajador", function(){
+		 num = $("#idNumero").val();
+		 codDest = $("#idCodDestinatario").val();	
+		 nomDest = $("#idNombreDestinatario").val(); 
+		 uniDest = $("#idUnidadOrgDestinatario").val();
+		$("#form-generarCuadroRqmt").trigger("reset");
+		$("#form-generarCuadroRqmt").data("bootstrapValidator").resetForm(true);
+		recupera();
+	});
+	function recupera(){
+		//Asignar valor guardado
+		$("#idCodUsuario").val(cod);
+		$("#idResponsable").val(nom);
+		$("#idUnidadResponsable").val(uni);
+		asignarfecha();
+		$("#idNumero").val(num);
+		$("#idCodDestinatario").val(codDest);
+		$("#idNombreDestinatario").val(nomDest);
+		$("#idUnidadOrgDestinatario").val(uniDest);
+	}
 	
 	function leerCondicionJSON(){
 		$.get("ServletCondicionJSON?comboBox=UO",function(response){
@@ -277,7 +331,6 @@
 		$("#idBuscar").data("bootstrapValidator").resetForm(true);
 		$("#tblBuscarTrabajador tbody").empty();
 	})	
-	
 </script>
 <script>
 function cargarRequerimientos(){
@@ -290,21 +343,21 @@ function cargarRequerimientos(){
 		 
 	})
 }
+let repeat = 0;
+let bienes = new Array();
 $(document).on("click",".btn-adicionar",function(){
 	let cod,des,uni,can;
 	cod=$(this).parents("tr").find("td")[0].innerHTML;
-	des=$(this).parents("tr").find("td")[1].innerHTML;	
+	des=$(this).parents("tr").find("td")[1].innerHTML;
 	uni=$(this).parents("tr").find("td")[2].innerHTML;
 	can=$("#idCantidad").val();
 	$("#tableDetalle tbody").empty();
-	$.get("ServletRequerimiento?accion=ADICIONAR&codigo="+cod+"&descripcion="+des+"&unidad="+uni+"&cantidad="+can,function(response){
-		$.each(response,function(index,item){
-			$("#tableDetalle").append("<tr><td>"+item.codBien+"</td><td>"+item.descripcion+"</td><td>"+item.uniMed+"</td><td>"+item.cant+"</td><td>"+
-			"<button type='button' class='btn btn-primary btn-eliminar'>x</button></td></tr>");		
-		})
-
-	})
-	
+		$.get("ServletRequerimiento?accion=ADICIONAR&codigo="+cod+"&descripcion="+des+"&unidad="+uni+"&cantidad="+can,function(response){
+			$.each(response,function(index,item){
+				$("#tableDetalle").append("<tr><td>"+item.codBien+"</td><td>"+item.descripcion+"</td><td>"+item.uniMed+"</td><td>"+item.cant+"</td><td>"+
+				"<button type='button' class='btn btn-primary btn-eliminar'>x</button></td></tr>");		
+			})
+		});
 })
 
 $(document).on("click",".btn-eliminar",function(){
@@ -315,13 +368,14 @@ $(document).on("click",".btn-eliminar",function(){
 		$.each(response,function(index,item){
 			$("#tableDetalle").append("<tr><td>"+item.codBien+"</td><td>"+item.descripcion+"</td><td>"+item.uniMed+"</td><td>"+item.cant+"</td><td>"+
 					"<button type='button' class='btn btn-primary btn-eliminar'>x</button></td></tr>");	
-		})
-		         
+		})       
 	})
 })
-var fecha = new Date();
-document.getElementById("idFecha").value = fecha.toJSON().slice(0,10);
-</script>  
+function asignarfecha(){
+	var fecha = new Date();
+	document.getElementById("idFecha").value = fecha.toJSON().slice(0,10);
+}
+
 </script>
 </body>
 </html>

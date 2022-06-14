@@ -2,7 +2,7 @@ package com.var.entidad;
 
 public class CuadroRequerimientos {
 	private String numreq,deUnidadOrg, paraUnidadOrg, estado, fechaEmi;   
-	private int dniSoli,dniEntr;
+	private int codSoli,codEntr, codReq;
 	
 	//Variables solo para el listado / No entran en la base de datos
 	private String nomUniSoli,nomUniEntr,apenomSoli,apenomEntre;
@@ -61,17 +61,23 @@ public class CuadroRequerimientos {
 	public void setFechaEmi(String fechaEmi) {
 		this.fechaEmi = fechaEmi;
 	}
-	public int getDniSoli() {
-		return dniSoli;
+	public int getCodSoli() {
+		return codSoli;
 	}
-	public void setDniSoli(int dniSoli) {
-		this.dniSoli = dniSoli;
+	public void setCodSoli(int dniSoli) {
+		this.codSoli = dniSoli;
 	}
-	public int getDniEntr() {
-		return dniEntr;
+	public int getCodEntr() {
+		return codEntr;
 	}
-	public void setDniEntr(int dniEntr) {
-		this.dniEntr = dniEntr;
+	public void setCodEntr(int dniEntr) {
+		this.codEntr = dniEntr;
+	}
+	public int getCodReq() {
+		return codReq;
+	}
+	public void setCodReq(int codReq) {
+		this.codReq = codReq;
 	}
 	
 	
