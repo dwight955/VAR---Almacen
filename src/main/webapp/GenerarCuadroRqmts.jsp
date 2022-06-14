@@ -72,6 +72,11 @@
 									id="idNumero" readonly>
 							</div>
 							<div class="form-group input-group-sm">
+									<label for="exampleInputEmail1" class="form-label">Estado</label>
+									<input type=text class="form-control" name="estado"
+										id="idEstado" readonly value="PENDIENTE">										
+							</div>
+							<div class="form-group input-group-sm">
 									<label for="exampleInputEmail1" class="form-label">Fecha de Emisión</label>
 									<input type=date class="form-control" name="fecha"
 										id="idFecha" readonly>										
@@ -210,10 +215,11 @@
 	<!-- FIN DE MODAL BUSCAR TRABAJADOR -->
 <%@ include file="Snippets/BooststrapJS.jsp" %>
 <script type="text/javascript">
-let cod,nom,uni,fec,num, codDest,nomDest, uniDest;
+let cod,nom,uni,fec,num, codDest,nomDest, uniDest,estado;
 cod = $("#idCodUsuario").val();
 nom = $("#idResponsable").val();
 uni = $("#idUnidadResponsable").val();
+estado = $("#idEstado").val();
 	$(document).ready(function() {
 		leerCondicionJSON();
 		cargarRequerimientos();
@@ -286,6 +292,7 @@ uni = $("#idUnidadResponsable").val();
 		$("#idCodDestinatario").val(codDest);
 		$("#idNombreDestinatario").val(nomDest);
 		$("#idUnidadOrgDestinatario").val(uniDest);
+		$("#idEstado").val(estado);
 	}
 	
 	function leerCondicionJSON(){
