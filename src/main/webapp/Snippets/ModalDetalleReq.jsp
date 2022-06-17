@@ -50,49 +50,20 @@
 												<td>25.50</td>
 												<td>10</td>
 											</tr>
-											<tr>
-												<td>25</td>
-												<td>Lorem Ipsum</td>
-												<td>Lorem Ipsum</td>
-												<td>Lorem Ipsum</td>
-												<td>25.50</td>
-												<td>10</td>
-											</tr>
-											<tr>
-												<td>25</td>
-												<td>Lorem Ipsum</td>
-												<td>Lorem Ipsum</td>
-												<td>Lorem Ipsum</td>
-												<td>25.50</td>
-												<td>10</td>
-											</tr>
-											<tr>
-												<td>25</td>
-												<td>Lorem Ipsum</td>
-												<td>Lorem Ipsum</td>
-												<td>Lorem Ipsum</td>
-												<td>25.50</td>
-												<td>10</td>
-											</tr>
-											<tr>
-												<td>25</td>
-												<td>Lorem Ipsum</td>
-												<td>Lorem Ipsum</td>
-												<td>Lorem Ipsum</td>
-												<td>25.50</td>
-												<td>10</td>
-											</tr>
-											<tr>
-												<td>25</td>
-												<td>Lorem Ipsum</td>
-												<td>Lorem Ipsum</td>
-												<td>Lorem Ipsum</td>
-												<td>25.50</td>
-												<td>10</td>
-											</tr>
 										</tbody>
 									</table>
 								</div>
+								<%
+									String cargoAux = (String) session.getAttribute("cargo");
+									if(cargoAux.equals("DIRECTOR EJECUTIVO")){
+										%>
+										<div class="modal-footer">
+									        <button type="button" class="btn btn-danger">Rechazar</button>
+									        <button type="button" class="btn btn-success">Enviar</button>
+				      					</div>
+				      					<%
+									}
+				      					%>
 						</div>
 					</div>
 			    </div>

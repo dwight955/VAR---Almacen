@@ -29,8 +29,7 @@ public class ServletRequerimiento extends HttpServlet {
 		servicio = new RequerimientoService();
 	}
 
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		String tipo = request.getParameter("accion");
 		if (tipo.equals("ADICIONAR"))
 			adicionarBien(request, response);
@@ -42,8 +41,16 @@ public class ServletRequerimiento extends HttpServlet {
 			insertar(request, response);
 		else if (tipo.equals("LISTAR"))
 			listar(request, response);
+		else if (tipo.equals("LISTARbyESTADO"))
+			listarByEstado(request, response);
 		else if (tipo.equals("LIMPIAR"))
 			limpiar(request, response);
+	}
+
+	private void listarByEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<RequerimientoDTO> lista = servicio.listarPorEstado("PENDIENTE");
+		request.setAttribute("requerimientos", lista);
+		request.getRequestDispatcher("/bdjCuadrosRequerimientos.jsp").forward(request, response);
 	}
 
 	private void limpiar(HttpServletRequest request, HttpServletResponse response) {

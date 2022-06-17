@@ -12,3 +12,7 @@
 .table-DetalleCuadroReq{
 	grid-column: 1/ 4; 
 }
+.modal-footer{
+	grid-column: 1 / 4;
+	grid-row: 4;
+}

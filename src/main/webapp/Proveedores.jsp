@@ -79,7 +79,7 @@
 					   	  <option value="">Seleccione un Distrito</option>
 						</select>
 					  </div>
-					   <div class="modal-footer">
+					  <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" id="btn-cerrar" data-bs-dismiss="modal">Cerrar</button>
 				        <button type="submit" class="btn btn-success">Grabar</button>
 				      </div>		

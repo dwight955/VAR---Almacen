@@ -24,7 +24,7 @@
 						if(unidaOrg.equals("LOGISTICA")){
 	               			if(cargo.equals("DIRECTOR EJECUTIVO")){
 	               				%>
-	                			<a href="#" id="nav02"><i class="far fa-calendar-check"></i>Bandeja de entrada</a>
+	                			<a href="ServletRequerimiento?accion=LISTARbyESTADO" id="nav02"><i class="far fa-calendar-check"></i>Bandeja de entrada</a>
 	                			<a href="ServletTrabajador?tipo=LISTAR" id="nav03"><i class="far fa-calendar-check"></i>Mantenimiento de Trabajadores</a>
 	                			<a href="" id="nav04"><i class="far fa-calendar-check"></i></a>
 	                			<%

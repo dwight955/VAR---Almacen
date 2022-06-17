@@ -1,5 +1,6 @@
 package com.var.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -144,6 +145,45 @@ public class MySqlRequerimientoDAO implements RequerimientoDAO {
 					cn.close();
 			} catch (SQLException e2) {
 				e2.printStackTrace();
+			}
+		}
+		return data;
+	}
+
+	@Override
+	public List<RequerimientoDTO> listByEstadoDTOs(String estado) {
+		List<RequerimientoDTO> data = new ArrayList<RequerimientoDTO>();
+		Connection cn = null;
+		CallableStatement cstm = null;
+		ResultSet rs = null;
+		try {
+			cn = MySqlConexion.getConectar();
+			String sql = "call usp_listar_requerimiento_estado(?)";
+			cstm = cn.prepareCall(sql);
+			cstm.setString(1, estado);
+			rs = cstm.executeQuery();
+			while (rs.next()) {
+				RequerimientoDTO bean = new RequerimientoDTO();
+				bean.setNumero(rs.getString(1));
+				bean.setDni(rs.getString(2));
+				bean.setRemitente(rs.getString(3));
+				bean.setEstado(rs.getString(4));
+				bean.setFecha(rs.getString(5));
+				data.add(bean);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (cstm != null)
+					cstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+				System.out.print("ERROR en servlet requerimiento");
 			}
 		}
 		return data;
