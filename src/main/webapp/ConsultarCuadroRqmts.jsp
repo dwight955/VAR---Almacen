@@ -83,85 +83,14 @@ overflow: auto;
 				                <td>Lorem Ipsum</td>
 				                <td>10</td>
 				                <td>30/05/2022</td>
-				                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Ver Detalle</button></td>
-				            </tr>
-				            <tr>
-				                <td>000014</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>10</td>
-				                <td>30/05/2022</td>
-				                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Ver Detalle</button></td>
-				            </tr>
-				            <tr>
-				                <td>000014</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>10</td>
-				                <td>30/05/2022</td>
-				                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Ver Detalle</button></td>
-				            </tr>
-				            <tr>
-				                <td>000014</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>10</td>
-				                <td>30/05/2022</td>
-				                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Ver Detalle</button></td>
-				            </tr>
-				            <tr>
-				                <td>000014</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>10</td>
-				                <td>30/05/2022</td>
-				                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Ver Detalle</button></td>
-				            </tr>
-				            <tr>
-				                <td>000014</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>10</td>
-				                <td>30/05/2022</td>
-				                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Ver Detalle</button></td>
-				            </tr>
-				            <tr>
-				                <td>000014</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>10</td>
-				                <td>30/05/2022</td>
-				                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Ver Detalle</button></td>
-				            </tr>
-				            <tr>
-				                <td>000014</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>10</td>
-				                <td>30/05/2022</td>
-				                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Ver Detalle</button></td>
-				            </tr>
-				            <tr>
-				                <td>000014</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>10</td>
-				                <td>30/05/2022</td>
-				                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Ver Detalle</button></td>
+				                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#idDetalleCuadroReq">Ver Detalle</button></td>
 				            </tr>
 			        </tbody>
 		    	</table>		
 			</div>
 			<div class="consultaRequ__block_info mt-2"><p>XXX Cuadro de Requerimiento encontradas</p></div>
-		</div>	
+		</div>
+		<%@ include file="Snippets/ModalDetalleReq.jsp" %>	
 		</section>
 	</div>
 <%@ include file="Snippets/BooststrapJS.jsp" %>

@@ -65,6 +65,7 @@ public class ServletRequerimiento extends HttpServlet {
 		if (servicio.insertar(requerimiento, detalle, usuario)) {
 			request.setAttribute("MENSAJE", "Requerimiento registrado...");
 			listar(request, response);
+			detalle.clear();	
 		}
 	}
 

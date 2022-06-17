@@ -26,7 +26,7 @@
 	               				%>
 	                			<a href="#" id="nav02"><i class="far fa-calendar-check"></i>Bandeja de entrada</a>
 	                			<a href="ServletTrabajador?tipo=LISTAR" id="nav03"><i class="far fa-calendar-check"></i>Mantenimiento de Trabajadores</a>
-	                			<a href="ConsultarCuadroRqmts.jsp" id="nav04"><i class="far fa-calendar-check"></i>Consultar Cuadro de Requerimientos</a>
+	                			<a href="" id="nav04"><i class="far fa-calendar-check"></i></a>
 	                			<%
 	               			}
 	               			else if(cargo.equals("SUB-ALMACENERO")){
@@ -40,7 +40,7 @@
 	               			else if(cargo.equals("JEFE DE ALMACEN")){
 	               				%>
 	                    		<a href="#" id="nav09"><i class="far fa-calendar-check"></i> Bandeja de entrada PECOSAs</a>
-	                    		<a href="#" id="nav10"><i class="far fa-calendar-check"></i> Actualizar estado de PECOSA</a>
+	                    		<a href="ConsultarCuadroRqmts.jsp" id="nav10"><i class="far fa-calendar-check"></i>Consultar Cuadro de Requerimientos</a>
 	                    		<a href="#" id="nav11"><i class="far fa-calendar-check"></i> Consultar PECOSA</a>
 	                    		<a href="ServletProveedor?tipo=LISTAR" id="nav12"><i class="far fa-calendar-check"></i> Listado de Proveedores</a>
 	                    		<a href="#" id="nav13"><i class="far fa-calendar-check"></i> Generar Reporte</a>
@@ -49,7 +49,7 @@
 	               			//MENU PARA LOS DIRECTIVOS
 	               		}else{
 	               				%>
-		               			<a href="GenerarCuadroRqmts.jsp" id="nav14"><i class="far fa-calendar-check"></i> Generar Cuadro de Requerimientos</a>
+		               			<a href="ServletRequerimiento?accion=LISTAR" id="nav14"><i class="far fa-calendar-check"></i> Generar Cuadro de Requerimientos</a>
 		               			<a href="UnidadOrg-ConsultarCuadroRqmts.jsp" id="nav15"><i class="far fa-calendar-check"></i> Consultar Cuadro de Requerimientos</a>
 		               			<a href="#" id="nav16"><i class="far fa-calendar-check"></i> Generar Reporte</a>
 	               				<%

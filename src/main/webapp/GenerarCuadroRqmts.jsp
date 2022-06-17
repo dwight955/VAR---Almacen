@@ -79,8 +79,7 @@
 								data-bs-dismiss="modal">×</button>
 						</div>
 						<div class="modal-body">
-							<form id="form-generarCuadroRqmt" method="post"
-								action="ServletRequerimiento?accion=INSERTAR"
+							<form id="form-generarCuadroRqmt" method="post"action="ServletRequerimiento?accion=INSERTAR"
 								class="grid-formCuadroRqrmt">
 								<div class="form-group input-group-sm">
 									<label for="exampleInputEmail1" class="form-label">Número</label>
@@ -357,42 +356,20 @@
 				})
 			})
 		}
-		$(document)
-				.on(
-						"click",
-						"#btnBuscar",
-						function() {
-							let dni, nomApe, unidadOrg;
-							dni = $("#idDniTrabajador").val();
-							nomApe = $("#idNombreTrabajador").val();
-							unidadOrg = $("#idUnidadOrganica").val();
-							$("#tblBuscarTrabajador tbody").empty();
-							$
-									.get(
-											"ServletTrabajadorJSON?dni=" + dni
-													+ "&nomApe=" + nomApe
-													+ "&unidadOrg=" + unidadOrg,
-											function(response) {
-												$
-														.each(
-																response,
-																function(index,
-																		item) {
-																	$(
-																			"#tblBuscarTrabajador")
-																			.append(
-																					"<tr><td>"
-																							+ item.dni
-																							+ "</td><td>"
-																							+ item.nomApe
-																							+ "</td><td>"
-																							+ item.codUnidadOrga
-																							+ "</td><td><button id='btnCodTrab' type='button' data-bs-toggle='modal' data-bs-target='#staticBackdrop' class='btn btn-success btn-codTrab' value='"+item.codTrab+"'>"
-																							+ item.codTrab
-																							+ "</button></td></tr>");
-																})
+		$(document).on("click","#btnBuscar",function() {
+		let dni, nomApe, unidadOrg;
+		dni = $("#idDniTrabajador").val();
+		nomApe = $("#idNombreTrabajador").val();
+		unidadOrg = $("#idUnidadOrganica").val();
+		$("#tblBuscarTrabajador tbody").empty();
+		$.get("ServletTrabajadorJSON?dni=" + dni+ "&nomApe=" + nomApe+ "&unidadOrg=" + unidadOrg,function(response) {
+			$.each(response,function(index,item) {
+				$("#tblBuscarTrabajador").append("<tr><td>"+ item.dni+ "</td><td>"+ item.nomApe+ "</td><td>"
+														   + item.codUnidadOrga+ "</td><td><button id='btnCodTrab' type='button' data-bs-toggle='modal' data-bs-target='#staticBackdrop' class='btn btn-success btn-codTrab' value='"+item.codTrab+"'>"
+														   + item.codTrab+ "</button></td></tr>");
+												})
 											})
-						});
+		});
 
 		$(document).on("click", ".btn-codTrab", function() {
 			let cod, nom, uni;

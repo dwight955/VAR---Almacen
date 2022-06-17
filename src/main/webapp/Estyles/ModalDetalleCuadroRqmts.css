@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+.cuadroReq__info{
+	display: grid;
+	padding: 1em;
+	grid-template-columns: 130px repeat(2, 1fr);
+	grid-template-rows: 30px 60px 1fr;
+	grid-gap: 1em;
+}
+.cuadroReq__info > .form-group:nth-child(3){
+	grid-column: 1 / 2;
+}
+.table-DetalleCuadroReq{
+	grid-column: 1/ 4; 
+}
