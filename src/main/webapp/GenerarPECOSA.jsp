@@ -196,5 +196,17 @@
 		</section>
 	</div>
 	<%@ include file="Snippets/BooststrapJS.jsp"%>	
+	<script type="text/javascript"> 
+	$(document).ready(function(){
+		asignarFecha();
+	});
+	function asignarFecha(){
+		let fecha= new Date();
+		document.getElementById("idFecha").value = fecha.toJSON().slice(0,10);
+	}
+	
+	
+	
+	</script>
 </body>
 </html>
