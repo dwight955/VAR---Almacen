@@ -31,7 +31,7 @@
 	               			}
 	               			else if(cargo.equals("SUB-ALMACENERO")){
 	               				%>
-	                    		<a href="#" id="nav05"><i class="far fa-calendar-check"></i> Generar PECOSA</a>
+	                    		<a href="GenerarPECOSA.jsp" id="nav05"><i class="far fa-calendar-check"></i> Generar PECOSA</a>
 			               		<a href="#" id="nav06"><i class="far fa-calendar-check"></i> Consultar PECOSAs</a>
 			               		<a href="ServletBien?tipo=LISTAR" id="nav07"><i class="far fa-calendar-check"></i> Listado de Bienes</a>
 			               		<a href="#" id="nav08"><i class="far fa-calendar-check"></i> Generar Reporte</a>

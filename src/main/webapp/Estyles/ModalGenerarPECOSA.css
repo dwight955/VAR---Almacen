@@ -1,0 +1,45 @@
+@charset "ISO-8859-1";
+.grid-formPECOSA{
+	display: grid;
+	grid-template-columns: 1fr 350px;
+	grid-template-rows: 130px 1fr 55px;
+	grid-gap: 1em;
+}
+
+.modal-body__block-cabeceraPecosa{
+	grid-column: 1 / 2;
+	display:grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, 60px);
+    grid-gap: .5em;
+}
+.modal-body__block-cabeceraPecosa > .form-group:nth-child(4){
+	grid-column: 1 / 4;
+}
+.modal-body__block-Requerimiento{
+	display: grid;
+	grid-template-columns: 100px repeat(3, 1fr);
+	grid-template-rows: 35px 1fr 35px;
+	grid-gap: .5em 1.5em;
+}
+.modal-body__block-Requerimiento > .tblDetalleReq__Pecosa{
+	grid-column: 1 / 5; 
+}
+.modal-body__block-Requerimiento > .input-group{
+	grid-column: 4 / 5;
+}
+.modal-body__block-responsable{
+	display: grid;
+    grid-template-rowS: 185px repeat(3, 60px);
+    grid-column: 2 / 4;
+    grid-row: 1 / 4;;
+    grid-gap: 1em;
+}
+.modal-body__perfil{
+	width: 140px;
+	margin: auto;
+}
+.modal-footer{
+	grid-column: 1 / 3;
+	grid-row: 3;
+}

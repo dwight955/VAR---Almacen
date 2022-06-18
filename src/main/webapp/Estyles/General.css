@@ -106,7 +106,7 @@ body {
 	background: #FFD133;
 }
 /*TABLAS*/
-.dashboard_content > .consultaRequ, .generarRequ{
+.dashboard_content > .consultaRequ, .generarRequ, .generarPECOSA{
 	margin-top: 2em;
 	width: 76%;
 	height: 80vh;
