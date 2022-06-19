@@ -25,8 +25,9 @@
 								<tr>
 									<th width="10%">NRO</th>
 									<th width="10%">DNI</th>
-									<th width="30%">REMITENTE</th>
-									<th width="15%">ESTADO</th>
+									<th>REMITENTE</th>
+									<th>DESTINATARIO</th>
+									<th>ESTADO</th>
 									<th>FECHA</th>
 									<th width="12%"></th>
 								</tr>
@@ -34,12 +35,14 @@
 							<tbody>
 								<c:forEach items="${requestScope.requerimientos}" var="requerimiento">
 									<tr>
-										<td>${requerimiento.numero}</td>
-										<td>${requerimiento.dni}</td>
-										<td>${requerimiento.remitente}</td>
+										<td>${requerimiento.numreq}</td>
+										<td>${requerimiento.dniSoli}</td>
+										<td>${requerimiento.apenomSoli}</td>
+										<td>${requerimiento.apenomEntre}</td>
 										<td>${requerimiento.estado}</td>
-										<td>${requerimiento.fecha}</td>
-										<td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#idDetalleCuadroReq">Ver Detalle</button></td>
+										<td>${requerimiento.fechaEmi}</td>
+										<td><button type="button" class="btn btn-danger" data-bs-toggle="modal" id="idVerDetalle"
+										data-bs-target="#idDetalleCuadroReq">Ver Detalle</button></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -51,5 +54,30 @@
 		<%@ include file="Snippets/ModalDetalleReq.jsp" %>
 	</div>
 		<%@ include file="Snippets/BooststrapJS.jsp"%>
+	
+	
+	<script type="text/javascript">
+	//asignar evento click a los botones con clase "btn btn-danger"
+	$(document).on("click","#idVerDetalle",function(){
+		//variables
+		let num,nomDest,responsable,estado;
+		//leer las columnas de la fila según el botón Ver Detalle que se pulso
+		num=$(this).parents("tr").find("td")[0].innerHTML;
+		console.log(num);
+		nomDest = $(this).parents("tr").find("td")[2].innerHTML;
+		responsable = $(this).parents("tr").find("td")[3].innerHTML;
+		//estado = $(this).parents("tr").find("td")[4].innerHTML;
+		//Colocamos los valores a los inputs
+		$("#idNumeroReq").val(num);
+		$("#idDestinatario").val(nomDest);
+		$("#idResponsable").val(responsable);
+		
+	})
+	
+	
+	</script>	
+	
+		
+		
 </body>
 </html>

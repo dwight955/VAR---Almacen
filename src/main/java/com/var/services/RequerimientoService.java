@@ -45,7 +45,7 @@ public class RequerimientoService {
 	public List<RequerimientoDTO> listarRequerimietoDTOs() {
 		return objReq.listarRequerimietoDTOs();
 	}
-	public List<RequerimientoDTO> listarPorEstado(String estado) {
-		return objReq.listByEstadoDTOs(estado);
+	public List<CuadroRequerimientos> listByEstado(String estado) {
+		return objReq.listByEstado(estado);
 	}
 }

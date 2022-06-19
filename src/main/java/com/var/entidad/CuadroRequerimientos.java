@@ -5,10 +5,16 @@ public class CuadroRequerimientos {
 	private int codSoli,codEntr, codReq;
 	
 	//Variables solo para el listado / No entran en la base de datos
-	private String nomUniSoli,nomUniEntr,apenomSoli,apenomEntre;
+	private String nomUniSoli,nomUniEntr,apenomSoli,apenomEntre, dniSoli;
 	
 	public String getNomUniSoli() {
 		return nomUniSoli;
+	}
+	public String getDniSoli() {
+		return dniSoli;
+	}
+	public void setDniSoli(String dniSoli) {
+		this.dniSoli = dniSoli;
 	}
 	public void setNomUniSoli(String nomUniSoli) {
 		this.nomUniSoli = nomUniSoli;
