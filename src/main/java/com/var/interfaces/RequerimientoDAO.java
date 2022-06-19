@@ -12,5 +12,5 @@ public interface RequerimientoDAO {
 	public String codigoCorrelativo();
 	CuadroRequerimientos registrar(CuadroRequerimientos requerimiento, Usuario usuario);
 	List<RequerimientoDTO> listarRequerimietoDTOs();
-	public List<RequerimientoDTO> listByEstadoDTOs(String estado); 
+	public List<CuadroRequerimientos> listByEstado(String estado); 
 }

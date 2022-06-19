@@ -151,8 +151,8 @@ public class MySqlRequerimientoDAO implements RequerimientoDAO {
 	}
 
 	@Override
-	public List<RequerimientoDTO> listByEstadoDTOs(String estado) {
-		List<RequerimientoDTO> data = new ArrayList<RequerimientoDTO>();
+	public List<CuadroRequerimientos> listByEstado(String estado) {
+		List<CuadroRequerimientos> data = new ArrayList<>();
 		Connection cn = null;
 		CallableStatement cstm = null;
 		ResultSet rs = null;
@@ -163,12 +163,13 @@ public class MySqlRequerimientoDAO implements RequerimientoDAO {
 			cstm.setString(1, estado);
 			rs = cstm.executeQuery();
 			while (rs.next()) {
-				RequerimientoDTO bean = new RequerimientoDTO();
-				bean.setNumero(rs.getString(1));
-				bean.setDni(rs.getString(2));
-				bean.setRemitente(rs.getString(3));
-				bean.setEstado(rs.getString(4));
-				bean.setFecha(rs.getString(5));
+				CuadroRequerimientos bean = new CuadroRequerimientos();
+				bean.setNumreq(rs.getString(1));
+				bean.setDniSoli(rs.getString(2));
+				bean.setApenomSoli(rs.getString(3));
+				bean.setApenomEntre(rs.getString(4));
+				bean.setEstado(rs.getString(5));
+				bean.setFechaEmi(rs.getString(6));
 				data.add(bean);
 			}
 		} catch (SQLException e) {

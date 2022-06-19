@@ -48,7 +48,7 @@ public class ServletRequerimiento extends HttpServlet {
 	}
 
 	private void listarByEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<RequerimientoDTO> lista = servicio.listarPorEstado("PENDIENTE");
+		List<CuadroRequerimientos> lista = servicio.listByEstado("PENDIENTE");
 		request.setAttribute("requerimientos", lista);
 		request.getRequestDispatcher("/bdjCuadrosRequerimientos.jsp").forward(request, response);
 	}
