@@ -7,4 +7,5 @@ import com.var.entidad.DetalleRequerimientos;
 
 public interface DetalleRequerimientoDAO {
 	boolean insertarMuchos(CuadroRequerimientos requerimiento, List<DetalleRequerimientos> detalleRequerimientos);
+	public List<DetalleRequerimientos> listarByNumReq(String numreq);
 }

@@ -43,28 +43,9 @@ public class ServletRequerimiento extends HttpServlet {
 			listar(request, response);
 		else if (tipo.equals("LISTARbyESTADO"))
 			listarByEstado(request, response);
-		else if (tipo.equals("CONSULTAR"))
-			consultar(request, response);
 		else if (tipo.equals("LIMPIAR"))
 			limpiar(request, response);
 	}
-
-	private void consultar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dest, soli, numReq, estado;
-		dest = request.getParameter("nombreDestinatario");
-		soli = request.getParameter("nombreTrabajador");
-		numReq = request.getParameter("numReq");
-		estado = request.getParameter("estado");
-		
-		List<CuadroRequerimientos> data = servicio.consultarJUFA(dest, soli, null, estado, 0, null, numReq);
-		
-		Gson gson = new Gson();
-		String json = gson.toJson(data);
-		response.setContentType("application/json;charset=UTF-8");
-		PrintWriter salida = response.getWriter();
-		salida.println(json);
-	}
-
 	private void listarByEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<CuadroRequerimientos> lista = servicio.listByEstado("PENDIENTE");
 		request.setAttribute("requerimientos", lista);

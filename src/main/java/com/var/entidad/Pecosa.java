@@ -4,7 +4,13 @@ public class Pecosa {
 	private String referencia,estado,numPec, fecform, fechApro;
 	private int codPec, codReq, codUsu; 
 	private double total;
-	
+	private DetalleRequerimientos detalleReq;
+	public DetalleRequerimientos getDetalleReq() {
+		return detalleReq;
+	}
+	public void setDetalleReq(DetalleRequerimientos detalleReq) {
+		this.detalleReq = detalleReq;
+	}
 	//variables para el listado
 	private String nomUnidadSoli,nomUnidadEntr, nombreFormulo;
 	public String getReferencia() {

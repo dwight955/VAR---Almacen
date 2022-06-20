@@ -18,7 +18,7 @@
 }
 .modal-body__block-Requerimiento{
 	display: grid;
-	grid-template-columns: 100px repeat(3, 1fr);
+	grid-template-columns: 100px 80px repeat(2, 1fr);
 	grid-template-rows: 35px 1fr 35px;
 	grid-gap: .5em 1.5em;
 }

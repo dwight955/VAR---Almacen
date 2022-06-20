@@ -119,10 +119,10 @@
 											<input type="text" class="form-control" name="numeroReq" id="idNumeroReq" readonly>
 									</div>
 									<div class="form-group input-group-sm">
-											<input type="text" class="form-control" name="dniDestinatario" id="idDniDestinatario" readonly>
+											<input type="text" class="form-control" name="nomDestinatario" id="idDestinatario" readonly>
 									</div>
 									<div class="form-group input-group-sm">
-											<input type="text" class="form-control" name="nombreDestinatario" id="idNombreDestinatario" readonly>
+											<input type="text" class="form-control" name="nomSolicitante" id="idSolicitante" readonly>
 									</div>
 									<div class="tblDetalleReq__Pecosa tbodyDiv">
 										<table id="tableBienes" class="table table-bordered text-center table-sm" style="width: 100%">
@@ -137,14 +137,6 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1</td>
-													<td>SILLA DE MADERA</td>
-													<td>UNIDAD</td>
-													<td>12</td>
-													<td>15.50</td>
-													<td>788.30</td>
-												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -153,7 +145,7 @@
 										<input type="text" class="form-control"
 											aria-label="Sizing example input"
 											aria-describedby="inputGroup-sizing-sm"
-											name="unidadOrgDestinatario" id="idUnidadOrgDestinatario"
+											name="total" id="idTotal"
 											readonly>
 									</div>
 								</div>
@@ -171,7 +163,7 @@
 			<div class="modal fade" id="idBuscarCuadroRequerimiento"
 				data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 				aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-lg">
+				<div class="modal-dialog modal-dialog-centered modal-xl">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="staticBackdropLabel">BUSCAR CUADRO DE REQUERIMIENTO</h5>
@@ -232,7 +224,8 @@
 			</div>
 		</section>
 	</div>
-	<%@ include file="Snippets/BooststrapJS.jsp"%>	
+	<%@ include file="Snippets/BooststrapJS.jsp"%>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript"> 
 	$(document).ready(function(){
 		asignarFecha();
@@ -241,6 +234,7 @@
 		let fecha= new Date();
 		document.getElementById("idFecha").value = fecha.toJSON().slice(0,10);
 	}
+	
 	$(document).on("click","#btnGenerar",function() {
 		$.get("ServletPecosaJSON?accion=CORRELATIVO", function(response) {
 			$("#idNumero").val(response);
@@ -253,12 +247,32 @@
 		dest = $("#idNombreDestinatarioBuscar").val();
 		estado = $("#idEstado").val();
 		$("#tblBuscarCuadroRequerimiento tbody").empty();
-		$.get("ServletRequerimientoJSON?dest="+dest+"&nombreTrabajador="+soli+"&numReq="+numreq+"&estado="+estado, function(response) {
+		$.get("ServletRequerimientoJSON?accion=BUSCAR&dest="+dest+"&nombreTrabajador="+soli+"&numReq="+numreq+"&estado="+estado, function(response) {
 			$.each(response,function(index,item) {
 				$("#tblBuscarCuadroRequerimiento").append("<tr><td>"+ item.numreq+ "</td><td>"+ item.apenomEntre+ "</td><td>"
 														   + item.apenomSoli + "</td><td>"+ item.nomUniEntr +"</td><td>"
-														   + item.cantidad + "</td><td>" + item.fechaEmi +"</td></tr>" );
+														   + item.cantidad + "</td><td>" + item.fechaEmi +"</td><td><button id='btnCuadroReq' type='button' data-bs-toggle='modal' data-bs-target='#staticBackdrop' class='btn btn-success' value='"+item.numreq+"'>+</button></td></tr>" );
 												})
+											})
+		});
+	$(document).on("click","#btnCuadroReq",function(){
+		let numreq, dest, soli, sumaTotal = 0; 
+		numreq = $(this).val();
+		soli = $(this).parents("tr").find("td")[1].innerHTML;
+		dest = $(this).parents("tr").find("td")[2].innerHTML;
+		$("#idNumeroReq").val(numreq);
+		$("#idDestinatario").val(dest);
+		$("#idSolicitante").val(soli);
+		$("#tableBienes tbody").empty();
+		$.get("ServletRequerimientoJSON?accion=BUSCARbyNUM&numreq="+numreq,function(response){
+			$.each(response,function(index,item) {
+				$("#tableBienes").append("<tr><td>"+ item.codBien+ "</td><td>"+ item.descripcion+ "</td><td>"
+														   + item.uniMed+ "</td><td>"+item.cant+"</td><td>"
+														   + item.preUni+ "</td><td class='sumar'>"+item.subTotal+"</td></tr>");
+				sumaTotal += parseFloat(item.subTotal);
+												})
+				$("#idTotal").empty();								
+				$("#idTotal").val("S/."+sumaTotal);
 											})
 		});
 	</script>
