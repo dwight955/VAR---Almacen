@@ -14,6 +14,10 @@
 	max-height: clamp(25vh, 10vh, 250px);
 	overflow: auto;
 }
+.tbodyRequerimiento{
+	max-height: clamp(25vh, 10vh, 250px);
+	overflow: auto;
+}
 </style>
 <body>
 <%@ include file="Snippets/Encabezado.jsp"%>
@@ -94,8 +98,8 @@
 										src="img/perfil.png">
 									<div class="form-group input-group-sm">
 										<label for="exampleInputEmail1" class="form-label">DNI</label>
-										<input type="text" class="form-control" name="CodUsuario"
-											id="idCodUsuario" readonly value="${sessionScope.CODIGO}">
+										<input type="text" class="form-control" name="DNI"
+											id="idDni" readonly value="${sessionScope.DNI}">
 									</div>
 									<div class="form-group input-group-sm">
 										<label for="exampleInputEmail1" class="form-label">APELLIDOS Y NOMBRES</label> 
@@ -109,7 +113,8 @@
 									</div>
 								</div>
 								<div class="modal-body__block-Requerimiento">
-									<button type="button" class="btn btn-danger">BUSCAR</button>
+									<button type="button" class="btn btn-danger" data-bs-toggle="modal" 
+									data-bs-target="#idBuscarCuadroRequerimiento">BUSCAR</button>
 									<div class="form-group input-group-sm">
 											<input type="text" class="form-control" name="numeroReq" id="idNumeroReq" readonly>
 									</div>
@@ -140,38 +145,6 @@
 													<td>15.50</td>
 													<td>788.30</td>
 												</tr>
-												<tr>
-													<td>1</td>
-													<td>SILLA DE MADERA</td>
-													<td>UNIDAD</td>
-													<td>12</td>
-													<td>15.50</td>
-													<td>788.30</td>
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>SILLA DE MADERA</td>
-													<td>UNIDAD</td>
-													<td>12</td>
-													<td>15.50</td>
-													<td>788.30</td>
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>SILLA DE MADERA</td>
-													<td>UNIDAD</td>
-													<td>12</td>
-													<td>15.50</td>
-													<td>788.30</td>
-												</tr>
-												<tr>
-													<td>1</td>
-													<td>SILLA DE MADERA</td>
-													<td>UNIDAD</td>
-													<td>12</td>
-													<td>15.50</td>
-													<td>788.30</td>
-												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -193,6 +166,70 @@
 					</div>
 				</div>
 			</div>
+			<!-- FIN DE MODAL PRINCIPAL -->
+			<!-- MODAL BUSCAR CUADRO DE REQUERIMIENTO -->
+			<div class="modal fade" id="idBuscarCuadroRequerimiento"
+				data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">BUSCAR CUADRO DE REQUERIMIENTO</h5>
+						</div>
+						<div class="grid_buscarCuadroRequerimiento">
+							<form id="idBuscar" method="post" class="criterios_CuadroReq">
+								<div class="form-group input-group-sm">
+									<label for="exampleInputEmail1" class="form-label"> Número
+									</label> <input type="text" class="form-control" name="numReq"
+										id="idNumReqBuscar">
+								</div>
+								<div class="form-group input-group-sm">
+									<label for="exampleInputEmail1" class="form-label"> Remitente</label> 
+									<input type="text" class="form-control"
+										name="nombreTrabajador" id="idNombreRemitenteBuscar">
+								</div>
+								<div class="form-group input-group-sm">
+									<label for="exampleInputEmail1" class="form-label"> Destinatario</label> 
+									<input type="text" class="form-control"
+										name="nombreDestinatario" id="idNombreDestinatarioBuscar">
+								</div>
+								<div class="form-group input-group-sm">
+									<label for="exampleInputEmail1" class="form-label"> Estado</label> 
+									<select class="form-select" 
+										name="estado" id="idEstado">
+										<option value="PENDIENTE">PENDIENTE</option>
+									</select>
+								</div>
+							<div class="table-buscarCuadroRequerimiento tbodyRequerimiento">
+								<table id="tblBuscarCuadroRequerimiento"
+									class="table table-bordered text-center table-sm table-hover"
+									style="width: 100%">
+									<thead class="table-danger sticky-top">
+										<tr>
+											<th width="10%">NRO</th>
+											<th>REMITENTE</th>
+											<th>DESTINATARIO</th>
+											<th>UNIDAD ORG.</th>
+											<th>CANTIDAD</th>
+											<th>FECHA</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							<div class="modal-footer d-flex justify-content-end">
+									<button type="button" class="btn btn-danger" id="btnBuscarCuadroReq">Buscar</button>
+									<button type="button" class="btn btn-primary" 
+									data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+									id="btnRegresar">Regresar</button>
+							</div>
+							</form>		
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
 	</div>
 	<%@ include file="Snippets/BooststrapJS.jsp"%>	
@@ -204,9 +241,26 @@
 		let fecha= new Date();
 		document.getElementById("idFecha").value = fecha.toJSON().slice(0,10);
 	}
-	
-	
-	
+	$(document).on("click","#btnGenerar",function() {
+		$.get("ServletPecosaJSON?accion=CORRELATIVO", function(response) {
+			$("#idNumero").val(response);
+		})
+	});
+	$(document).on("click","#btnBuscarCuadroReq",function() {
+		let numreq, dest, soli, estado;
+		numreq = $("#idNumReqBuscar").val();
+		soli = $("#idNombreRemitenteBuscar").val();
+		dest = $("#idNombreDestinatarioBuscar").val();
+		estado = $("#idEstado").val();
+		$("#tblBuscarCuadroRequerimiento tbody").empty();
+		$.get("ServletRequerimientoJSON?dest="+dest+"&nombreTrabajador="+soli+"&numReq="+numreq+"&estado="+estado, function(response) {
+			$.each(response,function(index,item) {
+				$("#tblBuscarCuadroRequerimiento").append("<tr><td>"+ item.numreq+ "</td><td>"+ item.apenomEntre+ "</td><td>"
+														   + item.apenomSoli + "</td><td>"+ item.nomUniEntr +"</td><td>"
+														   + item.cantidad + "</td><td>" + item.fechaEmi +"</td></tr>" );
+												})
+											})
+		});
 	</script>
 </body>
 </html>

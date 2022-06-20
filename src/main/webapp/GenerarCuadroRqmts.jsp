@@ -312,15 +312,12 @@
 				}
 			}
 		});
-		$(document).on(
-				"click",
-				"#btnGenerar",
-				function() {
-					$.get("ServletRequerimiento?accion=CORRELATIVO", function(
-							response) {
-						$("#idNumero").val(response);
-					})
-				});
+		$(document).on("click","#btnGenerar",function() {
+			$.get("ServletRequerimiento?accion=CORRELATIVO", function(response) {
+				$("#idNumero").val(response);
+			})
+		});
+		
 		$(document).on(
 				"click",
 				"#btnBuscarTrabajador",
@@ -506,8 +503,7 @@
 						})
 		function asignarfecha() {
 			var fecha = new Date();
-			document.getElementById("idFecha").value = fecha.toJSON().slice(0,
-					10);
+			document.getElementById("idFecha").value = fecha.toJSON().slice(0,10);
 		}
 	</script>
 </body>

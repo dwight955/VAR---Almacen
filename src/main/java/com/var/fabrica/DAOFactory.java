@@ -3,6 +3,7 @@ package com.var.fabrica;
 import com.var.interfaces.BienesDAO;
 import com.var.interfaces.CondicionDAO;
 import com.var.interfaces.DetalleRequerimientoDAO;
+import com.var.interfaces.PecosaDAO;
 import com.var.interfaces.ProveedorDAO;
 import com.var.interfaces.RequerimientoDAO;
 import com.var.interfaces.TrabajadorDAO;
@@ -28,6 +29,7 @@ public abstract class DAOFactory {
     public abstract RequerimientoDAO getRequerimientoDAO();
     public abstract DetalleRequerimientoDAO getDetalleRequerimientoDAO();
     public abstract UsuarioRequerimientoDAO getUsuarioRequerimientoDAO();
+    public abstract PecosaDAO getPecosaDAO();
     
     public static DAOFactory getDAOFactory(int whichFactory){
         switch(whichFactory){

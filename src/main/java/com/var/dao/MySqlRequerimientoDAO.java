@@ -190,4 +190,51 @@ public class MySqlRequerimientoDAO implements RequerimientoDAO {
 		return data;
 	}
 
+	@Override
+	public List<CuadroRequerimientos> consultarJUFA(String dest, String Soli, String fecha, String estado, int cant,
+			String uni, String numreq) {
+		List<CuadroRequerimientos> data = new ArrayList<>();
+		Connection cn = null;
+		CallableStatement cstm = null;
+		ResultSet rs = null;
+		try {
+			cn = MySqlConexion.getConectar();
+			String sql = "call usp_sonsultaCR_JUFA(?,?,?,?,?,?,?);";
+			cstm = cn.prepareCall(sql);
+			cstm.setString(1, dest);
+			cstm.setString(2, Soli);
+			cstm.setString(3, fecha);
+			cstm.setString(4, estado);
+			cstm.setInt(5, cant);
+			cstm.setString(6, uni);
+			cstm.setString(7, numreq);
+			rs = cstm.executeQuery();
+			while (rs.next()) {
+				CuadroRequerimientos bean = new CuadroRequerimientos();
+				bean.setNumreq(rs.getString(1));
+				bean.setApenomEntre(rs.getString(2));
+				bean.setApenomSoli(rs.getString(3));
+				bean.setNomUniEntr(rs.getString(4));
+				bean.setCantidad(rs.getInt(5));
+				bean.setFechaEmi(rs.getString(6));
+				data.add(bean);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (cstm != null)
+					cstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+				System.out.print("ERROR en servlet requerimiento - CONSULTA JUFA");
+			}
+		}
+		return data;
+	}
+
 }

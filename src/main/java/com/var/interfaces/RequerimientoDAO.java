@@ -12,5 +12,6 @@ public interface RequerimientoDAO {
 	public String codigoCorrelativo();
 	CuadroRequerimientos registrar(CuadroRequerimientos requerimiento, Usuario usuario);
 	List<RequerimientoDTO> listarRequerimietoDTOs();
-	public List<CuadroRequerimientos> listByEstado(String estado); 
+	public List<CuadroRequerimientos> listByEstado(String estado);
+	public List<CuadroRequerimientos> consultarJUFA(String dest, String Soli, String fecha, String estado, int cant, String uni, String numreq);
 }
