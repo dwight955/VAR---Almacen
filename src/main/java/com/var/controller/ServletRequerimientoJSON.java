@@ -39,7 +39,32 @@ public class ServletRequerimientoJSON extends HttpServlet {
 			buscar(request,response);
 		if(tipo.equals("BUSCARbyNUM")) 
 			buscarPorNumero(request,response);
+		if(tipo.equals("CONSULTAR_JUFA"))
+			consultarJUFA(request,response);
+	}
+
+	private void consultarJUFA(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String soli, dest, estado, fecha, uni;
+		int cant;
+		soli = request.getParameter("soli");
+		dest = request.getParameter("dest");
+		estado = request.getParameter("estado");
+		fecha = request.getParameter("fecha");
+		uni = request.getParameter("uni");
+		cant = Integer.parseInt(request.getParameter("cant"));
 		
+		cant = (cant == 0)?cant = 0:cant;
+		estado = (estado.equals(""))?estado=null:estado;
+		uni = (uni.equals(""))?uni=null:uni;
+		fecha = (fecha.equals(""))?fecha=null:fecha;
+		
+		List<CuadroRequerimientos> data = servicio.consultarJUFA(dest, soli, fecha, estado, cant, uni, null);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(data);
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter salida = response.getWriter();
+		salida.println(json);
 	}
 
 	private void buscarPorNumero(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -59,6 +84,7 @@ public class ServletRequerimientoJSON extends HttpServlet {
 		soli = request.getParameter("nombreTrabajador");
 		numReq = request.getParameter("numReq");
 		estado = request.getParameter("estado");
+		if(estado.equals("")) {estado = null;}
 		if(numReq.equals("")) {numReq = null;}
 		List<CuadroRequerimientos> data = servicio.consultarJUFA(dest, soli, null, estado, 0, null, numReq);
 		

@@ -25,28 +25,29 @@ overflow: auto;
 				<form id="idConsultar" method="post" action="" class="consultaRequ__criterios" role="form">
 					<div class="form-group">
 					    <label for="exampleInputEmail1" class="form-label">Destinatario</label>
-					    <input type="text" class="form-control" name="destinatario" id="idDestinatario">
+					    <input type="text" class="form-control" name="destinatario" id="idDestinatarioCriterio">
 					</div>
 					<div class="form-group">
 					    <label for="exampleInputEmail1" class="form-label">Responsable</label>
-					    <input type="text" class="form-control" name="responsable" id="idResponsable">
+					    <input type="text" class="form-control" name="responsable" id="idResponsableCriterio">
 					</div>
 					<div class="form-group">
 					    <label for="exampleInputEmail1" class="form-label">Fecha</label>
-					    <input type="date" class="form-control" name="fecha" id="idDescripcion">
+					    <input type="date" class="form-control" name="fecha" id="idFecha">
 					</div>
 					<div class="form-group">
 					    <label for="exampleInputPassword1" class="form-label">Estado</label>
 					   <select class="form-select"  name="estado" id="idEstado">
 					   	  <option value="">Seleccione un Estado</option>
-					   	  <option value="UNIDAD">APROBADO</option>
-					   	  <option value="KILO">RECHAZADO</option>
-					   	  <option value="KILO">FORMULADO</option>				   	
+					   	  <option value="PENDIENTE">PENDIENTE</option>
+					   	  <option value="APROBADO">APROBADO</option>
+					   	  <option value="RECHAZADO">RECHAZADO</option>
+					   	  <option value="FORMULADO">FORMULADO</option>				   	
 						</select>
 					 </div>
 					 <div class="form-group">
 					    <label for="exampleInputEmail1" class="form-label">Cantidad</label>
-					    <input type="text" class="form-control" name="cantidad" id="idCantidad">
+					    <input type="text" class="form-control" name="cantidad" id="idCantidad" value=0>
 					 </div>
 					 <div class="form-group">
 					    <label for="exampleInputPassword1" class="form-label">Unidad Organica</label>
@@ -54,21 +55,17 @@ overflow: auto;
 					   	  <option value="">Seleccione Unidad Organica</option>				   	
 						</select>
 					 </div>
-					 <div class="form-group">
-					    <label for="exampleInputEmail1" class="form-label">Codigo de Bien</label>
-					    <input type="text" class="form-control" name="codigobien" id="idCodigobien">
-					 </div>
-					 <button type="submit" class="btn btn-danger btn__fontSize">Consultar</button>
+					 <button type="button" class="btn btn-danger btn__fontSize" id="btnConsultarCuadroReq">Consultar</button>
 				 </form>
 			</div>
 			<div class="consultaRequ__block_table">
 				<div class="mt-3 tbodyDiv">
-				<table id="example" class="table table-bordered table-striped text-center" style="width:100%">
+				<table id="tblRequerimientos" class="table table-bordered table-striped text-center" style="width:100%">
 			        <thead class="table-danger sticky-top bg-white">
 			            <tr>
 			                <th>NRO</th>
-			                <th>RESPONSABLE</th>
 			                <th>DESTINATARIO</th>
+			                <th>RESPONSABLE</th>
 			                <th>UNIDAD ORGANICA</th>
 			                <th>CANTIDAD</th>
 			                <th>FECHA</th>
@@ -76,15 +73,6 @@ overflow: auto;
 			            </tr>
 			        </thead>
 			        <tbody>
-				            <tr>
-				                <td>000014</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>10</td>
-				                <td>30/05/2022</td>
-				                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#idDetalleCuadroReq">Ver Detalle</button></td>
-				            </tr>
 			        </tbody>
 		    	</table>		
 			</div>
@@ -123,7 +111,7 @@ overflow: auto;
 				cantidad:{
 					validators:{
 						between:{
-							min:1,
+							min:0,
     		 				max:9999,
     		 				message:'Solo números | Maximo 9999'
     			 		}
@@ -143,12 +131,45 @@ overflow: auto;
 	
 	function leerCondicionJSON(){
 		$.get("ServletCondicionJSON?comboBox=UO",function(response){
-			console.log(response);
 			$.each(response,function(index,item){ 
-				$("#idUnidadorganica").append("<option value='"+item.codigo+"'>"+item.nombre+"</option>");
+				$("#idUnidadorganica").append("<option value='"+item.nombre+"'>"+item.nombre+"</option>");
 			})
 		})
 	}
+	$(document).on("click","#btnConsultarCuadroReq",function(){
+		let dest, soli, cant, fecha, uni, estado;
+		soli = $("#idResponsableCriterio").val();
+		dest = $("#idDestinatarioCriterio").val();
+		estado = $("#idEstado").val();
+		cant = $("#idCantidad").val();
+		fecha = $("#idFecha").val();
+		uni = $("#idUnidadorganica").val();
+		$("#tblRequerimientos tbody").empty();
+		$.get("ServletRequerimientoJSON?accion=CONSULTAR_JUFA&estado="+estado+"&cant="+cant+"&uni="+uni+"&soli="+soli+"&dest="+dest+"&fecha="+fecha, function(response){
+			$.each(response,function(index,item){
+				$("#tblRequerimientos").append("<tr><td>"+item.numreq+"</td><td>"+item.apenomSoli+"</td><td>"
+											  +item.apenomEntre+"</td><td>"+item.nomUniEntr+ "</td><td>"
+											  +item.cantidad+"</td><td>"+item.fechaEmi+"</td><td><button id='btnCuadroReq' type='button' data-bs-toggle='modal' data-bs-target='#idDetalleCuadroReq' class='btn btn-danger' value='"+item.numreq+"'>Ver Detalle</button></td></tr>");
+			})
+		});
+	});
+	$(document).on("click","#btnCuadroReq",function(){
+		let numreq, soli, dest;
+		numreq = $(this).val();
+		soli = $(this).parents("tr").find("td")[1].innerHTML;
+		dest = $(this).parents("tr").find("td")[2].innerHTML;
+		$("#idNumeroReq").val(numreq);
+		$("#idDestinatario").val(dest);
+		$("#idResponsable").val(soli);
+		$("#tblDetalleCuadroReq tbody").empty();
+		$.get("ServletRequerimientoJSON?accion=BUSCARbyNUM&numreq="+numreq,function(response){
+			$.each(response,function(index,item) {
+				$("#tblDetalleCuadroReq").append("<tr><td>"+ item.codBien+ "</td><td>"+ item.descripcion+ "</td><td>"
+														   + item.uniMed+ "</td><td>"+item.cant+"</td><td>"
+														   + item.preUni+"</td></tr>");
+												})
+											})
+		});
 </script>
 </body>
 </html>

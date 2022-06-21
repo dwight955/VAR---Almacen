@@ -36,20 +36,11 @@
 												<th width="10%">CODIGO</th>
 												<th>DESCRIPCION</th>
 												<th>UNIDAD MED.</th>
-												<th>CATEGORIA</th>
 												<th>PRECIO</th>
 												<th>CANTIDAD</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>25</td>
-												<td>Lorem Ipsum</td>
-												<td>Lorem Ipsum</td>
-												<td>Lorem Ipsum</td>
-												<td>25.50</td>
-												<td>10</td>
-											</tr>
 										</tbody>
 									</table>
 								</div>

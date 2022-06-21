@@ -46,7 +46,7 @@
 								<tr>
 									<th width="5%">NRO</th>
 									<th width="10%">DNI</th>
-									<th width="50%">REMITENTE</th>
+									<th width="50%">DESTINATARIO</th>
 									<th width="15%">ESTADO</th>
 									<th width="15%">FECHA</th>
 								</tr>
