@@ -20,31 +20,32 @@
 		<%@ include file="Snippets/MenuLateral.jsp" %>
 		<section class="consultaRequ" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" >
 			<center><h3>CONSULTAR CUADRO DE REQUERIMIENTOS</h3></center>
-			<span class="fw-bold fs-5 text-danger">Nombre de Unidad Organica</span>
+			<span class="fw-bold fs-5 text-danger">${sessionScope.UNIDAD_ORGANICA}</span>
 			<div class="consultaRequ__block_query">
 				<form id="idConsultar" method="post" action="" class="consultaRequ__criterios consultaRequ__criterios_unidadOrganica" role="form">
 					<div class="form-group">
 					    <label for="exampleInputEmail1" class="form-label">Destinatario</label>
-					    <input type="text" class="form-control" name="destinatario" id="idDestinatario">
+					    <input type="text" class="form-control" name="destinatario" id="idDestinatarioCriterio">
 					</div>
 					<div class="form-group">
 					    <label for="exampleInputEmail1" class="form-label">Fecha</label>
-					    <input type="date" class="form-control" name="fecha" id="idDescripcion">
+					    <input type="date" class="form-control" name="fecha" id="idFecha">
 					</div>
 					<div class="form-group">
 					    <label for="exampleInputPassword1" class="form-label">Estado</label>
 					   <select class="form-select"  name="estado" id="idEstado">
 					   	  <option value="">Seleccione un Estado</option>
-					   	  <option value="UNIDAD">APROBADO</option>
-					   	  <option value="KILO">RECHAZADO</option>
-					   	  <option value="KILO">FORMULADO</option>				   	
+					   	  <option value="PENDIENTE">PENDIENTE</option>
+					   	  <option value="APROBADO">APROBADO</option>
+					   	  <option value="RECHAZADO">RECHAZADO</option>
+					   	  <option value="FORMULADO">FORMULADO</option>				   	
 						</select>
 					 </div>
 					 <div class="form-group">
 					    <label for="exampleInputEmail1" class="form-label">Cantidad</label>
-					    <input type="text" class="form-control" name="cantidad" id="idCantidad">
+					    <input type="number" class="form-control" name="cantidad" id="idCantidad">
 					 </div>
-					 <button type="submit" class="btn btn-danger btn__fontSize">Consultar</button>
+					 <button type="button" class="btn btn-danger btn__fontSize" id="btnConsultarCuadroReq">Consultar</button>
 				 </form>
 			</div>
 			<div class="consultaRequ__block_table">
@@ -109,7 +110,21 @@
 			}
 		})
 	});
-	
+	$(document).on("click","#btnConsultarCuadroReq",function(){
+		let dest, fecha, estado,cant;
+		dest = $("#idDestinatarioCriterio").val();
+		estado = $("#idEstado").val();
+		cant = $("#idCantidad").val();
+		fecha = $("#idFecha").val();
+		$("#tblRequerimientos tbody").empty();
+		$.get("ServletRequerimientoJSON?accion=CONSULTAR_JUFA&estado="+estado+"&cant="+cant+"&dest="+dest+"&fecha="+fecha, function(response){
+			$.each(response,function(index,item){
+				$("#tblRequerimientos").append("<tr><td>"+item.numreq+"</td><td>"+item.apenomSoli+"</td><td>"
+											  +item.apenomEntre+"</td><td>"+item.nomUniEntr+ "</td><td>"
+											  +item.cantidad+"</td><td>"+item.fechaEmi+"</td><td><button id='btnCuadroReq' type='button' data-bs-toggle='modal' data-bs-target='#idDetalleCuadroReq' class='btn btn-danger' value='"+item.numreq+"'>Ver Detalle</button></td></tr>");
+			})
+		});
+	});
 </script>
 
 </body>

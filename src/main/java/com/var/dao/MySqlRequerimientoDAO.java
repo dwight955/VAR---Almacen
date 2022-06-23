@@ -237,4 +237,43 @@ public class MySqlRequerimientoDAO implements RequerimientoDAO {
 		return data;
 	}
 
+	@Override
+	public CuadroRequerimientos FindByNumreq(String cod) {
+		CuadroRequerimientos bean = null;
+		Connection cn = null;
+		CallableStatement cstm = null;
+		ResultSet rs = null;
+		try {
+			cn = MySqlConexion.getConectar();
+			String sql = "call usp_buscar_requePorNum(?)";
+			cstm = cn.prepareCall(sql);
+			cstm.setString(1, cod);
+			rs = cstm.executeQuery();
+			if(rs.next()) {
+				bean = new CuadroRequerimientos();
+				bean.setNumreq(rs.getString(1));
+				bean.setDniSoli(rs.getString(2));
+				bean.setApenomSoli(rs.getString(3));
+				bean.setApenomEntre(rs.getString(4));
+				bean.setEstado(rs.getString(5));
+				bean.setFechaEmi(rs.getString(6));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (cstm != null)
+					cstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+				System.out.print("ERROR en servlet requerimiento - BuscarPorNumreq");
+			}
+		}
+		return bean;
+	}
+
 }

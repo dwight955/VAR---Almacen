@@ -13,8 +13,8 @@
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="cuadroReq__info">
-								<label for="exampleInputEmail1" class="form-label">Estado actual: </label>
-								<h5 class = "CuadroReq__estado-detalleReq">APROBADO</h5>
+								<label for="exampleInputEmail1"  class="form-label">Estado actual: </label>
+								<h5 class = "CuadroReq__estado-detalleReq" id="idEstadoByNumero"></h5>
 								<div class="form-group input-group-sm">
 									<label for="exampleInputEmail1" class="form-label"> Número </label> 
 									<input type="text" class="form-control" name="numeroReq" id="idNumeroReq" readonly>
@@ -36,8 +36,8 @@
 												<th width="10%">CODIGO</th>
 												<th>DESCRIPCION</th>
 												<th>UNIDAD MED.</th>
-												<th>PRECIO</th>
 												<th>CANTIDAD</th>
+												<th>PRECIO</th>
 											</tr>
 										</thead>
 										<tbody>

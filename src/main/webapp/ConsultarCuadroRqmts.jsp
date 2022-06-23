@@ -47,7 +47,7 @@ overflow: auto;
 					 </div>
 					 <div class="form-group">
 					    <label for="exampleInputEmail1" class="form-label">Cantidad</label>
-					    <input type="text" class="form-control" name="cantidad" id="idCantidad" value=0>
+					    <input type="number" class="form-control" name="cantidad" id="idCantidad" value=0>
 					 </div>
 					 <div class="form-group">
 					    <label for="exampleInputPassword1" class="form-label">Unidad Organica</label>
@@ -76,7 +76,7 @@ overflow: auto;
 			        </tbody>
 		    	</table>		
 			</div>
-			<div class="consultaRequ__block_info mt-2"><p>XXX Cuadro de Requerimiento encontradas</p></div>
+			<div class="consultaRequ__block_info mt-2"><p id="idContador"></p></div>
 		</div>
 		<%@ include file="Snippets/ModalDetalleReq.jsp" %>	
 		</section>
@@ -137,7 +137,7 @@ overflow: auto;
 		})
 	}
 	$(document).on("click","#btnConsultarCuadroReq",function(){
-		let dest, soli, cant, fecha, uni, estado;
+		let dest, soli, cant, fecha, uni, estado, count = 0;
 		soli = $("#idResponsableCriterio").val();
 		dest = $("#idDestinatarioCriterio").val();
 		estado = $("#idEstado").val();
@@ -145,30 +145,38 @@ overflow: auto;
 		fecha = $("#idFecha").val();
 		uni = $("#idUnidadorganica").val();
 		$("#tblRequerimientos tbody").empty();
+		$("#idContador").empty();
 		$.get("ServletRequerimientoJSON?accion=CONSULTAR_JUFA&estado="+estado+"&cant="+cant+"&uni="+uni+"&soli="+soli+"&dest="+dest+"&fecha="+fecha, function(response){
 			$.each(response,function(index,item){
 				$("#tblRequerimientos").append("<tr><td>"+item.numreq+"</td><td>"+item.apenomSoli+"</td><td>"
 											  +item.apenomEntre+"</td><td>"+item.nomUniEntr+ "</td><td>"
 											  +item.cantidad+"</td><td>"+item.fechaEmi+"</td><td><button id='btnCuadroReq' type='button' data-bs-toggle='modal' data-bs-target='#idDetalleCuadroReq' class='btn btn-danger' value='"+item.numreq+"'>Ver Detalle</button></td></tr>");
+				count++;
 			})
+			$("#idContador").text(count+" Cuadro de Requerimiento encontradas")
 		});
 	});
 	$(document).on("click","#btnCuadroReq",function(){
-		let numreq, soli, dest;
+		let numreq, soli, dest, estado;
 		numreq = $(this).val();
+		estado = $("#idEstado").val();
 		soli = $(this).parents("tr").find("td")[1].innerHTML;
 		dest = $(this).parents("tr").find("td")[2].innerHTML;
 		$("#idNumeroReq").val(numreq);
 		$("#idDestinatario").val(dest);
 		$("#idResponsable").val(soli);
 		$("#tblDetalleCuadroReq tbody").empty();
-		$.get("ServletRequerimientoJSON?accion=BUSCARbyNUM&numreq="+numreq,function(response){
+		$("#idEstadoByNumero").empty();
+		$.get("ServletRequerimientoJSON?accion=BUSCARbyNUMDetalle&numreq="+numreq,function(response){
 			$.each(response,function(index,item) {
 				$("#tblDetalleCuadroReq").append("<tr><td>"+ item.codBien+ "</td><td>"+ item.descripcion+ "</td><td>"
 														   + item.uniMed+ "</td><td>"+item.cant+"</td><td>"
 														   + item.preUni+"</td></tr>");
 												})
 											})
+		$.get("ServletRequerimientoJSON?accion=BUSCARbyNumreq&numreq="+numreq, function(response){
+				$("#idEstadoByNumero").text(response.estado);
+			});
 		});
 </script>
 </body>

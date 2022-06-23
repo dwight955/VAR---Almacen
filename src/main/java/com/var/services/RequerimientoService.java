@@ -51,7 +51,10 @@ public class RequerimientoService {
 	public List<CuadroRequerimientos> consultarJUFA(String dest, String Soli, String fecha, String estado, int cant, String uni, String numreq) {
 		return objReq.consultarJUFA(dest, Soli, fecha, estado, cant, uni, numreq);
 	} 
-	public List<DetalleRequerimientos> listarByNumReq(String numreq) {
+	public List<DetalleRequerimientos> listarByNumReqDetalle(String numreq) {
 		return detalleReqDao.listarByNumReq(numreq);
+	}
+	public CuadroRequerimientos FindByNumreq(String cod) {
+		return objReq.FindByNumreq(cod);
 	}
 }

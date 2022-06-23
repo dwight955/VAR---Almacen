@@ -13,5 +13,6 @@ public interface RequerimientoDAO {
 	CuadroRequerimientos registrar(CuadroRequerimientos requerimiento, Usuario usuario);
 	List<RequerimientoDTO> listarRequerimietoDTOs();
 	public List<CuadroRequerimientos> listByEstado(String estado);
+	public CuadroRequerimientos FindByNumreq(String cod);
 	public List<CuadroRequerimientos> consultarJUFA(String dest, String Soli, String fecha, String estado, int cant, String uni, String numreq);
 }

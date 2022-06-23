@@ -63,7 +63,6 @@
 		let num,nomDest,responsable,estado;
 		//leer las columnas de la fila según el botón Ver Detalle que se pulso
 		num=$(this).parents("tr").find("td")[0].innerHTML;
-		console.log(num);
 		nomDest = $(this).parents("tr").find("td")[2].innerHTML;
 		responsable = $(this).parents("tr").find("td")[3].innerHTML;
 		//estado = $(this).parents("tr").find("td")[4].innerHTML;
