@@ -188,8 +188,8 @@
 								<div class="form-group input-group-sm">
 									<label for="exampleInputEmail1" class="form-label"> Estado</label> 
 									<select class="form-select" 
-										name="estado" id="idEstado">
-										<option value="PENDIENTE">PENDIENTE</option>
+										name="estado" id="idEstadoReq">
+										<option value="APROBADO">APROBADO</option>
 									</select>
 								</div>
 							<div class="table-buscarCuadroRequerimiento tbodyRequerimiento">
@@ -245,7 +245,8 @@
 		numreq = $("#idNumReqBuscar").val();
 		soli = $("#idNombreRemitenteBuscar").val();
 		dest = $("#idNombreDestinatarioBuscar").val();
-		estado = $("#idEstado").val();
+		estado = $("#idEstadoReq").val();
+		console.log(estado);
 		$("#tblBuscarCuadroRequerimiento tbody").empty();
 		$.get("ServletRequerimientoJSON?accion=BUSCAR&dest="+dest+"&nombreTrabajador="+soli+"&numReq="+numreq+"&estado="+estado, function(response) {
 			$.each(response,function(index,item) {
@@ -264,7 +265,7 @@
 		$("#idDestinatario").val(dest);
 		$("#idSolicitante").val(soli);
 		$("#tableBienes tbody").empty();
-		$.get("ServletRequerimientoJSON?accion=BUSCARbyNUM&numreq="+numreq,function(response){
+		$.get("ServletRequerimientoJSON?accion=BUSCARbyNUMDetalle&numreq="+numreq,function(response){
 			$.each(response,function(index,item) {
 				$("#tableBienes").append("<tr><td>"+ item.codBien+ "</td><td>"+ item.descripcion+ "</td><td>"
 														   + item.uniMed+ "</td><td>"+item.cant+"</td><td>"
