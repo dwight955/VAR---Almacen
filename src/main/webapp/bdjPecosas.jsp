@@ -61,7 +61,7 @@
 				</div>
 			</div>
 		</section>
-		<%@ include file="Snippets/ModalDetalleReq.jsp" %>
+		<%@ include file="Snippets/ModalDetalleReq-PECOSA.jsp" %>
 	</div>
 		<%@ include file="Snippets/BooststrapJS.jsp"%>
 	

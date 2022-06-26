@@ -27,6 +27,10 @@
 									<label for="exampleInputEmail1" class="form-label">Responsable</label>
 									<input type="text" class="form-control" name="responsable" id="idResponsable" readonly>
 								</div>
+								<div class="form-group input-group-sm">
+									<label for="exampleInputEmail1" class="form-label">Referencia</label>
+									<input type="text" class="form-control" name="responsable" id="idResponsable" readonly>
+								</div>
 								<div class="table-DetalleCuadroReq tbodyDetalle">
 									<table id="tblDetalleCuadroReq"
 										class="table table-bordered text-center table-sm table-hover"
@@ -44,18 +48,16 @@
 										</tbody>
 									</table>
 								</div>
-								<% String cargoAux = (String) session.getAttribute("cargo");
-									if(cargoAux.equals("DIRECTOR EJECUTIVO")){
-										%>
-										<div class="modal-footer">
+										<div class="modal-footer justify-content-between">
+									         	<div class="form-group input-group-sm d-flex">
+													<span class="input-group-text" id="inputGroup-sizing-sm">Importe Total:</span>
+													<input type="text" class="form-control"readonly>
+												</div>
 											<div>
-												<button type="button" class="btn btn-danger">Rechazar</button>
-										        <button type="button" class="btn btn-success">Aprobar</button>
+											<button type="button" class="btn btn-danger">Rechazar</button>
+									        <button type="button" class="btn btn-success">Aprobar</button>
 									        </div>
 				      					</div>
-				      					<%
-									}
-				      					%>
 						</div>
 					</div>
 			    </div>
