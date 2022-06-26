@@ -276,11 +276,51 @@ public class MySqlRequerimientoDAO implements RequerimientoDAO {
 		}
 		return bean;
 	}
-
-	@Override
+	public List<CuadroRequerimientos> consultarAC(String dest,String fecha,String estado,int cant)
+	{
+		List<CuadroRequerimientos> data = new ArrayList<>();
+		Connection cn = null;
+		CallableStatement cstm = null;
+		ResultSet rs = null;
+		try {
+			cn = MySqlConexion.getConectar();
+			String sql = "call usp_consultar_DirectivoUni(?,?,?,?);";
+			cstm = cn.prepareCall(sql);
+			cstm.setString(1, dest);
+			cstm.setString(2, fecha);
+			cstm.setString(3, estado);
+			cstm.setInt(4, cant);
+	
+			rs = cstm.executeQuery();
+			while (rs.next()) {
+				CuadroRequerimientos bean = new CuadroRequerimientos();
+				bean.setApenomEntre(rs.getString(1));
+				bean.setFechaEmi(rs.getString(2));
+				bean.setEstado(rs.getString(3));
+				bean.setCantidad(rs.getInt(4));								
+				data.add(bean);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (cstm != null)
+					cstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+				System.out.print("ERROR en servlet requerimiento - CONSULTA");
+			}
+		}
+		return data;
+	}	
+	
+@Override
 	public boolean ActualizarEstado(int codRequerimiento, String estado) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }
