@@ -43,6 +43,8 @@ public class ServletRequerimientoJSON extends HttpServlet {
 			buscarPorNumero(request,response);
 		if(tipo.equals("CONSULTAR_JUFA"))
 			consultarJUFA(request,response);
+		if(tipo.equals("CONSULTARAC"))
+			consultarAC(request,response);
 	}
 
 	private void buscarPorNumero(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -106,5 +108,28 @@ public class ServletRequerimientoJSON extends HttpServlet {
 		PrintWriter salida = response.getWriter();
 		salida.println(json);
 	}
+	
+	private void consultarAC(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String dest,estado,fecha;
+		int cant;
+		dest = request.getParameter("des");		
+		fecha = request.getParameter("fec");
+		estado = request.getParameter("est");
+		cant = Integer.parseInt(request.getParameter("can"));
+		
+		
+		fecha = (fecha.equals(""))?fecha=null:fecha;		
+		estado = (estado.equals(""))?estado=null:estado;
+		cant = cant<0?cant=0:cant;
+		
+		
+		List<CuadroRequerimientos> data = servicio.consultarAC(dest,fecha,estado,cant);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(data);
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter salida = response.getWriter();
+		salida.println(json);
+	}	
 
 }
