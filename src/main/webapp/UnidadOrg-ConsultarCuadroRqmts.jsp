@@ -63,19 +63,10 @@
 			            </tr>
 			        </thead>
 			        <tbody>
-				            <tr>
-				                <td>000014</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>Lorem Ipsum</td>
-				                <td>10</td>
-				                <td>30/05/2022</td>
-				                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#idDetalleCuadroReq">Ver Detalle</button></td>
-				            </tr>
-			        </tbody>
+				    </tbody>
 		    	</table>		
 			</div>
-			<div class="consultaRequ__block_info mt-2"><p>XXX Cuadro de Requerimiento encontradas</p></div>
+			<div class="consultaRequ__block_info mt-2"><p id="idContador"></p></div>			
 		</div>
 		<%@ include file="Snippets/ModalDetalleReq.jsp" %>	
 		</section>
@@ -110,21 +101,25 @@
 			}
 		})
 	});
+	
 	$(document).on("click","#btnConsultarCuadroReq",function(){
-		let dest, fecha, estado,cant;
+		let dest,fecha,estado,cant count = 0;
 		dest = $("#idDestinatarioCriterio").val();
-		estado = $("#idEstado").val();
-		cant = $("#idCantidad").val();
 		fecha = $("#idFecha").val();
-		$("#tblRequerimientos tbody").empty();
-		$.get("ServletRequerimientoJSON?accion=CONSULTAR_JUFA&estado="+estado+"&cant="+cant+"&dest="+dest+"&fecha="+fecha, function(response){
+		estado = $("#idEstado").val();
+		cant = $("#idCantidad").val();		
+		$("#example tbody").empty();
+		$("#idContador").empty();
+		$.get("ServletRequerimientoJSON?accion=CONSULTARAC&dest="+dest+"&fecha="+fecha+"&estado="+estado+"&cant="+cant, function(response){
 			$.each(response,function(index,item){
-				$("#tblRequerimientos").append("<tr><td>"+item.numreq+"</td><td>"+item.apenomSoli+"</td><td>"
+				$("#example").append("<tr><td>"+item.numreq+"</td><td>"+item.apenomSoli+"</td><td>"
 											  +item.apenomEntre+"</td><td>"+item.nomUniEntr+ "</td><td>"
 											  +item.cantidad+"</td><td>"+item.fechaEmi+"</td><td><button id='btnCuadroReq' type='button' data-bs-toggle='modal' data-bs-target='#idDetalleCuadroReq' class='btn btn-danger' value='"+item.numreq+"'>Ver Detalle</button></td></tr>");
+				count++;
 			})
+			$("#idContador").text(count+" Cuadro de Requerimiento encontradas")
 		});
-	});
+	});	
 </script>
 
 </body>
