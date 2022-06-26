@@ -71,7 +71,7 @@
 								data-bs-dismiss="modal">×</button>
 						</div>
 						<div class="modal-body">
-							<form id="form-generarPECOSA" method="post" class="grid-formPECOSA">
+							<form id="form-generarPECOSA" method="post" class="grid-formPECOSA" action="ServletPecosa">
 								<div class="form-group modal-body__block-cabeceraPecosa">
 									<div class="form-group input-group-sm">
 										<label for="exampleInputEmail1" class="form-label">Número</label>
@@ -108,7 +108,7 @@
 									</div>
 									<div class="form-group input-group-sm">
 										<label for="exampleInputEmail1" class="form-label">CARGO</label>
-										<input type="text" class="form-control" name="Cargo"
+										<input type="text" class="form-control" name="cargo"
 											id="idCargo" readonly value="${sessionScope.CARGO}">
 									</div>
 								</div>

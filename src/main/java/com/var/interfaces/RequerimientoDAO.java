@@ -16,5 +16,5 @@ public interface RequerimientoDAO {
 	public CuadroRequerimientos FindByNumreq(String cod);
 	public List<CuadroRequerimientos> consultarJUFA(String dest, String Soli, String fecha, String estado, int cant, String uni, String numreq);
 	public List<CuadroRequerimientos>consultarAC(String dest,String fecha,String estado,int cant);
-	
+	boolean ActualizarEstado(int codRequerimiento, String estado);
 }

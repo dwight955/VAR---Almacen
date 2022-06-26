@@ -43,4 +43,47 @@ public class Pecosa {
 	public void setNombreFormulo(String nombreFormulo) {
 		this.nombreFormulo = nombreFormulo;
 	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public String getNumPec() {
+		return numPec;
+	}
+	public void setNumPec(String numPec) {
+		this.numPec = numPec;
+	}
+	public String getFecform() {
+		return fecform;
+	}
+	public void setFecform(String fecform) {
+		this.fecform = fecform;
+	}
+	public String getFechApro() {
+		return fechApro;
+	}
+	public void setFechApro(String fechApro) {
+		this.fechApro = fechApro;
+	}
+	public int getCodPec() {
+		return codPec;
+	}
+	public void setCodPec(int codPec) {
+		this.codPec = codPec;
+	}
+	public int getCodReq() {
+		return codReq;
+	}
+	public void setCodReq(int codReq) {
+		this.codReq = codReq;
+	}
+	public int getCodUsu() {
+		return codUsu;
+	}
+	public void setCodUsu(int codUsu) {
+		this.codUsu = codUsu;
+	}
+	
 }
