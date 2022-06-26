@@ -4,7 +4,7 @@
 	max-height: clamp(30vh, 10vh, 250px);
 	overflow: auto;
 }
-</style>
+</style><!-- Este Modal es un hibrido que se adapta segun el cargo del usuario -->
 		<div class="modal fade" id="idDetalleCuadroReq" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered modal-lg">
 					<div class="modal-content">
@@ -27,6 +27,13 @@
 									<label for="exampleInputEmail1" class="form-label">Responsable</label>
 									<input type="text" class="form-control" name="responsable" id="idResponsable" readonly>
 								</div>
+								<% String cargoAux = (String) session.getAttribute("cargo");
+								if(cargoAux.equals("JEFE DE ALMACEN")){ //input para detalle Pecosa%>
+								<div class="form-group input-group-sm">
+									<label for="exampleInputEmail1" class="form-label">Referencia</label>
+									<input type="text" class="form-control" name="responsable" id="idResponsable" readonly>
+								</div>
+								<%}%>
 								<div class="table-DetalleCuadroReq tbodyDetalle">
 									<table id="tblDetalleCuadroReq"
 										class="table table-bordered text-center table-sm table-hover"
@@ -44,13 +51,24 @@
 										</tbody>
 									</table>
 								</div>
-								<%
-									String cargoAux = (String) session.getAttribute("cargo");
-									if(cargoAux.equals("DIRECTOR EJECUTIVO")){
+								<% //cargo Jefe de Almacen -> Modal detalle PECOSA
+									if(cargoAux.equals("DIRECTOR EJECUTIVO")||cargoAux.equals("JEFE DE ALMACEN")){
 										%>
 										<div class="modal-footer">
-									        <button type="button" class="btn btn-danger">Rechazar</button>
-									        <button type="button" class="btn btn-success">Enviar</button>
+										<% if(cargoAux.equals("JEFE DE ALMACEN")){
+									         %>
+									         	<div class="form-group input-group-sm d-flex">
+													<span class="input-group-text" id="inputGroup-sizing-sm">Importe Total:</span>
+													<input type="text" class="form-control"readonly>
+												</div>
+												<style>.modal-footer{justify-content:space-between}</style>
+												<% 
+												} 
+												%>
+											<div>
+											<button type="button" class="btn btn-danger">Rechazar</button>
+									        <button type="button" class="btn btn-success">Aprobar</button>
+									        </div>
 				      					</div>
 				      					<%
 									}

@@ -34,16 +34,14 @@
 	                    		<a href="GenerarPECOSA.jsp" id="nav05"><i class="far fa-calendar-check"></i> Generar PECOSA</a>
 			               		<a href="#" id="nav06"><i class="far fa-calendar-check"></i> Consultar PECOSAs</a>
 			               		<a href="ServletBien?tipo=LISTAR" id="nav07"><i class="far fa-calendar-check"></i> Listado de Bienes</a>
-			               		<a href="#" id="nav08"><i class="far fa-calendar-check"></i> Generar Reporte</a>
-	                    		<%
+			               		<%
 	               			}
 	               			else if(cargo.equals("JEFE DE ALMACEN")){
 	               				%>
-	                    		<a href="#" id="nav09"><i class="far fa-calendar-check"></i> Bandeja de entrada PECOSAs</a>
+	                    		<a href="bdjPecosas.jsp" id="nav09"><i class="far fa-calendar-check"></i> Bandeja de entrada PECOSAs</a>
 	                    		<a href="ConsultarCuadroRqmts.jsp" id="nav10"><i class="far fa-calendar-check"></i>Consultar Cuadro de Requerimientos</a>
 	                    		<a href="#" id="nav11"><i class="far fa-calendar-check"></i> Consultar PECOSA</a>
 	                    		<a href="ServletProveedor?tipo=LISTAR" id="nav12"><i class="far fa-calendar-check"></i> Listado de Proveedores</a>
-	                    		<a href="#" id="nav13"><i class="far fa-calendar-check"></i> Generar Reporte</a>
 	                    		<%
 	               			}
 	               			//MENU PARA LOS DIRECTIVOS

@@ -57,23 +57,27 @@
 	
 	
 	<script type="text/javascript">
-	//asignar evento click a los botones con clase "btn btn-danger"
 	$(document).on("click","#idVerDetalle",function(){
-		//variables
 		let num,nomDest,responsable,estado;
-		//leer las columnas de la fila según el botón Ver Detalle que se pulso
+		
 		num=$(this).parents("tr").find("td")[0].innerHTML;
 		nomDest = $(this).parents("tr").find("td")[2].innerHTML;
 		responsable = $(this).parents("tr").find("td")[3].innerHTML;
-		//estado = $(this).parents("tr").find("td")[4].innerHTML;
-		//Colocamos los valores a los inputs
+		estado = $(this).parents("tr").find("td")[4].innerHTML;
+		
+		$("#tblDetalleCuadroReq tbody").empty();//limpiar despues de cada listado
 		$("#idNumeroReq").val(num);
 		$("#idDestinatario").val(nomDest);
 		$("#idResponsable").val(responsable);
-		
+		$.get("ServletRequerimientoJSON?accion=BUSCARbyNUMDetalle&numreq="+num,function(response){
+			$.each(response, function(index, item){
+				$("#tblDetalleCuadroReq tbody").append("<tr><td>"+ item.codBien+ "</td><td>"+ item.descripcion+ "</td><td>"
+						   + item.uniMed+ "</td><td>"+item.cant+"</td><td>"
+						   + item.preUni+"</td></tr>");
+			})
+		})
+		$("#idEstadoByNumero").text(estado);
 	})
-	
-	
 	</script>	
 	
 		

@@ -9,10 +9,13 @@
 .cuadroReq__info > .form-group:nth-child(3){
 	grid-column: 1 / 2;
 }
+.cuadroReq__info > .form-group:nth-child(6){
+	grid-column: 1 / 4;
+}
 .table-DetalleCuadroReq{
 	grid-column: 1/ 4; 
 }
 .modal-footer{
 	grid-column: 1 / 4;
-	grid-row: 4;
+	grid-row: 5;
 }

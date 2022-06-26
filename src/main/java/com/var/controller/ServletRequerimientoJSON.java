@@ -83,7 +83,6 @@ public class ServletRequerimientoJSON extends HttpServlet {
 	private void buscarPorNumeroDetalle(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String numreq = request.getParameter("numreq");
 		List<DetalleRequerimientos> data = servicio.listarByNumReqDetalle(numreq);
-		
 		Gson gson = new Gson();
 		String json = gson.toJson(data);
 		response.setContentType("application/json;charset=UTF-8");
