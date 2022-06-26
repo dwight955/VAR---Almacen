@@ -13,7 +13,7 @@ import com.var.entidad.CuadroRequerimientos;
 import com.var.entidad.Usuario;
 import com.var.interfaces.RequerimientoDAO;
 import com.var.utils.MySqlConexion;
-
+ 
 
 public class MySqlRequerimientoDAO implements RequerimientoDAO {
 
@@ -257,6 +257,7 @@ public class MySqlRequerimientoDAO implements RequerimientoDAO {
 				bean.setApenomEntre(rs.getString(4));
 				bean.setEstado(rs.getString(5));
 				bean.setFechaEmi(rs.getString(6));
+				bean.setCodReq(rs.getInt(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -274,6 +275,12 @@ public class MySqlRequerimientoDAO implements RequerimientoDAO {
 			}
 		}
 		return bean;
+	}
+
+	@Override
+	public boolean ActualizarEstado(int codRequerimiento, String estado) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
