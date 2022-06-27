@@ -113,18 +113,19 @@ public class ServletRequerimientoJSON extends HttpServlet {
 	private void consultarAC(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String dest,estado,fecha;
 		int cant;
-		dest = request.getParameter("des");		
-		fecha = request.getParameter("fec");
-		estado = request.getParameter("est");
-		cant = Integer.parseInt(request.getParameter("can"));
+		dest = request.getParameter("dest");		
+		fecha = request.getParameter("fecha");
+		estado = request.getParameter("estado");
+		cant = Integer.parseInt(request.getParameter("cant"));
 		
 		
-		fecha = (fecha.equals(""))?fecha=null:fecha;		
-		estado = (estado.equals(""))?estado=null:estado;
 		cant = cant<0?cant=0:cant;
+		estado = (estado.equals(""))?estado=null:estado;		
+		fecha = (fecha.equals(""))?fecha=null:fecha;
 		
 		
-		List<CuadroRequerimientos> data = servicio.consultarAC(dest,fecha,estado,cant);
+		
+		List<CuadroRequerimientos> data = servicio.consultarAC(dest,fecha,estado,cant , null);
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(data);

@@ -57,8 +57,8 @@ public class RequerimientoService {
 	public CuadroRequerimientos FindByNumreq(String cod) {
 		return objReq.FindByNumreq(cod);
 	}
-	public List<CuadroRequerimientos> consultarAC(String dest, String fecha, String estado, int cant) {
-		return objReq.consultarAC(dest,fecha,estado,cant);
+	public List<CuadroRequerimientos> consultarAC(String dest, String fecha, String estado, int cant, String uni) {
+		return objReq.consultarAC(dest ,fecha,estado , cant ,uni);
 	} 
 	
 	

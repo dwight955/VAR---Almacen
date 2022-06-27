@@ -276,7 +276,7 @@ public class MySqlRequerimientoDAO implements RequerimientoDAO {
 		}
 		return bean;
 	}
-	public List<CuadroRequerimientos> consultarAC(String dest,String fecha,String estado,int cant)
+	public List<CuadroRequerimientos> consultarAC(String dest,String fecha,String estado,int cant ,String uni)
 	{
 		List<CuadroRequerimientos> data = new ArrayList<>();
 		Connection cn = null;
@@ -284,20 +284,22 @@ public class MySqlRequerimientoDAO implements RequerimientoDAO {
 		ResultSet rs = null;
 		try {
 			cn = MySqlConexion.getConectar();
-			String sql = "call usp_consultar_DirectivoUni(?,?,?,?);";
+			String sql = "call usp_consultar_DirectivoUni(?,?,?,?,?);";
 			cstm = cn.prepareCall(sql);
 			cstm.setString(1, dest);
 			cstm.setString(2, fecha);
 			cstm.setString(3, estado);
 			cstm.setInt(4, cant);
-	
+			cstm.setString(5, uni);
 			rs = cstm.executeQuery();
 			while (rs.next()) {
 				CuadroRequerimientos bean = new CuadroRequerimientos();
-				bean.setApenomEntre(rs.getString(1));
-				bean.setFechaEmi(rs.getString(2));
-				bean.setEstado(rs.getString(3));
-				bean.setCantidad(rs.getInt(4));								
+				bean.setNumreq(rs.getString(1));
+				bean.setApenomEntre(rs.getString(2));
+				bean.setApenomSoli(rs.getString(3));
+				bean.setNomUniEntr(rs.getString(4));
+				bean.setCantidad(rs.getInt(5));
+				bean.setFechaEmi(rs.getString(6));							
 				data.add(bean);
 			}
 		} catch (SQLException e) {

@@ -43,14 +43,14 @@
 					 </div>
 					 <div class="form-group">
 					    <label for="exampleInputEmail1" class="form-label">Cantidad</label>
-					    <input type="number" class="form-control" name="cantidad" id="idCantidad">
+					    <input type="number" class="form-control" name="cantidad" id="idCantidad" value=0>
 					 </div>
-					 <button type="button" class="btn btn-danger btn__fontSize" id="btnConsultarCuadroReq">Consultar</button>
+					 <button type="button" class="btn btn-danger btn__fontSize" id="btnConsultar">Consultar</button>
 				 </form>
 			</div>
 			<div class="consultaRequ__block_table">
 				<div class="mt-3 tbodyDiv">
-				<table id="example" class="table table-bordered table-striped text-center" style="width:100%">
+				<table id="tbreq" class="table table-bordered table-striped text-center" style="width:100%">
 			        <thead class="table-danger sticky-top bg-white">
 			            <tr>
 			                <th>NRO</th>
@@ -102,24 +102,27 @@
 		})
 	});
 	
-	$(document).on("click","#btnConsultarCuadroReq",function(){
-		let dest,fecha,estado,cant count = 0;
+	$(document).on("click","#btnConsultar",function(){
+		let dest,fecha,estado,cant, count = 0;
 		dest = $("#idDestinatarioCriterio").val();
 		fecha = $("#idFecha").val();
 		estado = $("#idEstado").val();
 		cant = $("#idCantidad").val();		
-		$("#example tbody").empty();
+		$("#tbreq tbody").empty();
 		$("#idContador").empty();
 		$.get("ServletRequerimientoJSON?accion=CONSULTARAC&dest="+dest+"&fecha="+fecha+"&estado="+estado+"&cant="+cant, function(response){
 			$.each(response,function(index,item){
-				$("#example").append("<tr><td>"+item.numreq+"</td><td>"+item.apenomSoli+"</td><td>"
-											  +item.apenomEntre+"</td><td>"+item.nomUniEntr+ "</td><td>"
-											  +item.cantidad+"</td><td>"+item.fechaEmi+"</td><td><button id='btnCuadroReq' type='button' data-bs-toggle='modal' data-bs-target='#idDetalleCuadroReq' class='btn btn-danger' value='"+item.numreq+"'>Ver Detalle</button></td></tr>");
+				$("#tbreq").append("<tr><td>"+item.numreq+"</td><td>"+item.apenomSoli+
+												"</td><td>"+item.apenomEntre+
+												"</td><td>"+item.nomUniEntr+ 
+												"</td><td>"+item.cantidad+
+												"</td><td>"+item.fechaEmi+
+												"</td></tr>");
 				count++;
 			})
 			$("#idContador").text(count+" Cuadro de Requerimiento encontradas")
-		});
-	});	
+		})
+	})	
 </script>
 
 </body>
