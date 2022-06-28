@@ -159,7 +159,6 @@ overflow: auto;
 	$(document).on("click","#btnCuadroReq",function(){
 		let numreq, soli, dest, estado;
 		numreq = $(this).val();
-		estado = $("#idEstado").val();
 		soli = $(this).parents("tr").find("td")[1].innerHTML;
 		dest = $(this).parents("tr").find("td")[2].innerHTML;
 		$("#idNumeroReq").val(numreq);

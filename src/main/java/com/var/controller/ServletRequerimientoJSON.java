@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.var.entidad.CuadroRequerimientos;
@@ -110,20 +111,20 @@ public class ServletRequerimientoJSON extends HttpServlet {
 	}
 	
 	private void consultarAC(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String dest,estado,fecha;
+		String dest,estado,fecha, uni;
 		int cant;
-		dest = request.getParameter("des");		
-		fecha = request.getParameter("fec");
-		estado = request.getParameter("est");
-		cant = Integer.parseInt(request.getParameter("can"));
-		
-		
-		fecha = (fecha.equals(""))?fecha=null:fecha;		
+		HttpSession session = request.getSession();
+		dest = request.getParameter("dest");		
+		fecha = request.getParameter("fecha");
+		estado = request.getParameter("estado");
+		cant = Integer.parseInt(request.getParameter("cant"));
+		uni = (String) session.getAttribute("unidadOrganica");
+		fecha = fecha.equals("")?fecha=null:fecha;		
 		estado = (estado.equals(""))?estado=null:estado;
 		cant = cant<0?cant=0:cant;
 		
 		
-		List<CuadroRequerimientos> data = servicio.consultarAC(dest,fecha,estado,cant);
+		List<CuadroRequerimientos> data = servicio.consultarAC(dest,fecha,estado,cant,uni);
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(data);

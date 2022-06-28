@@ -240,7 +240,7 @@
 		   		 				message:'Campo Direccion es obligatorio'
 		   		 			},
 		   		 			regexp:{
-		   		 				regexp:/^[A-Za-z\ñ\Á\É\Í\Ó\Ú\á\é\í\ó\ú\Ñ\s\-\.]{5,50}$/,
+		   		 				regexp:/^[A-Za-z0-9\ñ\Á\É\Í\Ó\Ú\á\é\í\ó\ú\Ñ\s\-\.]{5,50}$/,
 		   		 				message:'Campo Direccion solo letras | Maximo: 50 letras'
 		   		 			}
 		   		 		}
@@ -251,7 +251,7 @@
 		   		 				message:'Campo Telefono es obligatorio'
 		   		 			},
 		   		 			regexp:{
-		   		 				regexp:/^[9][0-9]{8}$/,
+		   		 				regexp:/^[0-9]{9}$/,
 		   		 				message:'Campo Telefono solo números | Maximo: 9 digitos'
 		   		 			}
 		   		 		},

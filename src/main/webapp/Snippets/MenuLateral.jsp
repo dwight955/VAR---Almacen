@@ -33,7 +33,7 @@
 	               				%>
 	                    		<a href="ServletPecosa?accion=LISTAR&page=generarPecosa" id="nav05"><i class="far fa-calendar-check"></i> Generar PECOSA</a>
 			               		<a href="#" id="nav06"><i class="far fa-calendar-check"></i> Consultar PECOSAs</a>
-			               		<a href="ServletBien?tipo=LISTAR" id="nav07"><i class="far fa-calendar-check"></i> Listado de Bienes</a>
+			               		<a href="ServletBien?tipo=LISTAR" id="nav07"><i class="far fa-calendar-check"></i> Mantenimiento de Bienes</a>
 			               		<%
 	               			}
 	               			else if(cargo.equals("JEFE DE ALMACEN")){
@@ -41,15 +41,14 @@
 	                    		<a href="ServletPecosa?accion=LISTAR&page=bdjPecosa" id="nav09"><i class="far fa-calendar-check"></i> Bandeja de entrada PECOSAs</a>
 	                    		<a href="ConsultarCuadroRqmts.jsp" id="nav10"><i class="far fa-calendar-check"></i>Consultar Cuadro de Requerimientos</a>
 	                    		<a href="#" id="nav11"><i class="far fa-calendar-check"></i> Consultar PECOSA</a>
-	                    		<a href="ServletProveedor?tipo=LISTAR" id="nav12"><i class="far fa-calendar-check"></i> Listado de Proveedores</a>
+	                    		<a href="ServletProveedor?tipo=LISTAR" id="nav12"><i class="far fa-calendar-check"></i> Mantenimiento de Proveedores</a>
 	                    		<%
 	               			}
 	               			//MENU PARA LOS DIRECTIVOS
 	               		}else{
 	               				%>
 		               			<a href="ServletRequerimiento?accion=LISTAR" id="nav14"><i class="far fa-calendar-check"></i> Generar Cuadro de Requerimientos</a>
-		               			<a href="UnidadOrg-ConsultarCuadroRqmts.jsp" id="nav15"><i class="far fa-calendar-check"></i> Consultar Cuadro de Requerimientos</a>
-		               			<a href="#" id="nav16"><i class="far fa-calendar-check"></i> Generar Reporte</a>
+		               			<a href="UnidadOrg-ConsultarCuadroRqmts.jsp" id="nav15"><i class="far fa-calendar-check"></i> Consultar Cuadro de Requerimientos</a>		               			
 	               				<%
 	               		}
 					}else{

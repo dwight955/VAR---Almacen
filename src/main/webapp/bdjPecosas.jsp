@@ -68,7 +68,7 @@
 				$("#idDestinatario").val(destinatario);
 				$("#idResponsable").val(responsable);
 				$("#idReferencia").val(response.referencia);
-				$("#idImporteTotal").val(response.total);
+				$("#idImporteTotal").val("S/."+response.total);
 			})
 			$("#tblDetalleCuadroReq tbody").empty();
 			$.get("ServletRequerimientoJSON?accion=BUSCARbyNUMDetalle&numreq="+numreq,function(response){

@@ -20,7 +20,7 @@
 		<%@ include file="Snippets/MenuLateral.jsp" %>
 		<section class="consultaRequ" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" >
 			<center><h3>CONSULTAR CUADRO DE REQUERIMIENTOS</h3></center>
-			<span class="fw-bold fs-5 text-danger">${sessionScope.UNIDAD_ORGANICA}</span>
+			<span class="fw-bold fs-5 text-danger" id="idUniOrg">${sessionScope.UNIDAD_ORGANICA}</span>
 			<div class="consultaRequ__block_query">
 				<form id="idConsultar" method="post" action="" class="consultaRequ__criterios consultaRequ__criterios_unidadOrganica" role="form">
 					<div class="form-group">
@@ -43,7 +43,7 @@
 					 </div>
 					 <div class="form-group">
 					    <label for="exampleInputEmail1" class="form-label">Cantidad</label>
-					    <input type="number" class="form-control" name="cantidad" id="idCantidad">
+					    <input type="number" class="form-control" name="cantidad" id="idCantidad" value=0>
 					 </div>
 					 <button type="button" class="btn btn-danger btn__fontSize" id="btnConsultarCuadroReq">Consultar</button>
 				 </form>
@@ -92,7 +92,7 @@
 				cantidad:{
 					validators:{
 						between:{
-							min:1,
+							min:0,
     		 				max:9999,
     		 				message:'Solo números | Maximo 9999'
     			 		}
@@ -103,11 +103,12 @@
 	});
 	
 	$(document).on("click","#btnConsultarCuadroReq",function(){
-		let dest,fecha,estado,cant count = 0;
+		let dest,fecha,estado,cant, count = 0, uni;
 		dest = $("#idDestinatarioCriterio").val();
 		fecha = $("#idFecha").val();
 		estado = $("#idEstado").val();
 		cant = $("#idCantidad").val();		
+		
 		$("#example tbody").empty();
 		$("#idContador").empty();
 		$.get("ServletRequerimientoJSON?accion=CONSULTARAC&dest="+dest+"&fecha="+fecha+"&estado="+estado+"&cant="+cant, function(response){
@@ -119,7 +120,28 @@
 			})
 			$("#idContador").text(count+" Cuadro de Requerimiento encontradas")
 		});
-	});	
+	});
+	$(document).on("click","#btnCuadroReq",function(){
+		let numreq, soli, dest, estado;
+		numreq = $(this).val();
+		dest = $(this).parents("tr").find("td")[1].innerHTML;
+		soli = $(this).parents("tr").find("td")[2].innerHTML;
+		$("#idNumeroReq").val(numreq);
+		$("#idDestinatario").val(dest);
+		$("#idResponsable").val(soli);
+		$("#tblDetalleCuadroReq tbody").empty();
+		$("#idEstadoByNumero").empty();
+		$.get("ServletRequerimientoJSON?accion=BUSCARbyNUMDetalle&numreq="+numreq,function(response){
+			$.each(response,function(index,item) {
+				$("#tblDetalleCuadroReq").append("<tr><td>"+ item.codBien+ "</td><td>"+ item.descripcion+ "</td><td>"
+														   + item.uniMed+ "</td><td>"+item.cant+"</td><td>"
+														   + item.preUni+"</td></tr>");
+												})
+											})
+		$.get("ServletRequerimientoJSON?accion=BUSCARbyNumreq&numreq="+numreq, function(response){
+				$("#idEstadoByNumero").text(response.estado);
+			});
+		});
 </script>
 
 </body>
