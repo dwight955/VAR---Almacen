@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -21,41 +22,29 @@
 							class="table table-striped table-bordered">
 							<thead>
 								<tr>
-									<th width="10%">NUMERO</th>
-									<th width="10%">REQUERIMIENTO</th>
+									<th width="10%">NRO</th>
+									<th >NRO REQUERIMIENTO</th>
 									<th>DESTINATARIO</th>
-									<th>UNIDAD ORGANICA</th>
+									<th>RESPONSABLE</th>
 									<th>ESTADO</th>
 									<th>FECHA</th>
-									<th>IMPORTE TOTAL</th>
-									<th width="12%"></th>
+									<th></th>
 								</tr>
 							</thead>
-								<tbody>
+							<tbody>
+								<c:forEach items="${requestScope.PECOSA}" var="pecosa">
 									<tr>
-										<td>lorem ipsum</td>
-										<td>lorem ipsum</td>
-										<td>lorem ipsum</td>
-										<td>lorem ipsum</td>
-										<td>lorem ipsum</td>
-										<td>lorem ipsum</td>
-										<td>lorem ipsum</td>
+										<td>${pecosa.nroPec}</td>
+										<td>${pecosa.nroReq}</td>
+										<td>${pecosa.destinatario}</td>
+										<td>${pecosa.responsable}</td>
+										<td>${pecosa.estado}</td>
+										<td>${pecosa.fecha}</td>
 										<td><button type="button" class="btn btn-danger" data-bs-toggle="modal" id="idVerDetalle"
-										data-bs-target="#idDetalleCuadroReq">Ver Detalle</button></td>
+											data-bs-target="#idDetalleCuadroReq">Ver Detalle</button></td>
 									</tr>
-								<!-- <c:forEach items="${requestScope.requerimientos}" var="requerimiento">
-									<tr>
-										<td>${requerimiento.numreq}</td>
-										<td>${requerimiento.dniSoli}</td>
-										<td>${requerimiento.apenomSoli}</td>
-										<td>${requerimiento.apenomEntre}</td>
-										<td>${requerimiento.estado}</td>
-										<td>${requerimiento.fechaEmi}</td>
-										<td><button type="button" class="btn btn-danger" data-bs-toggle="modal" id="idVerDetalle"
-										data-bs-target="#idDetalleCuadroReq">Ver Detalle</button></td>
-									</tr>
-								</c:forEach>  -->
-							   </tbody>
+								</c:forEach>
+							</tbody>
 						</table>
 					</div>
 				</div>
@@ -66,7 +55,41 @@
 		<%@ include file="Snippets/BooststrapJS.jsp"%>
 	
 	<script type="text/javascript">
-	
+		$(document).on("click","#idVerDetalle",function(){
+			let numpec, numreq, responsable, destinatario;
+			numpec = $(this).parents("tr").find("td")[0].innerHTML;
+			numreq = $(this).parents("tr").find("td")[1].innerHTML
+			responsable = $(this).parents("tr").find("td")[3].innerHTML;
+			destinatario = $(this).parents("tr").find("td")[2].innerHTML;
+			estado = $(this).parents("tr").find("td")[4].innerHTML;
+			$.get("ServletPecosaJSON?accion=BUSCARbyNum&numpec="+numpec,function(response){
+				$("#idNumeroPec").val(response.numPec);
+				$("#idNumeroReq").val(response.numReq);
+				$("#idDestinatario").val(destinatario);
+				$("#idResponsable").val(responsable);
+				$("#idReferencia").val(response.referencia);
+				$("#idImporteTotal").val(response.total);
+			})
+			$("#tblDetalleCuadroReq tbody").empty();
+			$.get("ServletRequerimientoJSON?accion=BUSCARbyNUMDetalle&numreq="+numreq,function(response){
+				$.each(response, function(index, item){
+					$("#tblDetalleCuadroReq tbody").append("<tr><td>"+ item.codBien+ "</td><td>"+ item.descripcion+ "</td><td>"
+							   + item.uniMed+ "</td><td>"+item.cant+"</td><td>"
+							   + item.preUni+"</td></tr>");
+				})
+				$("#idEstadoByNumero").text(estado)
+			})
+			isStatePendiente(estado);
+		});
+		function isStatePendiente(estado){
+			if(estado != "PENDIENTE"){
+				$("#idBtnRechazado").addClass("disabled");
+				$("#idBtnAprobado").addClass("disabled");
+			}else{
+				$("#idBtnRechazado").removeClass("disabled");
+				$("#idBtnAprobado").removeClass("disabled");
+			}
+		}
 	</script>
 </body>
 </html>

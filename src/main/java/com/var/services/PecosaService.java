@@ -22,4 +22,10 @@ public class PecosaService {
 	public boolean registrar(Pecosa pecosa) {
 		return objPecosaDAO.registrar(pecosa);
 	}
+	public Pecosa buscarNumPecosa(String numPec) {
+		return objPecosaDAO.buscar(numPec);
+	}
+	public int ActualizarEstado(String numPec, String estado) {
+		return objPecosaDAO.ActualizarEstado(numPec, estado);
+	}
 }

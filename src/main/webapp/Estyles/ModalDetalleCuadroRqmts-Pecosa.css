@@ -2,23 +2,29 @@
 .cuadroReq__info{
 	display: grid;
 	padding: 1em;
-	grid-template-columns: 130px repeat(2, 1fr);
+	grid-template-columns: 100px 100px repeat(2, 1fr);
 	grid-template-rows: 30px 60px 1fr;
 	grid-gap: 1em;
 }
 .cuadroReq__info > .form-group:nth-child(3){
 	grid-column: 1 / 2;
 }
+
+.cuadroReq__info > .form-group:nth-child(5){
+	grid-column: 4 / 5;
+	grid-row:2;
+}
 .cuadroReq__info > .form-group:nth-child(6){
-	grid-column: 1 / 4;
+	grid-column: 3 / 4;
+	grid-row:2;
+}
+.cuadroReq__info > .form-group:nth-child(7){
+	grid-column: 1 / 5;
 }
 .table-DetalleCuadroReq{
-	grid-column: 1/ 4; 
+	grid-column: 1/ 5; 
 }
 .modal-footer{
-	grid-column: 1 / 4;
+	grid-column: 1 / 5;
 	grid-row: 5;
-}
-.cuadroReq__info > .rep_pecosa{
-	grid-template-columns: 100px 100px repeat(2, 1fr);
 }

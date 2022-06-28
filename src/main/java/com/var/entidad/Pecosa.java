@@ -2,9 +2,12 @@ package com.var.entidad;
 
 public class Pecosa {
 	private String referencia,estado,numPec, fecform, fechApro;
-	private int codPec, codReq, codUsu; 
+	private int codPec, codUsu, codReq; 
 	private double total;
 	private DetalleRequerimientos detalleReq;
+	public DetalleRequerimientos getRequerimientos() {
+		return detalleReq;
+	}
 	public DetalleRequerimientos getDetalleReq() {
 		return detalleReq;
 	}
@@ -12,9 +15,15 @@ public class Pecosa {
 		this.detalleReq = detalleReq;
 	}
 	//variables para el listado
-	private String nomUnidadSoli,nomUnidadEntr, nombreFormulo;
+	private String nomUnidadSoli,nomUnidadEntr, nombreFormulo, numReq;
 	public String getReferencia() {
 		return referencia;
+	}
+	public String getNumReq() {
+		return numReq;
+	}
+	public void setNumReq(String numReq) {
+		this.numReq = numReq;
 	}
 	public void setReferencia(String referencia) {
 		this.referencia = referencia;

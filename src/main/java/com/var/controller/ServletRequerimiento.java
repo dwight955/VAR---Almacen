@@ -45,7 +45,25 @@ public class ServletRequerimiento extends HttpServlet {
 			listarByEstado(request, response);
 		else if (tipo.equals("LIMPIAR"))
 			limpiar(request, response);
+		else if (tipo.equals("CAMBIAR_ESTADO"))
+			cambiarEstado(request, response);
+		
 	}
+	private void cambiarEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String numreq, estado;
+		int salida;
+		numreq = request.getParameter("numeroReq");
+		estado = request.getParameter("btnEstado");
+		salida = servicio.ActualizarEstado(numreq, estado);
+		if(salida>0) {
+			request.setAttribute("MENSAJE", "Se actualizo su estado a "+estado);
+			listarByEstado(request,response);
+		}else {
+			request.setAttribute("MENSAJE", "No se actualizo el cuadro de requerimiento");
+			listarByEstado(request,response);
+		}
+	}
+
 	private void listarByEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<CuadroRequerimientos> lista = servicio.listByEstado("PENDIENTE");
 		request.setAttribute("requerimientos", lista);

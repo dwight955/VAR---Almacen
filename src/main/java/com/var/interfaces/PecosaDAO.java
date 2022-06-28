@@ -9,4 +9,6 @@ public interface PecosaDAO {
 	public String codigoCorrelativo();
 	public List<PecosaDTO> listAll();
 	boolean registrar(Pecosa pecosa);
+	public Pecosa buscar(String numPec);
+	public int ActualizarEstado(String numPec, String estado);
 }

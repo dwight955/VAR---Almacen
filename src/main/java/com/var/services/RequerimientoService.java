@@ -60,6 +60,7 @@ public class RequerimientoService {
 	public List<CuadroRequerimientos> consultarAC(String dest, String fecha, String estado, int cant) {
 		return objReq.consultarAC(dest,fecha,estado,cant);
 	} 
-	
-	
+	public int ActualizarEstado(String numRequerimiento, String estado) {
+		return objReq.ActualizarEstado(numRequerimiento, estado);
+	}
 }

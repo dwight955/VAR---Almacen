@@ -1,7 +1,7 @@
 <link href="Estyles/ModalDetalleCuadroRqmts.css" rel="stylesheet">
 <style>
 .tbodyDetalle {
-	max-height: clamp(30vh, 10vh, 250px);
+	max-height: clamp(25vh, 10vh, 250px);
 	overflow: auto;
 }
 </style><!-- Este Modal es un hibrido que se adapta segun el cargo del usuario -->
@@ -12,7 +12,7 @@
 							<h5 class="modal-title" id="staticBackdropLabel"> DETALLE CUADRO DE REQUERIMIENTO </h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
-						<div class="cuadroReq__info">
+							<form class="cuadroReq__info" method="post" action="ServletRequerimiento?accion=CAMBIAR_ESTADO" role="form">
 								<label for="exampleInputEmail1"  class="form-label">Estado actual: </label>
 								<h5 class = "CuadroReq__estado-detalleReq" id="idEstadoByNumero"></h5>
 								<div class="form-group input-group-sm">
@@ -49,14 +49,14 @@
 										%>
 										<div class="modal-footer">
 											<div>
-												<button type="button" class="btn btn-danger">Rechazar</button>
-										        <button type="button" class="btn btn-success">Aprobar</button>
+												<button type="submit" name="btnEstado" value="RECHAZADO" class="btn btn-danger">Rechazar</button>
+										        <button type="submit" name="btnEstado" value="APROBADO" class="btn btn-success">Aprobar</button>
 									        </div>
 				      					</div>
 				      					<%
 									}
 				      					%>
-						</div>
+							</form>
 					</div>
 			    </div>
 		</div>

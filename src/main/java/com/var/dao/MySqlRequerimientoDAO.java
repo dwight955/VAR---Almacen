@@ -318,9 +318,29 @@ public class MySqlRequerimientoDAO implements RequerimientoDAO {
 		return data;
 	}	
 	
-@Override
-	public boolean ActualizarEstado(int codRequerimiento, String estado) {
-		// TODO Auto-generated method stub
-		return false;
+	@Override
+	public int ActualizarEstado(String numRequerimiento, String estado) {
+		int salida = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MySqlConexion.getConectar();
+			pstm = cn.prepareStatement("update tb_cabecreq as c"
+									+ "	set c.estado=?"
+									+ " where c.numreq=?");
+			pstm.setString(1, estado);
+			pstm.setString(2, numRequerimiento);
+			salida = pstm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(cn!=null) cn.close();
+				if(pstm!=null)pstm.close();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return salida;
 	}
 }

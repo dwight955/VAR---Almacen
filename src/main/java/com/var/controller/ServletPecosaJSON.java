@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.var.entidad.Pecosa;
 import com.var.services.PecosaService;
 
 /**
@@ -34,6 +35,18 @@ public class ServletPecosaJSON extends HttpServlet {
 		String tipo = request.getParameter("accion");
 		if(tipo.equals("CORRELATIVO"))
 			correlativo(request,response);
+		if(tipo.equals("BUSCARbyNum"))
+			buscarByNum(request,response);
+	}
+
+	private void buscarByNum(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String numPec = request.getParameter("numpec");
+		Pecosa pecosa = servicio.buscarNumPecosa(numPec);
+		Gson gson=new Gson();
+		String json = gson.toJson(pecosa);
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter salida=response.getWriter();
+		salida.println(json);
 	}
 
 	private void correlativo(HttpServletRequest request, HttpServletResponse response) throws IOException {

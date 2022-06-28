@@ -1,10 +1,18 @@
 package com.var.dto;
 
 public class PecosaDTO {
-	public String nroPec, nroReq, destinatario, estado, fecha;
+	public String nroPec, nroReq, destinatario, estado, fecha, responsable;
 
 	public String getNroPec() {
 		return nroPec;
+	}
+
+	public String getResponsable() {
+		return responsable;
+	}
+
+	public void setResponsable(String nomResponsable) {
+		this.responsable = nomResponsable;
 	}
 
 	public void setNroPec(String nroPec) {

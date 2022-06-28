@@ -14,6 +14,14 @@
 	<div class="dashboard_content">
 		<%@ include file="Snippets/MenuLateral.jsp"%>
 		<section class="generarRequ">
+			<c:if test="${requestScope.MENSAJE!=null}">
+				<div class="alert alert-warning alert-dismissible fade show"
+					role="alert">
+					<strong>MENSAJE : </strong> ${requestScope.MENSAJE}
+					<button type="button" class="btn-close" data-bs-dismiss="alert"
+						aria-label="Close"></button>
+				</div>
+			</c:if>
 			<h3 class="text-center">Bandeja de Entrada - Cuadros de Requerimientos</h3>
 			<div class="mt-4">
 				<div class="card">
@@ -78,6 +86,7 @@
 		})
 		$("#idEstadoByNumero").text(estado);
 	})
+	
 	</script>	
 	
 		

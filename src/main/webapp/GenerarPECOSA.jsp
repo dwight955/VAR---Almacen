@@ -33,8 +33,7 @@
 							id="btnGenerar">GENERAR</button>
 					</div>
 					<div class="card-body">
-						<table id="tablePECOSA"
-							class="table table-striped table-bordered">
+						<table id="tablePECOSA" class="table table-striped table-bordered">
 							<thead>
 								<tr>
 									<th width="10%">NRO</th>
@@ -45,13 +44,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${requestScope.requerimientos}" var="requerimiento">
+								<c:forEach items="${requestScope.PECOSA}" var="pecosa">
 									<tr>
-										<td>${requerimiento.numero}</td>
-										<td>${requerimiento.dni}</td>
-										<td>${requerimiento.remitente}</td>
-										<td>${requerimiento.estado}</td>
-										<td>${requerimiento.fecha}</td>
+										<td>${pecosa.nroPec}</td>
+										<td>${pecosa.nroReq}</td>
+										<td>${pecosa.destinatario}</td>
+										<td>${pecosa.estado}</td>
+										<td>${pecosa.fecha}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -71,7 +70,7 @@
 								data-bs-dismiss="modal">×</button>
 						</div>
 						<div class="modal-body">
-							<form id="form-generarPECOSA" method="post" class="grid-formPECOSA" action="ServletPecosa">
+							<form id="form-generarPECOSA" method="post" class="grid-formPECOSA" action="ServletPecosa?accion=GENERAR&page=generarPecosa">
 								<div class="form-group modal-body__block-cabeceraPecosa">
 									<div class="form-group input-group-sm">
 										<label for="exampleInputEmail1" class="form-label">Número</label>
@@ -246,7 +245,6 @@
 		soli = $("#idNombreRemitenteBuscar").val();
 		dest = $("#idNombreDestinatarioBuscar").val();
 		estado = $("#idEstadoReq").val();
-		console.log(estado);
 		$("#tblBuscarCuadroRequerimiento tbody").empty();
 		$.get("ServletRequerimientoJSON?accion=BUSCAR&dest="+dest+"&nombreTrabajador="+soli+"&numReq="+numreq+"&estado="+estado, function(response) {
 			$.each(response,function(index,item) {
